@@ -356,6 +356,16 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 
 == Changelog ==
 
+= 1.5.2 - 2025-11-29 =
+* FIX: Admin product search SSL connection issue with Manticore
+* FIX: Exact SKU matching for "Add to Order" functionality
+* FIX: Variable products now return variations when searching by parent SKU
+* FIX: Input sanitization improvements (json_encode to wp_json_encode)
+* FIX: Added ABSPATH check to reset script for security
+* IMPROVE: Bundled Select2 and Chart.js locally (removed CDN dependencies)
+* IMPROVE: WordPress.org plugin review compliance
+* IMPROVE: Database indexes feature for WooCommerce performance
+
 = 1.5.1 - 2025-11-20 =
 * FIX: Removed hardcoded PHP paths for better hosting compatibility
 * FIX: Replaced shell exec with WordPress cron for safer background processing

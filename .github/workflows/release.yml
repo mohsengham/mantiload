@@ -1,0 +1,143 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on tags like v1.0.0, v1.5.1, etc.
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Extract changelog for this version
+        id: changelog
+        run: |
+          # Extract changelog from readme.txt for this version
+          VERSION=${{ steps.version.outputs.version }}
+
+          # Try to extract changelog between version headers
+          CHANGELOG=$(awk "/^= $VERSION =/,/^= [0-9]/" readme.txt | sed '1d;$d' | sed '/^$/d')
+
+          # If no changelog found, use a default message
+          if [ -z "$CHANGELOG" ]; then
+            CHANGELOG="See readme.txt for full changelog."
+          fi
+
+          # Save to file for GitHub release
+          echo "$CHANGELOG" > CHANGELOG.md
+
+          # Also output for later steps
+          echo "changelog<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGELOG" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Prepare plugin for release
+        run: |
+          # Create release directory
+          mkdir -p release
+
+          # Copy plugin files (exclude development files)
+          rsync -av \
+            --exclude='.git*' \
+            --exclude='.github' \
+            --exclude='.claude' \
+            --exclude='node_modules' \
+            --exclude='vendor' \
+            --exclude='tests' \
+            --exclude='*.md' \
+            --exclude='DEVELOPMENT.md' \
+            --exclude='INVESTIGATION_SUMMARY.txt' \
+            --exclude='ELASTICPRESS_*.md' \
+            --exclude='FEATURES_COMPLETE.md' \
+            --exclude='FEATURE_INDEX.md' \
+            --exclude='FEATURE_SUMMARY.md' \
+            --exclude='FILTER_ENHANCEMENT_PLAN.md' \
+            --exclude='MOBILE_DRAWER_README.md' \
+            --exclude='CRITICAL_OPTIONS.md' \
+            --exclude='RESET-SETTINGS.md' \
+            --exclude='reset_mantiload.php' \
+            --exclude='*.log' \
+            --exclude='.DS_Store' \
+            --exclude='Thumbs.db' \
+            ./ release/mantiload/
+
+      - name: Create ZIP archive
+        run: |
+          cd release
+          zip -r ../mantiload-${{ steps.version.outputs.version }}.zip mantiload/
+          cd ..
+
+          # Verify ZIP was created
+          ls -lh mantiload-${{ steps.version.outputs.version }}.zip
+
+      - name: Generate release notes
+        id: release_notes
+        run: |
+          cat > RELEASE_NOTES.md << 'EOF'
+          ## MantiLoad v${{ steps.version.outputs.version }}
+
+          ### Changelog
+
+          ${{ steps.changelog.outputs.changelog }}
+
+          ---
+
+          ### 📦 Installation
+
+          1. Download `mantiload-${{ steps.version.outputs.version }}.zip`
+          2. Go to WordPress Admin → Plugins → Add New → Upload Plugin
+          3. Upload the ZIP file
+          4. Activate the plugin
+          5. Configure Manticore connection in MantiLoad → Settings
+
+          ### 📚 Documentation
+
+          - [Documentation](https://docs.mantiload.com/)
+          - [GitHub Repository](https://github.com/mantiload/mantiload)
+          - [Support](https://wordpress.org/support/plugin/mantiload/)
+
+          ### ⚡ Requirements
+
+          - WordPress 5.8+
+          - PHP 7.4+
+          - WooCommerce 6.0+ (optional)
+          - Manticore Search 13.0+
+
+          ### 🐛 Found a bug?
+
+          Please report issues on [GitHub Issues](https://github.com/mantiload/mantiload/issues)
+          EOF
+
+          cat RELEASE_NOTES.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: MantiLoad v${{ steps.version.outputs.version }}
+          body_path: RELEASE_NOTES.md
+          files: |
+            mantiload-${{ steps.version.outputs.version }}.zip
+          draft: false
+          prerelease: false
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to WordPress.org (optional)
+        if: false  # Set to true when ready to auto-deploy to WordPress.org
+        run: |
+          # This section can be enabled later to auto-deploy to WordPress.org
+          # Requires WordPress.org SVN credentials stored as secrets
+          echo "WordPress.org deployment disabled (set if: true to enable)"
