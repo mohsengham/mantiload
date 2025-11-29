@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.5.1
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -355,6 +355,13 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.6.0 - 2025-11-29 =
+* IMPROVE: Removed Author URI for WordPress.org compliance
+* NEW: GitHub Actions automated release workflow
+* NEW: Comprehensive .gitignore for repository management
+* IMPROVE: Complete WordPress.org plugin review compliance
+* IMPROVE: All CDN dependencies bundled locally
 
 = 1.5.2 - 2025-11-29 =
 * FIX: Admin product search SSL connection issue with Manticore
