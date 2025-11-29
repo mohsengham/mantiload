@@ -1,0 +1,406 @@
+/**
+ * Theme Override Protection
+ * Prevents WoodMart and other themes from breaking MantiLoad styles
+ *
+ * @package MantiLoad
+ * @version 1.0.0
+ */
+
+/* ========================================
+   High Specificity Overrides
+   ======================================== */
+
+/* WoodMart often adds styles with high specificity */
+/* We use even higher specificity to override */
+
+body .mantiload-modal {
+    font-family: inherit !important;
+}
+
+body .mantiload-modal input[type="text"],
+body .mantiload-modal input[type="search"],
+body .mantiload-search-input,
+body .mantiload-inline-search-input {
+    width: 100% !important;
+    padding: 14px 48px !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 8px !important;
+    background: #f9fafb !important;
+    color: #111827 !important;
+    transition: all 0.2s ease !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    margin: 0 !important;
+    height: auto !important;
+}
+
+body .mantiload-inline-search-input {
+    padding: 12px 8px !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+body .mantiload-search-input:focus,
+body .mantiload-inline-search-input:focus {
+    background: #fff !important;
+    border-color: #667eea !important;
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1) !important;
+    outline: none !important;
+}
+
+body .mantiload-inline-search-input:focus {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* Button overrides */
+body .mantiload-modal button,
+body .mantiload-search-box-inline button {
+    font-family: inherit !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+body .mantiload-inline-submit-btn {
+    padding: 10px 24px !important;
+    background: #000 !important;
+    border: none !important;
+    border-radius: 50px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    height: auto !important;
+    line-height: normal !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+body .mantiload-inline-submit-btn:hover {
+    background: #1a1a1a !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+body .mantiload-inline-submit-btn svg {
+    flex-shrink: 0 !important;
+}
+
+body .mantiload-modal-close,
+body .mantiload-search-clear,
+body .mantiload-inline-clear {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Link overrides */
+body .mantiload-modal a,
+body .mantiload-search-box-inline a {
+    text-decoration: none !important;
+    color: inherit !important;
+}
+
+body .mantiload-result-item:hover,
+body .mantiload-inline-result-item:hover {
+    text-decoration: none !important;
+}
+
+/* Image overrides */
+body .mantiload-result-thumbnail,
+body .mantiload-inline-result-thumb {
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+}
+
+body .mantiload-result-thumbnail {
+    width: 60px !important;
+    height: 60px !important;
+}
+
+body .mantiload-inline-result-thumb {
+    width: 70px !important;
+    height: 70px !important;
+}
+
+/* Typography overrides */
+body .mantiload-result-title,
+body .mantiload-inline-result-title {
+    margin: 0 0 4px !important;
+    padding: 0 !important;
+    line-height: 1.4 !important;
+}
+
+body .mantiload-result-meta,
+body .mantiload-inline-result-meta {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Prevent theme from adding margins/padding */
+body .mantiload-modal * {
+    margin: 0 auto 0 0 !important;
+    padding: 0 !important;
+}
+
+/* Allow specific elements to have their intended spacing */
+body .mantiload-modal-content {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+body .mantiload-search-form-wrapper {
+    padding: 24px 24px 16px !important;
+}
+
+body .mantiload-search-results {
+    padding: 8px !important;
+}
+
+body .mantiload-result-item,
+body .mantiload-inline-result-item {
+    padding: 12px !important;
+    margin: 0 !important;
+}
+
+/* WoodMart specific fixes */
+.woodmart-theme body .mantiload-search-input,
+.woodmart-theme body .mantiload-inline-search-input {
+    font-family: inherit !important;
+}
+
+/* Remove WoodMart's box-shadow on inputs */
+.woodmart-theme body .mantiload-search-input:focus {
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1) !important;
+}
+
+/* Prevent WoodMart from changing button colors */
+.woodmart-theme body .mantiload-inline-submit-btn:hover {
+    background: linear-gradient(135deg, #5568d3 0%, #6842 90%) !important;
+}
+
+/* ========================================
+   Mobile Responsiveness
+   ======================================== */
+
+@media (max-width: 640px) {
+    body .mantiload-search-input,
+    body .mantiload-inline-search-input {
+        font-size: 16px !important; /* Prevent zoom on iOS */
+    }
+
+    /* ========== MODAL SEARCH - BEAUTIFUL MOBILE DESIGN ========== */
+
+    /* Fullscreen modal on mobile */
+    body .mantiload-modal {
+        padding: 0 !important;
+        align-items: stretch !important;
+    }
+
+    body .mantiload-modal-content {
+        max-height: 100vh !important;
+        border-radius: 0 !important;
+        max-width: none !important;
+    }
+
+    /* Slim modal header */
+    body .mantiload-modal-header {
+        padding: 12px 16px !important;
+        background: #fafafa !important;
+        border-bottom: 1px solid #e8e8e8 !important;
+    }
+
+    /* Better close button */
+    body .mantiload-modal-close {
+        width: 36px !important;
+        height: 36px !important;
+        top: 10px !important;
+        right: 10px !important;
+        background: rgba(0, 0, 0, 0.05) !important;
+        border-radius: 8px !important;
+    }
+
+    body .mantiload-modal-close:active {
+        background: rgba(0, 0, 0, 0.1) !important;
+    }
+
+    /* Slim search input wrapper */
+    body .mantiload-search-form-wrapper {
+        padding: 14px 16px !important;
+        background: #fff !important;
+    }
+
+    /* Beautiful slim search input */
+    body .mantiload-search-input {
+        padding: 12px 48px 12px 44px !important;
+        border-radius: 12px !important;
+        background: #f5f5f5 !important;
+        border: 1px solid #e8e8e8 !important;
+    }
+
+    body .mantiload-search-input:focus {
+        background: #fff !important;
+        border-color: #000 !important;
+        box-shadow: none !important;
+    }
+
+    body .mantiload-search-icon {
+        left: 14px !important;
+    }
+
+    body .mantiload-search-clear {
+        right: 10px !important;
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    /* Compact stats */
+    body .mantiload-search-stats {
+        margin-top: 6px !important;
+        font-size: 12px !important;
+        gap: 12px !important;
+    }
+
+    /* Beautiful compact result cards */
+    body .mantiload-result-item {
+        padding: 12px !important;
+        border-radius: 10px !important;
+        gap: 12px !important;
+    }
+
+    body .mantiload-result-thumbnail {
+        width: 70px !important;
+        height: 70px !important;
+        border-radius: 8px !important;
+        flex-shrink: 0 !important;
+    }
+
+    body .mantiload-result-content {
+        flex: 1 !important;
+        min-width: 0 !important;
+    }
+
+    body .mantiload-result-title {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        font-weight: 500 !important;
+    }
+
+    body .mantiload-result-price {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        margin-top: 4px !important;
+    }
+
+    /* Results container */
+    body .mantiload-search-results {
+        padding: 8px 12px !important;
+    }
+
+    /* ========== END MODAL SEARCH ========== */
+
+    /* Slim, modern mobile search box */
+    body .mantiload-inline-input-group {
+        padding: 2px 2px 2px 14px !important;
+        border-radius: 40px !important;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    body .mantiload-inline-search-input {
+        padding: 10px 6px !important;
+        font-weight: 400 !important;
+    }
+
+    body .mantiload-inline-search-icon {
+        margin-right: 8px !important;
+    }
+
+    body .mantiload-inline-search-icon svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    body .mantiload-inline-clear {
+        width: 28px !important;
+        height: 28px !important;
+        margin-right: 2px !important;
+    }
+
+    body .mantiload-inline-clear svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+
+    body .mantiload-inline-submit-btn {
+        padding: 10px 20px !important;
+        font-size: 14px !important;
+        border-radius: 30px !important;
+        min-height: 38px !important;
+    }
+
+    body .mantiload-inline-submit-btn svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    /* Cleaner result cards on mobile */
+    body .mantiload-inline-result-item {
+        padding: 10px 12px !important;
+        border-radius: 12px !important;
+    }
+
+    body .mantiload-inline-result-thumb {
+        width: 56px !important;
+        height: 56px !important;
+        border-radius: 10px !important;
+    }
+
+    body .mantiload-inline-result-title {
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        font-weight: 500 !important;
+    }
+
+    body .mantiload-inline-result-price {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+    }
+
+    /* Dropdown on mobile */
+    body .mantiload-inline-results-dropdown {
+        border-radius: 16px !important;
+        margin-top: 8px !important;
+        max-height: 60vh !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+    }
+
+    body .mantiload-inline-stats {
+        padding: 10px 14px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* ========================================
+   Z-Index Protection
+   ======================================== */
+
+/* Ensure modal is above theme elements */
+body .mantiload-modal {
+    z-index: 999999 !important;
+}
+
+body .mantiload-inline-results-dropdown {
+    z-index: 99999 !important;
+}

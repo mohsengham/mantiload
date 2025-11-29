@@ -1,0 +1,731 @@
+/**
+ * MantiLoad Admin Modern UI
+ * Clean, minimal design inspired by FlyingPress
+ */
+
+/* Variables - Minimal color palette */
+:root {
+	--mantiload-primary: #3b82f6;
+	--mantiload-primary-dark: #2563eb;
+	--mantiload-primary-light: #eff6ff;
+	--mantiload-success: #10b981;
+	--mantiload-warning: #f59e0b;
+	--mantiload-danger: #ef4444;
+	--mantiload-text: #171717;
+	--mantiload-text-light: #737373;
+	--mantiload-border: #e5e5e5;
+	--mantiload-bg: #fafafa;
+	--mantiload-white: #ffffff;
+	--mantiload-radius: 6px;
+	--mantiload-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	--mantiload-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Main Container */
+.mantiload-admin-wrap {
+	max-width: 1200px;
+	margin: 32px 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	color: var(--mantiload-text);
+	line-height: 1.6;
+}
+
+/* Header - Clean and minimal */
+.mantiload-header {
+	background: var(--mantiload-white);
+	padding: 32px 0;
+	margin-bottom: 32px;
+	border-bottom: 1px solid var(--mantiload-border);
+}
+
+.mantiload-header h1 {
+	margin: 0 0 8px 0;
+	font-size: 28px;
+	font-weight: 600;
+	color: var(--mantiload-text);
+	letter-spacing: -0.02em;
+}
+
+.mantiload-header p {
+	margin: 0;
+	color: var(--mantiload-text-light);
+	font-size: 15px;
+}
+
+/* Card - Simple and clean */
+.mantiload-card {
+	background: var(--mantiload-white);
+	border: 1px solid var(--mantiload-border);
+	border-radius: var(--mantiload-radius);
+	padding: 24px;
+	margin-bottom: 20px;
+	box-shadow: var(--mantiload-shadow);
+}
+
+.mantiload-card h2 {
+	margin: 0 0 4px 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: var(--mantiload-text);
+	letter-spacing: -0.01em;
+}
+
+.mantiload-card h3 {
+	margin: 0 0 8px 0;
+	font-size: 15px;
+	font-weight: 600;
+	color: var(--mantiload-text);
+}
+
+/* Button - Simple and flat */
+.mantiload-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	padding: 10px 20px;
+	font-size: 14px;
+	font-weight: 500;
+	border: 1px solid transparent;
+	border-radius: var(--mantiload-radius);
+	cursor: pointer;
+	transition: all 0.15s ease;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.mantiload-btn:hover {
+	transform: none;
+	opacity: 0.9;
+}
+
+.mantiload-btn:active {
+	transform: scale(0.98);
+}
+
+.mantiload-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.mantiload-btn-primary {
+	background: var(--mantiload-primary);
+	color: var(--mantiload-white);
+}
+
+.mantiload-btn-primary:hover {
+	background: var(--mantiload-primary-dark);
+}
+
+.mantiload-btn-success {
+	background: var(--mantiload-success);
+	color: var(--mantiload-white);
+}
+
+.mantiload-btn-danger {
+	background: var(--mantiload-danger);
+	color: var(--mantiload-white);
+}
+
+.mantiload-btn-secondary {
+	background: var(--mantiload-bg);
+	color: var(--mantiload-text);
+	border-color: var(--mantiload-border);
+}
+
+.mantiload-btn-secondary:hover {
+	background: #f5f5f5;
+}
+
+.mantiload-btn-hero {
+	padding: 12px 28px;
+	font-size: 15px;
+}
+
+/* Progress bar - Simple */
+.mantiload-progress-container {
+	background: var(--mantiload-bg);
+	border: 1px solid var(--mantiload-border);
+	border-radius: var(--mantiload-radius);
+	padding: 20px;
+	margin-top: 16px;
+}
+
+.mantiload-progress-text {
+	font-size: 14px;
+	font-weight: 500;
+	color: var(--mantiload-text);
+	margin-bottom: 12px;
+}
+
+.mantiload-progress-bar-wrapper {
+	background: #e5e5e5;
+	height: 32px;
+	border-radius: 16px;
+	overflow: hidden;
+	position: relative;
+}
+
+.mantiload-progress-bar {
+	background: var(--mantiload-success);
+	height: 100%;
+	border-radius: 16px;
+	transition: width 0.3s ease;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--mantiload-white);
+	font-weight: 600;
+	font-size: 13px;
+	position: relative;
+}
+
+.mantiload-progress-bar::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+	0% { left: -100%; }
+	100% { left: 100%; }
+}
+
+/* Stats table - Clean */
+.mantiload-stats-table {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	margin-top: 16px;
+	border: 1px solid var(--mantiload-border);
+	border-radius: var(--mantiload-radius);
+	overflow: hidden;
+}
+
+.mantiload-stats-table thead {
+	background: var(--mantiload-bg);
+}
+
+.mantiload-stats-table thead th {
+	padding: 12px 16px;
+	text-align: left;
+	font-weight: 600;
+	font-size: 13px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: var(--mantiload-text-light);
+	border-bottom: 1px solid var(--mantiload-border);
+}
+
+.mantiload-stats-table tbody tr {
+	background: var(--mantiload-white);
+	border-bottom: 1px solid var(--mantiload-border);
+}
+
+.mantiload-stats-table tbody tr:last-child {
+	border-bottom: none;
+}
+
+.mantiload-stats-table tbody tr:hover {
+	background: var(--mantiload-bg);
+}
+
+.mantiload-stats-table tbody td {
+	padding: 14px 16px;
+	font-size: 14px;
+	color: var(--mantiload-text);
+}
+
+/* Form - Clean inputs */
+.mantiload-form-table {
+	width: 100%;
+}
+
+.mantiload-form-table tr {
+	border-bottom: 1px solid var(--mantiload-border);
+}
+
+.mantiload-form-table tr:last-child {
+	border-bottom: none;
+}
+
+.mantiload-form-table th {
+	padding: 20px 20px 20px 0;
+	text-align: left;
+	font-weight: 500;
+	color: var(--mantiload-text);
+	width: 200px;
+	vertical-align: top;
+	padding-top: 22px;
+	font-size: 14px;
+}
+
+.mantiload-form-table td {
+	padding: 20px 0;
+}
+
+.mantiload-input,
+.mantiload-select {
+	width: 100%;
+	max-width: 400px;
+	padding: 10px 14px;
+	border: 1px solid var(--mantiload-border);
+	border-radius: var(--mantiload-radius);
+	font-size: 14px;
+	transition: all 0.15s ease;
+	background: var(--mantiload-white);
+	color: var(--mantiload-text);
+}
+
+.mantiload-input:focus,
+.mantiload-select:focus {
+	outline: none;
+	border-color: var(--mantiload-primary);
+	box-shadow: 0 0 0 3px var(--mantiload-primary-light);
+}
+
+.mantiload-input[type="number"] {
+	max-width: 120px;
+}
+
+/* Toggle Switch instead of checkbox */
+.mantiload-checkbox {
+	position: relative;
+	width: 44px;
+	height: 24px;
+	cursor: pointer;
+	appearance: none;
+	background: #d4d4d4;
+	border-radius: 12px;
+	transition: all 0.2s ease;
+}
+
+.mantiload-checkbox:checked {
+	background: var(--mantiload-primary);
+}
+
+.mantiload-checkbox::before {
+	content: '';
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 20px;
+	height: 20px;
+	background: white;
+	border-radius: 50%;
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.mantiload-checkbox:checked::before {
+	left: 22px;
+}
+
+.mantiload-description {
+	display: block;
+	margin-top: 6px;
+	color: var(--mantiload-text-light);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+/* Button group */
+.mantiload-btn-group {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	margin: 16px 0;
+}
+
+/* Alert boxes - Subtle */
+.mantiload-alert {
+	padding: 14px 16px;
+	border-radius: var(--mantiload-radius);
+	margin: 16px 0;
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	font-size: 14px;
+	border: 1px solid;
+	line-height: 1.5;
+}
+
+.mantiload-alert-success {
+	background: #f0fdf4;
+	color: #166534;
+	border-color: #bbf7d0;
+}
+
+.mantiload-alert-warning {
+	background: #fffbeb;
+	color: #92400e;
+	border-color: #fde68a;
+}
+
+.mantiload-alert-error {
+	background: #fef2f2;
+	color: #991b1b;
+	border-color: #fecaca;
+}
+
+.mantiload-alert-info {
+	background: #eff6ff;
+	color: #1e40af;
+	border-color: #bfdbfe;
+}
+
+/* Badge - Minimal */
+.mantiload-badge {
+	display: inline-block;
+	padding: 3px 10px;
+	border-radius: 4px;
+	font-size: 12px;
+	font-weight: 500;
+}
+
+.mantiload-badge-success {
+	background: #d1fae5;
+	color: #065f46;
+}
+
+.mantiload-badge-warning {
+	background: #fed7aa;
+	color: #92400e;
+}
+
+/* Divider - Subtle */
+.mantiload-divider {
+	height: 1px;
+	background: var(--mantiload-border);
+	margin: 24px 0;
+}
+
+/* Grid layout */
+.mantiload-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 20px;
+	margin: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.mantiload-admin-wrap {
+		margin: 16px 0;
+	}
+
+	.mantiload-header {
+		padding: 24px 0;
+	}
+
+	.mantiload-header h1 {
+		font-size: 22px;
+	}
+
+	.mantiload-card {
+		padding: 16px;
+	}
+
+	.mantiload-btn-group {
+		flex-direction: column;
+	}
+
+	.mantiload-btn {
+		width: 100%;
+	}
+
+	.mantiload-form-table th,
+	.mantiload-form-table td {
+		display: block;
+		width: 100%;
+		padding: 12px 0;
+	}
+
+	.shortcode-examples .code-example {
+		padding: 12px;
+	}
+}
+
+/* ===========================
+   Shortcode Documentation
+   =========================== */
+
+.mantiload-shortcode-docs {
+	background: var(--mantiload-white);
+	border-radius: var(--mantiload-radius);
+	border: 1px solid var(--mantiload-border);
+	padding: 32px;
+	margin-bottom: 32px;
+	box-shadow: var(--mantiload-shadow);
+}
+
+.mantiload-shortcode-docs h2 {
+	margin: 0 0 16px 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--mantiload-text);
+}
+
+.mantiload-shortcode-docs h3 {
+	margin: 24px 0 12px 0;
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--mantiload-text);
+}
+
+.mantiload-shortcode-docs > p {
+	margin: 0 0 24px 0;
+	color: var(--mantiload-text-light);
+}
+
+.shortcode-examples code {
+	background: var(--mantiload-bg);
+	padding: 3px 8px;
+	border-radius: 4px;
+	font-size: 13px;
+	font-family: 'Monaco', 'Courier New', monospace;
+	color: #d63638;
+}
+
+.shortcode-examples .code-example {
+	background: var(--mantiload-bg);
+	border: 1px solid var(--mantiload-border);
+	border-radius: var(--mantiload-radius);
+	padding: 16px;
+	margin-bottom: 16px;
+}
+
+.shortcode-examples .code-example strong {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: var(--mantiload-text);
+}
+
+.shortcode-examples .code-example code {
+	display: block;
+	background: var(--mantiload-white);
+	padding: 12px;
+	border: 1px solid var(--mantiload-border);
+	border-radius: 4px;
+	overflow-x: auto;
+	word-wrap: break-word;
+}
+
+.shortcode-examples .code-example .description {
+	margin: 8px 0 0 0;
+	font-size: 13px;
+	color: var(--mantiload-text-light);
+	font-style: italic;
+}
+
+.shortcode-examples table.widefat {
+	margin: 16px 0;
+	border: 1px solid var(--mantiload-border);
+	border-radius: var(--mantiload-radius);
+	overflow: hidden;
+}
+
+.shortcode-examples table.widefat th {
+	background: var(--mantiload-bg);
+	font-weight: 600;
+	color: var(--mantiload-text);
+	padding: 12px 16px;
+}
+
+.shortcode-examples table.widefat td {
+	padding: 12px 16px;
+	border-top: 1px solid var(--mantiload-border);
+}
+
+.shortcode-examples table.widefat td code {
+	background: var(--mantiload-primary-light);
+	color: var(--mantiload-primary-dark);
+	padding: 2px 6px;
+	font-size: 12px;
+}
+
+.shortcode-tips {
+	background: var(--mantiload-primary-light);
+	border-left: 4px solid var(--mantiload-primary);
+	border-radius: var(--mantiload-radius);
+	padding: 20px 24px;
+	margin-top: 24px;
+}
+
+.shortcode-tips h3 {
+	margin: 0 0 12px 0;
+	color: var(--mantiload-primary-dark);
+	font-size: 16px;
+}
+
+.shortcode-tips ul {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.shortcode-tips li {
+	margin-bottom: 8px;
+	color: var(--mantiload-text);
+	line-height: 1.6;
+}
+
+.shortcode-tips li:last-child {
+	margin-bottom: 0;
+}
+
+.shortcode-tips code {
+	background: var(--mantiload-white);
+	color: var(--mantiload-primary-dark);
+	padding: 2px 6px;
+	border-radius: 3px;
+	font-size: 12px;
+}
+
+/* Shortcode Documentation Styles */
+.mantiload-code-block {
+	background: #f8f9fa;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+	padding: 12px 16px;
+	font-family: 'Courier New', monospace;
+	font-size: 13px;
+	color: #1f2937;
+	overflow-x: auto;
+}
+
+.mantiload-code-block code {
+	background: none;
+	padding: 0;
+	color: inherit;
+	font-size: inherit;
+}
+
+.mantiload-params-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 12px;
+	font-size: 13px;
+}
+
+.mantiload-params-table tr {
+	border-bottom: 1px solid #f3f4f6;
+}
+
+.mantiload-params-table tr:last-child {
+	border-bottom: none;
+}
+
+.mantiload-params-table td {
+	padding: 10px 12px;
+	vertical-align: top;
+}
+
+.mantiload-params-table td:first-child {
+	font-weight: 600;
+	color: #1f2937;
+	white-space: nowrap;
+	width: 140px;
+}
+
+.mantiload-params-table td:nth-child(2) {
+	color: #6b7280;
+}
+
+.mantiload-params-table td:last-child {
+	color: #9ca3af;
+	width: 120px;
+	text-align: right;
+	font-family: monospace;
+	font-size: 12px;
+}
+
+.mantiload-params-table code {
+	background: #f3f4f6;
+	padding: 2px 6px;
+	border-radius: 3px;
+	font-size: 12px;
+	color: #374151;
+	font-family: 'Courier New', monospace;
+}
+
+/* Index Status Widget Styles - Compact Layout */
+.mantiload-status-grid-compact {
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	padding: 20px;
+	margin-top: 20px;
+}
+
+.mantiload-status-row {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 30px;
+	padding: 12px 0;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.mantiload-status-row:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.mantiload-status-row:first-child {
+	padding-top: 0;
+}
+
+.mantiload-status-compact {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.mantiload-status-label-inline {
+	font-size: 13px;
+	font-weight: 600;
+	color: #6b7280;
+	white-space: nowrap;
+}
+
+.mantiload-status-value-inline {
+	font-size: 14px;
+	font-weight: 600;
+	color: #1f2937;
+}
+
+.mantiload-status-value-inline code {
+	background: #ffffff;
+	padding: 4px 8px;
+	border-radius: 4px;
+	font-size: 13px;
+	color: #1f2937;
+	border: 1px solid #e5e7eb;
+}
+
+@media (max-width: 768px) {
+	.mantiload-status-row {
+		grid-template-columns: 1fr;
+		gap: 12px;
+	}
+}
+
+/* Spinner for loading states */
+.mantiload-spinner {
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	border: 2px solid #e5e7eb;
+	border-top-color: #1f2937;
+	border-radius: 50%;
+	animation: mantiload-spin 0.8s linear infinite;
+}
+
+@keyframes mantiload-spin {
+	to { transform: rotate(360deg); }
+}

@@ -1,0 +1,77 @@
+# MantiLoad REST API Documentation
+
+## Search Endpoint
+
+**URL:** `/wp-json/mantiload/v1/search`
+
+**Method:** POST
+
+**Description:** Ultra-fast search using Manticore Search engine, bypassing WordPress admin overhead for maximum performance.
+
+### Parameters
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `query` | string | No | "" | Search query string |
+| `post_type` | string | No | "product" | Post type to search in |
+| `limit` | integer | No | 10 | Maximum number of results |
+
+### Request Example
+
+```bash
+curl -X POST /wp-json/mantiload/v1/search \
+  -H "Content-Type: application/x-www-form-urlencoded" \
+  -d "query=laptop&post_type=product&limit=5"
+```
+
+### Response Example
+
+```json
+{
+  "results": [
+    {
+      "id": 123,
+      "title": "Gaming Laptop Pro",
+      "url": "https://example.com/product/gaming-laptop-pro/",
+      "price": "$999.99",
+      "thumbnail": "https://example.com/wp-content/uploads/2024/01/laptop.jpg",
+      "stock_status": "instock"
+    }
+  ],
+  "total": 1,
+  "query_time": "0.023"
+}
+```
+
+### JavaScript Usage
+
+```javascript
+// Fast REST API call
+fetch('/wp-json/mantiload/v1/search', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded',
+  },
+  body: 'query=laptop&post_type=product&limit=10'
+})
+.then(response => response.json())
+.then(data => {
+  console.log('Search results:', data);
+});
+```
+
+### Performance Benefits
+
+- **No WordPress admin loading** (unlike admin-ajax.php)
+- **Direct Manticore queries** for sub-millisecond responses
+- **Automatic parameter sanitization**
+- **RESTful architecture** for better caching potential
+- **Lightweight JSON responses**
+
+### Backward Compatibility
+
+The legacy AJAX endpoint (`admin-ajax.php?action=mantiload_search`) is still available for existing implementations.
+
+### Error Handling
+
+Returns standard WordPress REST API error responses for invalid requests or server errors.

@@ -1,0 +1,266 @@
+/**
+ * MantiLoad Mobile Filter Drawer
+ *
+ * Handles the mobile filter drawer experience with touch gestures,
+ * smooth animations, and filter badge counting.
+ *
+ * @package MantiLoad
+ * @since 2.1.0
+ */
+
+(function($) {
+	'use strict';
+
+	/**
+	 * Mobile Drawer Handler Class
+	 */
+	class MobileFilterDrawer {
+		constructor() {
+			this.$toggle = $('.mantiload-mobile-filter-toggle');
+			this.$backdrop = $('.mantiload-mobile-backdrop');
+			this.$drawer = $('.mantiload-mobile-drawer');
+			this.$body = $('body');
+			this.startY = 0;
+			this.currentY = 0;
+			this.isDragging = false;
+
+			if (this.$drawer.length > 0) {
+				this.init();
+			}
+		}
+
+		/**
+		 * Initialize drawer
+		 */
+		init() {
+			// Clone filters from sidebar into drawer
+			this.cloneFilters();
+
+			// Bind events
+			this.bindEvents();
+
+			// Update badge count
+			this.updateBadge();
+
+			// Read filters from URL and update badge
+			const params = new URLSearchParams(window.location.search);
+			if (params.toString()) {
+				this.updateBadge();
+			}
+		}
+
+		`cat /tmp/new_clone_function.js`);
+
+			// Clone and insert into drawer
+			if ($filters.length > 0) {
+				const $cloned = $filters.clone(true, true); // Deep clone with events
+				$drawerFilters.empty().append($cloned);
+			}
+		}
+
+		/**
+		 * Bind event listeners
+		 */
+		bindEvents() {
+			// Toggle button click
+			this.$toggle.on('click', () => this.open());
+
+			// Close button and backdrop
+			this.$drawer.find('.mantiload-drawer-close').on('click', () => this.close());
+			this.$backdrop.on('click', () => this.close());
+
+			// Apply filters button
+			this.$drawer.find('.mantiload-drawer-apply').on('click', () => {
+				this.updateBadge();
+				this.close();
+				// Trigger filter refresh (will be handled by main filters.js)
+				$(document).trigger('mantiload:apply-filters');
+			});
+
+			// Clear all filters button
+			this.$drawer.find('.mantiload-drawer-clear').on('click', () => {
+				// Clear all checkboxes
+				this.$drawer.find('input[type="checkbox"]').prop('checked', false);
+
+				// Clear all selects
+				this.$drawer.find('select').val('');
+
+				// Clear all radios
+				this.$drawer.find('input[type="radio"]').prop('checked', false);
+
+				// Update badge
+				this.updateBadge();
+			});
+
+			// Touch gestures for swipe-to-close
+			const $handle = this.$drawer.find('.mantiload-drawer-handle');
+			const $drawerHeader = this.$drawer.find('.mantiload-drawer-header');
+
+			// Mouse/touch events on handle and header
+			$handle.on('mousedown touchstart', (e) => this.startDrag(e));
+			$drawerHeader.on('mousedown touchstart', (e) => this.startDrag(e));
+
+			$(document).on('mousemove touchmove', (e) => this.drag(e));
+			$(document).on('mouseup touchend', () => this.endDrag());
+
+			// Filter change events - update badge
+			this.$drawer.on('change', 'input, select', () => {
+				// Small delay to allow change to complete
+				setTimeout(() => this.updateBadge(), 100);
+			});
+
+			// Prevent drawer body scroll from affecting page
+			this.$drawer.find('.mantiload-drawer-content').on('touchmove', (e) => {
+				e.stopPropagation();
+			});
+		}
+
+		/**
+		 * Open drawer
+		 */
+		open() {
+			this.$drawer.addClass('is-open');
+			this.$backdrop.addClass('is-visible');
+			this.$body.css('overflow', 'hidden');
+
+			// Re-clone filters to get latest state
+			this.cloneFilters();
+
+			// Update badge count
+			this.updateBadge();
+		}
+
+		/**
+		 * Close drawer
+		 */
+		close() {
+			this.$drawer.removeClass('is-open');
+			this.$backdrop.removeClass('is-visible');
+			this.$body.css('overflow', '');
+
+			// Reset drag position
+			this.$drawer.css('transform', '');
+		}
+
+		/**
+		 * Start drag gesture
+		 */
+		startDrag(e) {
+			// Only allow dragging when scrolled to top
+			const $content = this.$drawer.find('.mantiload-drawer-content');
+			if ($content.scrollTop() > 0) {
+				return;
+			}
+
+			this.isDragging = true;
+			this.startY = e.type === 'touchstart' ? e.originalEvent.touches[0].clientY : e.clientY;
+			this.$drawer.css('transition', 'none');
+		}
+
+		/**
+		 * Handle drag movement
+		 */
+		drag(e) {
+			if (!this.isDragging) {
+				return;
+			}
+
+			this.currentY = e.type === 'touchmove' ? e.originalEvent.touches[0].clientY : e.clientY;
+			const deltaY = this.currentY - this.startY;
+
+			// Only allow downward dragging
+			if (deltaY > 0) {
+				this.$drawer.css('transform', `translateY(${deltaY}px)`);
+			}
+		}
+
+		/**
+		 * End drag gesture
+		 */
+		endDrag() {
+			if (!this.isDragging) {
+				return;
+			}
+
+			this.isDragging = false;
+			this.$drawer.css('transition', '');
+
+			const deltaY = this.currentY - this.startY;
+
+			// Close if dragged down more than 100px
+			if (deltaY > 100) {
+				this.close();
+			} else {
+				// Snap back
+				this.$drawer.css('transform', '');
+			}
+		}
+
+		/**
+		 * Update filter badge count
+		 */
+		updateBadge() {
+			let count = 0;
+
+			// Count checked checkboxes (excluding "all" options)
+			this.$drawer.find('input[type="checkbox"]:checked').each(function() {
+				const val = $(this).val();
+				if (val && val !== '' && val !== 'all') {
+					count++;
+				}
+			});
+
+			// Count selected dropdown options (excluding empty/default)
+			this.$drawer.find('select').each(function() {
+				const val = $(this).val();
+				if (val && val !== '' && val !== 'all') {
+					// For multi-select, count array length
+					if (Array.isArray(val)) {
+						count += val.filter(v => v && v !== '' && v !== 'all').length;
+					} else {
+						count++;
+					}
+				}
+			});
+
+			// Count checked radios (excluding default/empty)
+			const $checkedRadios = this.$drawer.find('input[type="radio"]:checked');
+			$checkedRadios.each(function() {
+				const val = $(this).val();
+				// Only count non-empty, non-default values
+				if (val && val !== '' && val !== 'all' && val !== 'instock') {
+					count++;
+				}
+			});
+
+			// Update badge
+			const $badge = this.$toggle.find('.mantiload-filter-badge');
+			if (count > 0) {
+				$badge.text(count).show();
+			} else {
+				$badge.hide();
+			}
+
+			// Update "Show Results" button text
+			const $resultsCount = this.$drawer.find('.mantiload-results-count');
+			if (count > 0) {
+				$resultsCount.text(`(${count})`);
+			} else {
+				$resultsCount.text('');
+			}
+		}
+	}
+
+	/**
+	 * Initialize on document ready
+	 */
+	$(document).ready(function() {
+		window.mantiloadMobileDrawer = new MobileFilterDrawer();
+	});
+
+	/**
+	 * Also expose on window for external access
+	 */
+	window.MantiLoadMobileDrawer = MobileFilterDrawer;
+
+})(jQuery);

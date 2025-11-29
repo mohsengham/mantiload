@@ -1,0 +1,488 @@
+/**
+ * MantiLoad Filters - Modern, Performance-First Filtering
+ *
+ * Fast code = Green code 🌱
+ *
+ * @package MantiLoad
+ */
+
+/* ==========================================================================
+   Filter Container
+   ========================================================================== */
+
+.mantiload-filters {
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+.mantiload-filters__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	padding-bottom: 15px;
+	border-bottom: 2px solid #f5f5f5;
+}
+
+.mantiload-filters__title {
+	margin: 0;
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+}
+
+.mantiload-filters__clear {
+	background: transparent;
+	border: none;
+	color: #999;
+	cursor: pointer;
+	font-size: 14px;
+	text-decoration: underline;
+	transition: color 0.2s;
+}
+
+.mantiload-filters__clear:hover {
+	color: #e74c3c;
+}
+
+.mantiload-filters__body {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+}
+
+.mantiload-filters__footer {
+	margin-top: 20px;
+	padding-top: 15px;
+	border-top: 2px solid #f5f5f5;
+}
+
+.mantiload-filters__results-count {
+	font-size: 14px;
+	color: #666;
+	text-align: center;
+}
+
+.mantiload-filters__count-number {
+	font-weight: 600;
+	color: #333;
+	font-size: 16px;
+}
+
+/* ==========================================================================
+   Individual Filter
+   ========================================================================== */
+
+.mantiload-filter {
+	padding: 0;
+}
+
+.mantiload-filter__title {
+	font-size: 15px;
+	font-weight: 600;
+	margin: 0 0 12px 0;
+	color: #333;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.mantiload-filter__title:hover {
+	color: #666;
+}
+
+.mantiload-filter__content {
+	padding-left: 0;
+}
+
+/* ==========================================================================
+   Filter List (Checkboxes/Radio)
+   ========================================================================== */
+
+.mantiload-filter-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.mantiload-filter-item {
+	margin: 0;
+	padding: 0;
+}
+
+.mantiload-filter-label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 0;
+	cursor: pointer;
+	font-size: 14px;
+	color: #666;
+	transition: color 0.2s;
+	user-select: none;
+}
+
+.mantiload-filter-label:hover {
+	color: #333;
+}
+
+.mantiload-filter-input {
+	margin: 0;
+	cursor: pointer;
+}
+
+.mantiload-filter-name {
+	flex: 1;
+}
+
+.mantiload-filter-count {
+	color: #999;
+	font-size: 13px;
+}
+
+.mantiload-filter-item.is-active .mantiload-filter-label {
+	color: #333;
+	font-weight: 500;
+}
+
+/* ==========================================================================
+   Price Range Slider
+   ========================================================================== */
+
+.mantiload-price-slider {
+	position: relative;
+	padding: 10px 0;
+}
+
+.mantiload-price-slider__input {
+	width: 100%;
+	margin: 8px 0;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	height: 6px;
+	background: #e0e0e0;
+	border-radius: 3px;
+	outline: none;
+}
+
+.mantiload-price-slider__input::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #2c3e50;
+	cursor: pointer;
+	transition: background 0.2s, transform 0.2s;
+}
+
+.mantiload-price-slider__input::-webkit-slider-thumb:hover {
+	background: #34495e;
+	transform: scale(1.1);
+}
+
+.mantiload-price-slider__input::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: #2c3e50;
+	cursor: pointer;
+	border: none;
+	transition: background 0.2s, transform 0.2s;
+}
+
+.mantiload-price-slider__input::-moz-range-thumb:hover {
+	background: #34495e;
+	transform: scale(1.1);
+}
+
+.mantiload-price-slider__values {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 12px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
+}
+
+.mantiload-price-slider__separator {
+	color: #999;
+}
+
+/* ==========================================================================
+   Color Swatches
+   ========================================================================== */
+
+.mantiload-color-swatches {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.mantiload-color-swatch {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 5px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.mantiload-color-swatch input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.mantiload-color-swatch__color {
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: 2px solid #e0e0e0;
+	transition: all 0.2s;
+	position: relative;
+}
+
+.mantiload-color-swatch:hover .mantiload-color-swatch__color {
+	border-color: #999;
+	transform: scale(1.05);
+}
+
+.mantiload-color-swatch.is-active .mantiload-color-swatch__color {
+	border-color: #2c3e50;
+	border-width: 3px;
+	transform: scale(1.1);
+}
+
+.mantiload-color-swatch.is-active .mantiload-color-swatch__color::after {
+	content: '✓';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: #fff;
+	font-weight: bold;
+	font-size: 16px;
+	text-shadow: 0 0 2px rgba(0,0,0,0.5);
+}
+
+.mantiload-color-swatch__name {
+	font-size: 12px;
+	color: #666;
+	text-align: center;
+	max-width: 60px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   Rating Stars
+   ========================================================================== */
+
+.mantiload-filter-stars {
+	color: #ffa500;
+	font-size: 16px;
+	letter-spacing: 2px;
+}
+
+/* ==========================================================================
+   Toggle Filter (On Sale)
+   ========================================================================== */
+
+.mantiload-filter-toggle {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px;
+	background: #f9f9f9;
+	border-radius: 6px;
+	cursor: pointer;
+	user-select: none;
+	transition: background 0.2s;
+}
+
+.mantiload-filter-toggle:hover {
+	background: #f0f0f0;
+}
+
+.mantiload-filter-toggle input:checked + .mantiload-filter-name {
+	font-weight: 600;
+	color: #2c3e50;
+}
+
+/* ==========================================================================
+   Loading States
+   ========================================================================== */
+
+body.mantiload-filtering {
+	cursor: progress;
+}
+
+.products.is-loading,
+ul.products.is-loading {
+	position: relative;
+	pointer-events: none;
+}
+
+.products.is-loading::after,
+ul.products.is-loading::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 40px;
+	height: 40px;
+	margin: -20px 0 0 -20px;
+	border: 4px solid #f3f3f3;
+	border-top-color: #2c3e50;
+	border-radius: 50%;
+	animation: mantiload-spin 0.8s linear infinite;
+}
+
+@keyframes mantiload-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* ==========================================================================
+   Active Filters Display
+   ========================================================================== */
+
+.mantiload-active-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 15px 0;
+}
+
+.mantiload-active-filter {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 6px 12px;
+	background: #f0f0f0;
+	border-radius: 20px;
+	font-size: 13px;
+	color: #333;
+}
+
+.mantiload-active-filter__remove {
+	background: none;
+	border: none;
+	color: #999;
+	cursor: pointer;
+	font-size: 16px;
+	line-height: 1;
+	padding: 0;
+	transition: color 0.2s;
+}
+
+.mantiload-active-filter__remove:hover {
+	color: #e74c3c;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 768px) {
+	.mantiload-filters {
+		padding: 15px;
+	}
+
+	.mantiload-filters__title {
+		font-size: 16px;
+	}
+
+	.mantiload-filter__title {
+		font-size: 14px;
+	}
+
+	.mantiload-filter-label {
+		font-size: 13px;
+	}
+
+	.mantiload-color-swatches {
+		gap: 8px;
+	}
+
+	.mantiload-color-swatch__color {
+		width: 32px;
+		height: 32px;
+	}
+}
+
+/* ==========================================================================
+   RTL Support
+   ========================================================================== */
+
+body.rtl .mantiload-filter-label {
+	flex-direction: row-reverse;
+}
+
+body.rtl .mantiload-filters__header {
+	flex-direction: row-reverse;
+}
+
+body.rtl .mantiload-price-slider__values {
+	flex-direction: row-reverse;
+}
+
+/* ==========================================================================
+   Dark Mode Support (Optional)
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+	.mantiload-filters {
+		background: #1e1e1e;
+		border-color: #333;
+	}
+
+	.mantiload-filters__title,
+	.mantiload-filter__title,
+	.mantiload-filter-item.is-active .mantiload-filter-label {
+		color: #fff;
+	}
+
+	.mantiload-filter-label {
+		color: #ccc;
+	}
+
+	.mantiload-filter-label:hover {
+		color: #fff;
+	}
+
+	.mantiload-filter-count {
+		color: #888;
+	}
+
+	.mantiload-price-slider__input {
+		background: #333;
+	}
+
+	.mantiload-price-slider__input::-webkit-slider-thumb {
+		background: #3498db;
+	}
+
+	.mantiload-price-slider__input::-moz-range-thumb {
+		background: #3498db;
+	}
+
+	.mantiload-filter-toggle {
+		background: #2a2a2a;
+	}
+
+	.mantiload-filter-toggle:hover {
+		background: #333;
+	}
+}

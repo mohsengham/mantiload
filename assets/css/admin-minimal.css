@@ -1,0 +1,1099 @@
+/**
+ * MantiLoad Minimal Admin UI
+ * Clean, minimal, black/white/gray design inspired by the MantiLoad lion
+ * Uses Lucide icons for consistency
+ */
+
+/* ============================================
+   Design System - Black, White, Gray Only
+   ============================================ */
+:root {
+	/* Grayscale palette */
+	--ml-black: #000000;
+	--ml-gray-900: #171717;
+	--ml-gray-800: #262626;
+	--ml-gray-700: #404040;
+	--ml-gray-600: #525252;
+	--ml-gray-500: #737373;
+	--ml-gray-400: #a3a3a3;
+	--ml-gray-300: #d4d4d4;
+	--ml-gray-200: #e5e5e5;
+	--ml-gray-100: #f5f5f5;
+	--ml-white: #ffffff;
+
+	/* Danger/Warning only */
+	--ml-danger: #dc2626;
+	--ml-danger-hover: #b91c1c;
+
+	/* Spacing */
+	--ml-space-xs: 4px;
+	--ml-space-sm: 8px;
+	--ml-space-md: 16px;
+	--ml-space-lg: 24px;
+	--ml-space-xl: 32px;
+
+	/* Typography - Inherit from WordPress/Theme */
+	--ml-font-sans: inherit;
+	--ml-font-mono: ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas, monospace;
+
+	/* Borders */
+	--ml-border: 1px solid var(--ml-gray-200);
+	--ml-radius: 6px;
+
+	/* Shadows - Minimal */
+	--ml-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+	--ml-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+.mantiload-dashboard,
+.mantiload-admin-wrap,
+.wrap.mantiload-dashboard {
+	font-family: var(--ml-font-sans);
+	color: var(--ml-gray-900);
+	font-size: 14px;
+	line-height: 1.5;
+	background: var(--ml-white);
+}
+
+/* Remove WordPress default styles that interfere */
+.mantiload-dashboard .button,
+.mantiload-dashboard .button-primary,
+.mantiload-dashboard .button-secondary {
+	all: unset;
+}
+
+/* Admin Wrap */
+.mantiload-admin-wrap {
+	max-width: 1200px;
+	margin: 20px auto;
+	padding: 0 var(--ml-space-lg);
+}
+
+/* ============================================
+   WordPress Admin Notices
+   ============================================ */
+/* Style notices that appear above MantiLoad pages */
+body.wp-admin .notice,
+body.wp-admin div.notice {
+	max-width: 1200px;
+	margin: 16px auto 20px auto !important;
+	padding: 12px 20px !important;
+	border-left: 4px solid var(--ml-gray-300) !important;
+	background: var(--ml-white) !important;
+	box-shadow: var(--ml-shadow-sm) !important;
+	border-radius: 0 !important;
+}
+
+body.wp-admin .notice p {
+	margin: 0.5em 0 !important;
+	font-size: 13px !important;
+	line-height: 1.5 !important;
+}
+
+/* Success notices - Black border */
+body.wp-admin .notice-success,
+body.wp-admin .updated {
+	border-left-color: var(--ml-black) !important;
+}
+
+/* Error notices - Red border */
+body.wp-admin .notice-error,
+body.wp-admin .error {
+	border-left-color: var(--ml-danger) !important;
+}
+
+/* Warning notices - Gray border */
+body.wp-admin .notice-warning {
+	border-left-color: var(--ml-gray-600) !important;
+}
+
+/* Info notices - Gray border */
+body.wp-admin .notice-info {
+	border-left-color: var(--ml-gray-400) !important;
+}
+
+/* Dismiss button styling */
+body.wp-admin .notice .notice-dismiss {
+	padding: 0 !important;
+	color: var(--ml-gray-500) !important;
+}
+
+body.wp-admin .notice .notice-dismiss:hover {
+	color: var(--ml-black) !important;
+}
+
+/* Header Section */
+.mantiload-header {
+	margin-bottom: var(--ml-space-xl);
+	padding-bottom: var(--ml-space-lg);
+	border-bottom: var(--ml-border);
+}
+
+.mantiload-header h1 {
+	font-size: 24px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-xs) 0;
+	letter-spacing: -0.02em;
+}
+
+.mantiload-header p {
+	font-size: 14px;
+	color: var(--ml-gray-600);
+	margin: 0;
+}
+
+/* ============================================
+   Cards - Modern minimal cards
+   ============================================ */
+.mantiload-card {
+	background: var(--ml-white);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	padding: var(--ml-space-lg);
+	margin-bottom: var(--ml-space-lg);
+	transition: border-color 0.15s ease;
+}
+
+.mantiload-card:hover {
+	border-color: var(--ml-gray-300);
+}
+
+.mantiload-card h2 {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-sm) 0;
+	display: flex;
+	align-items: center;
+	gap: var(--ml-space-sm);
+}
+
+.mantiload-card h2 i {
+	width: 18px;
+	height: 18px;
+	opacity: 0.7;
+}
+
+.mantiload-card p,
+.mantiload-description {
+	font-size: 13px;
+	color: var(--ml-gray-600);
+	margin: 0 0 var(--ml-space-md) 0;
+	line-height: 1.6;
+}
+
+.mantiload-divider {
+	height: 1px;
+	background: var(--ml-gray-200);
+	margin: var(--ml-space-lg) 0;
+}
+
+/* ============================================
+   Modern Form Tables
+   ============================================ */
+.mantiload-form-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.mantiload-form-table tr {
+	border-bottom: 1px solid var(--ml-gray-100);
+}
+
+.mantiload-form-table tr:last-child {
+	border-bottom: none;
+}
+
+.mantiload-form-table th {
+	width: 200px;
+	padding: var(--ml-space-md) 0;
+	text-align: left;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--ml-gray-900);
+	vertical-align: top;
+	padding-top: 18px;
+}
+
+.mantiload-form-table td {
+	padding: var(--ml-space-md) 0;
+}
+
+/* ============================================
+   Modern Form Inputs
+   ============================================ */
+.mantiload-input,
+input.mantiload-input {
+	width: 100%;
+	max-width: 400px;
+	padding: 10px 12px;
+	font-size: 14px;
+	font-family: var(--ml-font-sans);
+	color: var(--ml-gray-900);
+	background: var(--ml-white);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	transition: all 0.15s ease;
+	display: block;
+	margin-bottom: var(--ml-space-xs);
+}
+
+.mantiload-input:focus,
+input.mantiload-input:focus {
+	outline: none;
+	border-color: var(--ml-black);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.mantiload-input:disabled {
+	background: var(--ml-gray-100);
+	color: var(--ml-gray-500);
+	cursor: not-allowed;
+}
+
+/* Number inputs */
+input[type="number"].mantiload-input {
+	max-width: 150px;
+}
+
+/* ============================================
+   Modern Checkboxes - Custom Styled
+   ============================================ */
+.mantiload-checkbox,
+input[type="checkbox"].mantiload-checkbox {
+	appearance: none;
+	-webkit-appearance: none;
+	width: 18px;
+	height: 18px;
+	border: 2px solid var(--ml-gray-300);
+	border-radius: 4px;
+	background: var(--ml-white);
+	cursor: pointer;
+	position: relative;
+	transition: all 0.15s ease;
+	margin: 0;
+	flex-shrink: 0;
+}
+
+.mantiload-checkbox:hover,
+input[type="checkbox"].mantiload-checkbox:hover {
+	border-color: var(--ml-gray-600);
+}
+
+.mantiload-checkbox:checked,
+input[type="checkbox"].mantiload-checkbox:checked {
+	background: var(--ml-black);
+	border-color: var(--ml-black);
+}
+
+.mantiload-checkbox:checked::after,
+input[type="checkbox"].mantiload-checkbox:checked::after {
+	content: '';
+	position: absolute;
+	left: 5px;
+	top: 1px;
+	width: 4px;
+	height: 9px;
+	border: solid var(--ml-white);
+	border-width: 0 2px 2px 0;
+	transform: rotate(45deg);
+}
+
+.mantiload-checkbox:focus,
+input[type="checkbox"].mantiload-checkbox:focus {
+	outline: 2px solid var(--ml-gray-300);
+	outline-offset: 2px;
+}
+
+/* Checkbox labels */
+.mantiload-form-table label {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 13px;
+	color: var(--ml-gray-900);
+	cursor: pointer;
+	margin: var(--ml-space-xs) 0;
+}
+
+.mantiload-form-table label:hover {
+	color: var(--ml-black);
+}
+
+/* ============================================
+   Logo - Clean minimal logo without text
+   ============================================ */
+.mantiload-logo {
+	width: 56px;
+	height: 56px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 16px;
+}
+
+.mantiload-logo img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+/* Dashboard wrap spacing */
+.wrap.mantiload-dashboard {
+	margin: 20px auto;
+	padding: 0 var(--ml-space-lg);
+	max-width: 1200px;
+}
+
+/* ============================================
+   Header - Minimal
+   ============================================ */
+.mantiload-title {
+	display: flex;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-sm) 0;
+	letter-spacing: -0.02em;
+}
+
+.mantiload-hero {
+	margin-bottom: var(--ml-space-xl);
+	padding-bottom: var(--ml-space-lg);
+	border-bottom: var(--ml-border);
+}
+
+.mantiload-hero h2 {
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--ml-gray-700);
+	margin: 0 0 var(--ml-space-xs) 0;
+}
+
+.mantiload-hero p {
+	font-size: 14px;
+	color: var(--ml-gray-500);
+	margin: 0;
+}
+
+/* ============================================
+   Stats Grid - Clean cards
+   ============================================ */
+.mantiload-stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--ml-space-md);
+	margin-bottom: var(--ml-space-xl);
+}
+
+.mantiload-stat-card {
+	background: var(--ml-white);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	padding: var(--ml-space-lg);
+	transition: border-color 0.15s ease;
+}
+
+.mantiload-stat-card:hover {
+	border-color: var(--ml-gray-300);
+}
+
+.stat-icon {
+	font-size: 24px;
+	margin-bottom: var(--ml-space-sm);
+	opacity: 0.6;
+}
+
+.stat-content h3 {
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--ml-gray-600);
+	margin: 0 0 var(--ml-space-xs) 0;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.stat-number {
+	font-size: 20px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin-bottom: var(--ml-space-xs);
+}
+
+.stat-label {
+	font-size: 12px;
+	color: var(--ml-gray-500);
+	margin-bottom: var(--ml-space-sm);
+}
+
+.stat-progress {
+	height: 4px;
+	background: var(--ml-gray-100);
+	border-radius: 2px;
+	overflow: hidden;
+	margin-bottom: var(--ml-space-xs);
+}
+
+.progress-bar {
+	height: 100%;
+	background: var(--ml-black);
+	transition: width 0.3s ease;
+}
+
+.stat-percentage {
+	font-size: 12px;
+	font-weight: 500;
+	color: var(--ml-gray-600);
+}
+
+/* ============================================
+   Cache Info - Minimal
+   ============================================ */
+.mantiload-cache-info {
+	background: var(--ml-gray-100);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	padding: var(--ml-space-lg);
+	margin-bottom: var(--ml-space-xl);
+}
+
+.mantiload-cache-info h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-md) 0;
+	display: flex;
+	align-items: center;
+	gap: var(--ml-space-sm);
+}
+
+.mantiload-cache-info h3 i {
+	width: 18px;
+	height: 18px;
+}
+
+.mantiload-cache-info p {
+	font-size: 13px;
+	color: var(--ml-gray-600);
+	margin: 0;
+}
+
+/* ============================================
+   Buttons - Minimal, consistent size
+   ============================================ */
+.ml-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--ml-space-sm);
+	padding: 8px 16px;
+	font-size: 13px;
+	font-weight: 500;
+	font-family: var(--ml-font-sans);
+	color: var(--ml-gray-900);
+	background: var(--ml-white);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	cursor: pointer;
+	transition: all 0.15s ease;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.ml-btn:hover {
+	background: var(--ml-gray-100);
+	border-color: var(--ml-gray-300);
+	color: var(--ml-black);
+}
+
+.ml-btn:active {
+	transform: translateY(1px);
+}
+
+.ml-btn:focus {
+	outline: 2px solid var(--ml-gray-300);
+	outline-offset: 2px;
+}
+
+/* Primary button - Black on white */
+.ml-btn-primary {
+	background: var(--ml-black);
+	color: var(--ml-white);
+	border-color: var(--ml-black);
+}
+
+.ml-btn-primary:hover {
+	background: var(--ml-gray-900);
+	border-color: var(--ml-gray-900);
+	color: var(--ml-white);
+}
+
+/* Danger button - Red for warnings */
+.ml-btn-danger {
+	background: var(--ml-white);
+	color: var(--ml-danger);
+	border-color: var(--ml-danger);
+}
+
+.ml-btn-danger:hover {
+	background: var(--ml-danger);
+	color: var(--ml-white);
+	border-color: var(--ml-danger);
+}
+
+/* Icon in button */
+.ml-btn i {
+	width: 16px;
+	height: 16px;
+	display: inline-block;
+}
+
+/* Button group */
+.ml-btn-group {
+	display: flex;
+	gap: var(--ml-space-sm);
+	flex-wrap: wrap;
+}
+
+/* ============================================
+   Quick Actions Section
+   ============================================ */
+.mantiload-quick-actions {
+	margin-bottom: var(--ml-space-xl);
+}
+
+.mantiload-quick-actions h2 {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-md) 0;
+}
+
+.mantiload-actions-form {
+	display: flex;
+	gap: var(--ml-space-sm);
+	flex-wrap: wrap;
+}
+
+/* ============================================
+   Cards & Sections
+   ============================================ */
+.mantiload-card,
+.mantiload-shortcode-docs,
+.mantiload-features {
+	background: var(--ml-white);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	padding: var(--ml-space-lg);
+	margin-bottom: var(--ml-space-lg);
+}
+
+.mantiload-card h2,
+.mantiload-shortcode-docs h2,
+.mantiload-features h2 {
+	font-size: 16px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-md) 0;
+}
+
+.mantiload-card h3,
+.mantiload-shortcode-docs h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--ml-gray-900);
+	margin: var(--ml-space-lg) 0 var(--ml-space-sm) 0;
+}
+
+.mantiload-card p,
+.mantiload-shortcode-docs p {
+	font-size: 13px;
+	color: var(--ml-gray-600);
+	line-height: 1.6;
+	margin: 0 0 var(--ml-space-md) 0;
+}
+
+/* ============================================
+   Code Examples - Minimal
+   ============================================ */
+.code-example {
+	background: var(--ml-gray-100);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	padding: var(--ml-space-md);
+	margin: var(--ml-space-md) 0;
+}
+
+.code-example code {
+	font-family: var(--ml-font-mono);
+	font-size: 12px;
+	color: var(--ml-black);
+	display: block;
+	margin-bottom: var(--ml-space-sm);
+}
+
+.code-example .description,
+.code-example p {
+	font-size: 12px;
+	color: var(--ml-gray-600);
+	margin: var(--ml-space-sm) 0 0 0;
+}
+
+.shortcode-examples code {
+	font-family: var(--ml-font-mono);
+	font-size: 12px;
+	background: var(--ml-gray-100);
+	padding: 2px 6px;
+	border-radius: 3px;
+	color: var(--ml-black);
+}
+
+/* ============================================
+   Tables - Clean & minimal
+   ============================================ */
+.widefat {
+	border-collapse: collapse;
+	width: 100%;
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	overflow: hidden;
+}
+
+.widefat thead th {
+	background: var(--ml-gray-100);
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--ml-gray-700);
+	text-align: left;
+	padding: 10px 12px;
+	border-bottom: var(--ml-border);
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.widefat tbody td {
+	padding: 10px 12px;
+	font-size: 13px;
+	color: var(--ml-gray-900);
+	border-bottom: 1px solid var(--ml-gray-100);
+}
+
+.widefat tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.widefat.striped tbody tr:nth-child(even) {
+	background: var(--ml-gray-50);
+}
+
+.widefat tbody td code {
+	font-family: var(--ml-font-mono);
+	font-size: 12px;
+	background: var(--ml-gray-100);
+	padding: 2px 6px;
+	border-radius: 3px;
+	color: var(--ml-black);
+}
+
+/* ============================================
+   Features Grid
+   ============================================ */
+.features-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--ml-space-md);
+	margin-top: var(--ml-space-md);
+}
+
+.feature-card {
+	padding: var(--ml-space-md);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	transition: border-color 0.15s ease;
+}
+
+.feature-card:hover {
+	border-color: var(--ml-gray-300);
+}
+
+.feature-icon {
+	font-size: 24px;
+	display: block;
+	margin-bottom: var(--ml-space-sm);
+	opacity: 0.6;
+}
+
+.feature-card h3 {
+	font-size: 14px;
+	font-weight: 600;
+	color: var(--ml-black);
+	margin: 0 0 var(--ml-space-xs) 0;
+}
+
+.feature-card p {
+	font-size: 12px;
+	color: var(--ml-gray-600);
+	line-height: 1.5;
+	margin: 0;
+}
+
+/* ============================================
+   Tips & Lists
+   ============================================ */
+.shortcode-tips {
+	margin-top: var(--ml-space-lg);
+	padding-top: var(--ml-space-lg);
+	border-top: var(--ml-border);
+}
+
+.shortcode-tips ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.shortcode-tips li {
+	font-size: 13px;
+	color: var(--ml-gray-700);
+	padding: var(--ml-space-sm) 0;
+	padding-left: 20px;
+	position: relative;
+}
+
+.shortcode-tips li::before {
+	content: "•";
+	position: absolute;
+	left: 0;
+	color: var(--ml-gray-400);
+}
+
+.shortcode-tips li strong {
+	color: var(--ml-black);
+	font-weight: 600;
+}
+
+.shortcode-tips li code {
+	font-family: var(--ml-font-mono);
+	font-size: 12px;
+	background: var(--ml-gray-100);
+	padding: 2px 6px;
+	border-radius: 3px;
+}
+
+/* ============================================
+   Forms - Minimal
+   ============================================ */
+.ml-form-group {
+	margin-bottom: var(--ml-space-md);
+}
+
+.ml-form-label {
+	display: block;
+	font-size: 13px;
+	font-weight: 500;
+	color: var(--ml-gray-900);
+	margin-bottom: var(--ml-space-xs);
+}
+
+.ml-form-input,
+.ml-form-select,
+.ml-form-textarea {
+	width: 100%;
+	padding: 8px 12px;
+	font-size: 13px;
+	font-family: var(--ml-font-sans);
+	color: var(--ml-gray-900);
+	background: var(--ml-white);
+	border: var(--ml-border);
+	border-radius: var(--ml-radius);
+	transition: all 0.15s ease;
+}
+
+.ml-form-input:focus,
+.ml-form-select:focus,
+.ml-form-textarea:focus {
+	outline: none;
+	border-color: var(--ml-gray-400);
+	box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   WordPress Settings Errors - Minimal
+   ============================================ */
+.settings-error {
+	margin: var(--ml-space-md) 0;
+	padding: 12px 16px;
+	border-radius: var(--ml-radius);
+	font-size: 13px;
+	border-left: 3px solid;
+}
+
+.settings-error.notice-success,
+.updated {
+	background: var(--ml-gray-100);
+	border-left-color: var(--ml-black);
+	color: var(--ml-gray-900);
+}
+
+.settings-error.notice-error,
+.error {
+	background: #fef2f2;
+	border-left-color: var(--ml-danger);
+	color: var(--ml-danger);
+}
+
+/* ============================================
+   Dashicons Integration
+   ============================================ */
+.dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+	display: inline-block;
+	vertical-align: middle;
+	line-height: 1;
+}
+
+/* Dashicons in buttons */
+.ml-btn .dashicons,
+.mantiload-tab-button .dashicons {
+	width: 16px;
+	height: 16px;
+	font-size: 16px;
+}
+
+/* Dashicons in headings */
+.mantiload-card h2 .dashicons {
+	width: 18px;
+	height: 18px;
+	font-size: 18px;
+	opacity: 0.7;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+	.mantiload-stats-grid,
+	.features-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.ml-btn-group,
+	.mantiload-actions-form {
+		flex-direction: column;
+	}
+
+	.ml-btn {
+		width: 100%;
+		justify-content: center;
+	}
+}
+
+/* ============================================
+   Remove old colorful styles
+   ============================================ */
+.button-hero {
+	all: unset !important;
+}
+
+/* Override WordPress button styles in MantiLoad admin */
+.mantiload-dashboard .button,
+.mantiload-dashboard .button-primary,
+.mantiload-dashboard .button-secondary,
+.mantiload-dashboard .button-hero {
+	all: revert;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: var(--ml-space-sm) !important;
+	padding: 8px 16px !important;
+	font-size: 13px !important;
+	font-weight: 500 !important;
+	height: auto !important;
+	line-height: 1.5 !important;
+}
+
+/* ============================================
+   Select2 Styling
+   ============================================ */
+.select2-container--default .select2-selection--multiple {
+	border: 1px solid #ddd !important;
+	border-radius: 4px !important;
+	padding: 4px 8px !important;
+	min-height: 40px !important;
+	background: white !important;
+}
+
+.select2-container--default .select2-selection--multiple:focus,
+.select2-container--default.select2-container--focus .select2-selection--multiple {
+	border-color: #000 !important;
+	outline: none !important;
+	box-shadow: 0 0 0 1px #000 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+	background-color: #000 !important;
+	border: 1px solid #000 !important;
+	color: white !important;
+	border-radius: 3px !important;
+	padding: 4px 8px !important;
+	margin: 2px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+	color: white !important;
+	margin-right: 6px !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+	color: #ddd !important;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+	background-color: #000 !important;
+	color: white !important;
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+	margin: 2px 0 !important;
+	padding: 4px !important;
+}
+
+.select2-dropdown {
+	border: 1px solid #000 !important;
+	border-radius: 4px !important;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+	border: 1px solid #ddd !important;
+	border-radius: 3px !important;
+	padding: 6px 10px !important;
+}
+
+/* ============================================
+   Tabbed Interface
+   ============================================ */
+
+/* Tab Container */
+.mantiload-tabs-container {
+	margin-top: 24px;
+}
+
+/* Tab Navigation */
+.mantiload-tabs-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	background: var(--ml-gray-100);
+	padding: 12px;
+	border-radius: var(--ml-radius);
+	margin-bottom: 24px;
+	box-shadow: var(--ml-shadow-sm);
+}
+
+/* Tab Buttons */
+.mantiload-tab-button {
+	flex: 1;
+	min-width: 140px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	padding: 12px 16px;
+	background: var(--ml-white);
+	border: 1px solid var(--ml-gray-300);
+	border-radius: 4px;
+	color: var(--ml-gray-700);
+	font-size: 13px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.mantiload-tab-button:hover {
+	background: var(--ml-gray-50);
+	border-color: var(--ml-gray-400);
+	color: var(--ml-black);
+}
+
+.mantiload-tab-button.active {
+	background: var(--ml-black);
+	border-color: var(--ml-black);
+	color: var(--ml-white);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mantiload-tab-button i {
+	width: 16px;
+	height: 16px;
+}
+
+.mantiload-tab-button svg {
+	width: 16px;
+	height: 16px;
+}
+
+/* Tab Content */
+.mantiload-tabs-content {
+	position: relative;
+}
+
+/* Tab Panels */
+.mantiload-tab-panel {
+	display: none;
+	animation: fadeIn 0.3s ease;
+}
+
+.mantiload-tab-panel.active {
+	display: block;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Responsive Design for Tabs */
+@media (max-width: 1024px) {
+	.mantiload-tabs-nav {
+		gap: 6px;
+		padding: 10px;
+	}
+
+	.mantiload-tab-button {
+		min-width: 120px;
+		padding: 10px 12px;
+		font-size: 12px;
+		gap: 6px;
+	}
+
+	.mantiload-tab-button span {
+		display: none;
+	}
+
+	.mantiload-tab-button i {
+		margin: 0;
+	}
+}
+
+@media (max-width: 768px) {
+	.mantiload-tabs-nav {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+		gap: 8px;
+	}
+
+	.mantiload-tab-button {
+		min-width: auto;
+	}
+}

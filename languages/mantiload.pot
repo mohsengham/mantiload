@@ -1,0 +1,1842 @@
+# Copyright (C) 2025 MantiLoad
+# This file is distributed under the GPL v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: MantiLoad - Ultra-Fast Search & Filter 1.5.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mantiload\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-11-29T18:54:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: mantiload\n"
+
+#. Plugin Name of the plugin
+#: mantiload.php
+msgid "MantiLoad - Ultra-Fast Search & Filter"
+msgstr ""
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: mantiload.php
+msgid "https://mantiload.com/"
+msgstr ""
+
+#. Description of the plugin
+#: mantiload.php
+msgid "Lightning-fast search and filtering powered by Manticore Search. Optimized for WooCommerce with beautiful UI, advanced filters, and sub-millisecond search responses."
+msgstr ""
+
+#. Author of the plugin
+#: mantiload.php
+#: admin/class-admin-controller.php:34
+#: admin/class-admin-controller.php:35
+msgid "MantiLoad"
+msgstr ""
+
+#: admin/class-admin-ajax.php:39
+#: admin/class-admin-ajax.php:91
+#: admin/class-admin-ajax.php:132
+#: admin/class-admin-ajax.php:161
+#: admin/class-admin-ajax.php:200
+#: admin/class-admin-ajax.php:236
+#: admin/class-admin-ajax.php:279
+#: admin/class-admin-ajax.php:346
+#: admin/class-admin-ajax.php:389
+#: admin/class-admin-ajax.php:470
+msgid "Unauthorized"
+msgstr ""
+
+#: admin/class-admin-ajax.php:146
+msgid "Index created successfully with multi-language support! Now you can start indexing."
+msgstr ""
+
+#: admin/class-admin-ajax.php:149
+msgid "Failed to create index. Check that Manticore is running and accessible."
+msgstr ""
+
+#: admin/class-admin-ajax.php:172
+#: admin/class-admin-ajax.php:211
+msgid "Manticore client not available"
+msgstr ""
+
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:184
+#, php-format
+msgid "Index \"%s\" truncated successfully"
+msgstr ""
+
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:188
+#, php-format
+msgid "Failed to truncate index \"%s\""
+msgstr ""
+
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:220
+#, php-format
+msgid "Index \"%s\" optimized successfully"
+msgstr ""
+
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:224
+#, php-format
+msgid "Failed to optimize index \"%s\""
+msgstr ""
+
+#: admin/class-admin-controller.php:43
+msgid "Dashboard"
+msgstr ""
+
+#: admin/class-admin-controller.php:44
+#: admin/views/indexing-new.php:13
+msgid "Indexing"
+msgstr ""
+
+#: admin/class-admin-controller.php:45
+msgid "DB Indexes"
+msgstr ""
+
+#: admin/class-admin-controller.php:46
+msgid "Synonyms"
+msgstr ""
+
+#: admin/class-admin-controller.php:47
+#: admin/views/settings.php:18
+msgid "Settings"
+msgstr ""
+
+#: admin/class-admin-controller.php:48
+msgid "Analytics"
+msgstr ""
+
+#: admin/class-admin-controller.php:73
+msgid "Are you sure you want to abort indexing?\\n\\nProgress will be saved, but remaining posts will not be indexed."
+msgstr ""
+
+#: admin/class-admin-controller.php:74
+msgid "Aborting..."
+msgstr ""
+
+#: admin/class-admin-controller.php:75
+msgid "Are you sure you want to reindex all products?\\n\\nThis will reindex all products with full categories, attributes, and filter data."
+msgstr ""
+
+#: admin/class-admin-controller.php:76
+msgid "Are you sure you want to clear all cached search results?"
+msgstr ""
+
+#: admin/class-admin-controller.php:77
+msgid "Error"
+msgstr ""
+
+#: admin/class-admin-controller.php:78
+msgid "Unknown error"
+msgstr ""
+
+#: admin/class-admin-controller.php:79
+msgid "AJAX Error"
+msgstr ""
+
+#: admin/class-admin-controller.php:80
+msgid "Network error"
+msgstr ""
+
+#: admin/class-admin-controller.php:81
+msgid "Index optimized successfully!"
+msgstr ""
+
+#: admin/class-admin-controller.php:82
+msgid "Optimization failed"
+msgstr ""
+
+#: admin/class-admin-controller.php:83
+msgid "Error loading hidden notices"
+msgstr ""
+
+#: admin/class-admin-controller.php:122
+msgid "Failed to create indexes: "
+msgstr ""
+
+#: admin/class-admin-controller.php:125
+msgid "Indexes created successfully for: "
+msgstr ""
+
+#. translators: 1: number of items indexed, 2: time in seconds
+#: admin/class-admin-controller.php:151
+#, php-format
+msgid "Reindex completed! Indexed %1$d items in %2$.2f seconds."
+msgstr ""
+
+#: admin/class-admin-controller.php:162
+msgid "Indexer not available. Please check Manticore connection."
+msgstr ""
+
+#. translators: %d: number of indexes cleared
+#: admin/class-admin-controller.php:176
+#, php-format
+msgid "Cleared %d indexes! All indexed data removed."
+msgstr ""
+
+#: admin/class-admin-controller.php:182
+msgid "Indexes optimized!"
+msgstr ""
+
+#: admin/class-admin-controller.php:187
+msgid "Search logs cleared!"
+msgstr ""
+
+#: admin/class-admin-controller.php:194
+msgid "Search cache cleared successfully! Next searches will rebuild cache."
+msgstr ""
+
+#: admin/class-admin-controller.php:553
+msgid "Security verification failed. Please try again."
+msgstr ""
+
+#. translators: %1$d: installed count, %2$d: failed count
+#: admin/class-admin-controller.php:632
+#, php-format
+msgid "Installed %1$d indexes, %2$d failed"
+msgstr ""
+
+#. translators: %d: installed count
+#: admin/class-admin-controller.php:645
+#, php-format
+msgid "Successfully installed %d indexes"
+msgstr ""
+
+#. translators: %1$d: removed count, %2$d: failed count
+#: admin/class-admin-controller.php:727
+#, php-format
+msgid "Removed %1$d indexes, %2$d failed"
+msgstr ""
+
+#. translators: %d: removed count
+#: admin/class-admin-controller.php:740
+#, php-format
+msgid "Successfully removed %d indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:34
+msgid "Database Indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:36
+msgid "Optimize MySQL query performance for admin panel and reliability"
+msgstr ""
+
+#: admin/views/database-indexes.php:41
+#: admin/views/settings.php:25
+msgid "Index Status"
+msgstr ""
+
+#: admin/views/database-indexes.php:47
+msgid "Installed:"
+msgstr ""
+
+#: admin/views/database-indexes.php:49
+msgid "indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:53
+msgid "Available:"
+msgstr ""
+
+#: admin/views/database-indexes.php:55
+msgid "ready to install"
+msgstr ""
+
+#: admin/views/database-indexes.php:59
+msgid "Unavailable:"
+msgstr ""
+
+#: admin/views/database-indexes.php:61
+msgid "(table missing)"
+msgstr ""
+
+#: admin/views/database-indexes.php:67
+msgid "Total Indexes:"
+msgstr ""
+
+#: admin/views/database-indexes.php:74
+msgid "Index WP MySQL:"
+msgstr ""
+
+#: admin/views/database-indexes.php:76
+msgid "Detected"
+msgstr ""
+
+#: admin/views/database-indexes.php:89
+#: admin/views/database-indexes.php:367
+msgid "About Database Indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:94
+msgid "When Indexes Help"
+msgstr ""
+
+#: admin/views/database-indexes.php:96
+msgid "WooCommerce admin panel (orders, products, reports)"
+msgstr ""
+
+#: admin/views/database-indexes.php:97
+msgid "Reliability when Manticore is unavailable"
+msgstr ""
+
+#: admin/views/database-indexes.php:98
+msgid "Secondary queries (widgets, sidebars)"
+msgstr ""
+
+#: admin/views/database-indexes.php:99
+msgid "Variable product variation loading"
+msgstr ""
+
+#: admin/views/database-indexes.php:104
+msgid "How They Work With MantiLoad"
+msgstr ""
+
+#: admin/views/database-indexes.php:106
+msgid "Frontend:"
+msgstr ""
+
+#: admin/views/database-indexes.php:106
+msgid "MantiLoad uses Manticore (indexes dormant)"
+msgstr ""
+
+#: admin/views/database-indexes.php:107
+msgid "Admin:"
+msgstr ""
+
+#: admin/views/database-indexes.php:107
+msgid "Indexes speed up MySQL (40-80% faster)"
+msgstr ""
+
+#: admin/views/database-indexes.php:108
+msgid "Fallback:"
+msgstr ""
+
+#: admin/views/database-indexes.php:108
+msgid "Essential safety net for reliability"
+msgstr ""
+
+#: admin/views/database-indexes.php:115
+msgid "Pro Tip:"
+msgstr ""
+
+#: admin/views/database-indexes.php:116
+msgid "For maximum performance, also install \"Index WP MySQL For Speed\" plugin. It optimizes meta tables while MantiLoad handles taxonomy and WooCommerce queries."
+msgstr ""
+
+#: admin/views/database-indexes.php:126
+msgid "Quick Installation"
+msgstr ""
+
+#: admin/views/database-indexes.php:129
+msgid "Install all available indexes with one click for improved performance"
+msgstr ""
+
+#. translators: %d: number of indexes
+#: admin/views/database-indexes.php:136
+#, php-format
+msgid "Install All Indexes (%d)"
+msgstr ""
+
+#: admin/views/database-indexes.php:156
+msgid "Taxonomy"
+msgstr ""
+
+#: admin/views/database-indexes.php:160
+msgid "WooCommerce"
+msgstr ""
+
+#: admin/views/database-indexes.php:164
+#: includes/class-ajax-search.php:138
+msgid "Products"
+msgstr ""
+
+#: admin/views/database-indexes.php:168
+msgid "About"
+msgstr ""
+
+#: admin/views/database-indexes.php:176
+msgid "Taxonomy Indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:182
+msgid "Optimizes category filtering, hierarchical queries, and product attribute filtering."
+msgstr ""
+
+#: admin/views/database-indexes.php:189
+#: admin/views/database-indexes.php:253
+#: admin/views/database-indexes.php:317
+#: admin/views/settings.php:139
+msgid "Index Name"
+msgstr ""
+
+#: admin/views/database-indexes.php:190
+#: admin/views/database-indexes.php:254
+#: admin/views/database-indexes.php:318
+msgid "Table"
+msgstr ""
+
+#: admin/views/database-indexes.php:191
+#: admin/views/database-indexes.php:255
+#: admin/views/database-indexes.php:319
+msgid "Benefit"
+msgstr ""
+
+#: admin/views/database-indexes.php:192
+#: admin/views/database-indexes.php:256
+#: admin/views/database-indexes.php:320
+msgid "Status"
+msgstr ""
+
+#: admin/views/database-indexes.php:193
+#: admin/views/database-indexes.php:257
+#: admin/views/database-indexes.php:321
+msgid "Actions"
+msgstr ""
+
+#: admin/views/database-indexes.php:211
+#: admin/views/database-indexes.php:275
+#: admin/views/database-indexes.php:339
+msgid "N/A"
+msgstr ""
+
+#: admin/views/database-indexes.php:213
+#: admin/views/database-indexes.php:277
+#: admin/views/database-indexes.php:341
+msgid "Active"
+msgstr ""
+
+#: admin/views/database-indexes.php:215
+#: admin/views/database-indexes.php:279
+#: admin/views/database-indexes.php:343
+msgid "Not Installed"
+msgstr ""
+
+#: admin/views/database-indexes.php:221
+#: admin/views/database-indexes.php:285
+#: admin/views/database-indexes.php:349
+#: admin/views/database-indexes.php:488
+#: admin/views/database-indexes.php:493
+msgid "Install"
+msgstr ""
+
+#: admin/views/database-indexes.php:225
+#: admin/views/database-indexes.php:289
+#: admin/views/database-indexes.php:353
+#: admin/views/database-indexes.php:522
+#: admin/views/database-indexes.php:527
+msgid "Remove"
+msgstr ""
+
+#: admin/views/database-indexes.php:240
+msgid "WooCommerce HPOS Indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:246
+msgid "Optimizes WooCommerce High-Performance Order Storage (HPOS) queries for faster order management."
+msgstr ""
+
+#: admin/views/database-indexes.php:304
+msgid "Product Optimization Indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:310
+msgid "Optimizes product catalog queries and variable product loading for faster shop pages."
+msgstr ""
+
+#: admin/views/database-indexes.php:370
+msgid "What These Indexes Do"
+msgstr ""
+
+#: admin/views/database-indexes.php:372
+msgid "Complement existing optimization plugins (Index WP MySQL For Speed, Scalability Pro)"
+msgstr ""
+
+#: admin/views/database-indexes.php:373
+msgid "Focus on taxonomy relationships and WooCommerce-specific queries"
+msgstr ""
+
+#: admin/views/database-indexes.php:374
+msgid "Avoid conflicts by using unique index names with \"mantiload_\" prefix"
+msgstr ""
+
+#: admin/views/database-indexes.php:375
+msgid "Target specific performance bottlenecks in category filtering and product queries"
+msgstr ""
+
+#: admin/views/database-indexes.php:378
+msgid "Index Size Impact"
+msgstr ""
+
+#: admin/views/database-indexes.php:380
+msgid "Each index: 5-50 MB depending on store size. Total for all 8 indexes on 10k product store: ~100-200 MB (negligible compared to typical WooCommerce database of 500MB-5GB)."
+msgstr ""
+
+#: admin/views/database-indexes.php:383
+msgid "Safety"
+msgstr ""
+
+#: admin/views/database-indexes.php:385
+msgid "All indexes can be safely removed without affecting your data. Only database query performance will be impacted. MySQL automatically maintains indexes - no ongoing management needed."
+msgstr ""
+
+#: admin/views/database-indexes.php:392
+msgid "Remove All Indexes"
+msgstr ""
+
+#: admin/views/database-indexes.php:395
+msgid "If you need to remove all MantiLoad indexes (for troubleshooting or uninstallation), use the button below."
+msgstr ""
+
+#. translators: %d: number of installed indexes
+#: admin/views/database-indexes.php:402
+#, php-format
+msgid "Remove All Installed Indexes (%d)"
+msgstr ""
+
+#: admin/views/database-indexes.php:429
+msgid "This will install all available database indexes. Continue?"
+msgstr ""
+
+#: admin/views/database-indexes.php:440
+msgid "Installing indexes..."
+msgstr ""
+
+#: admin/views/database-indexes.php:462
+#: admin/views/database-indexes.php:492
+msgid "Installation failed. Please try again."
+msgstr ""
+
+#: admin/views/database-indexes.php:473
+msgid "Installing..."
+msgstr ""
+
+#: admin/views/database-indexes.php:500
+msgid "Are you sure you want to remove this index?"
+msgstr ""
+
+#: admin/views/database-indexes.php:507
+#: admin/views/database-indexes.php:539
+msgid "Removing..."
+msgstr ""
+
+#: admin/views/database-indexes.php:526
+#: admin/views/database-indexes.php:557
+msgid "Removal failed. Please try again."
+msgstr ""
+
+#: admin/views/database-indexes.php:534
+msgid "Are you sure you want to remove ALL MantiLoad indexes? This cannot be undone."
+msgstr ""
+
+#: admin/views/database-indexes.php:553
+#: admin/views/database-indexes.php:558
+msgid "Remove All Installed Indexes"
+msgstr ""
+
+#: admin/views/indexing-new.php:15
+msgid "Lightning-fast search indexing powered by Manticore Search"
+msgstr ""
+
+#: admin/views/indexing-new.php:20
+msgid "Full Reindex"
+msgstr ""
+
+#: admin/views/indexing-new.php:21
+msgid "Reindex all products with categories, attributes, and filter data"
+msgstr ""
+
+#: admin/views/indexing-new.php:28
+msgid "Start Full Reindex"
+msgstr ""
+
+#: admin/views/indexing-new.php:32
+msgid "Abort"
+msgstr ""
+
+#: admin/views/indexing-new.php:39
+msgid "Starting..."
+msgstr ""
+
+#: admin/views/indexing-new.php:51
+#: admin/views/settings.php:169
+msgid "Index Management"
+msgstr ""
+
+#: admin/views/indexing-new.php:53
+msgid "Manage your Manticore search index with these powerful tools"
+msgstr ""
+
+#: admin/views/indexing-new.php:62
+#: admin/views/indexing-new.php:69
+msgid "Create Index"
+msgstr ""
+
+#: admin/views/indexing-new.php:65
+msgid "Create a new search index with multi-language support"
+msgstr ""
+
+#: admin/views/indexing-new.php:76
+#: admin/views/indexing-new.php:83
+msgid "Truncate Index"
+msgstr ""
+
+#: admin/views/indexing-new.php:79
+msgid "Remove all indexed data and clear the entire search index"
+msgstr ""
+
+#: admin/views/indexing-new.php:90
+#: admin/views/indexing-new.php:97
+msgid "Optimize Index"
+msgstr ""
+
+#: admin/views/indexing-new.php:93
+msgid "Optimize the index for better query performance and reduced disk usage"
+msgstr ""
+
+#: admin/views/indexing-new.php:105
+msgid "Indexing Statistics"
+msgstr ""
+
+#: admin/views/indexing-new.php:114
+msgid "Post Type"
+msgstr ""
+
+#: admin/views/indexing-new.php:115
+msgid "Indexed"
+msgstr ""
+
+#: admin/views/indexing-new.php:116
+msgid "Total"
+msgstr ""
+
+#: admin/views/indexing-new.php:117
+msgid "Progress"
+msgstr ""
+
+#: admin/views/settings.php:20
+msgid "Configure your search engine for optimal performance"
+msgstr ""
+
+#: admin/views/settings.php:31
+msgid "Connection:"
+msgstr ""
+
+#: admin/views/settings.php:33
+msgid "Checking..."
+msgstr ""
+
+#: admin/views/settings.php:37
+msgid "Documents:"
+msgstr ""
+
+#: admin/views/settings.php:39
+#: admin/views/settings.php:45
+#: includes/filters/class-filter-manager.php:166
+msgid "Loading..."
+msgstr ""
+
+#: admin/views/settings.php:43
+msgid "Index Size:"
+msgstr ""
+
+#: admin/views/settings.php:51
+msgid "Index:"
+msgstr ""
+
+#: admin/views/settings.php:57
+msgid "Server:"
+msgstr ""
+
+#: admin/views/settings.php:71
+msgid "Connection"
+msgstr ""
+
+#: admin/views/settings.php:75
+msgid "General"
+msgstr ""
+
+#: admin/views/settings.php:79
+msgid "Relevance"
+msgstr ""
+
+#: admin/views/settings.php:83
+msgid "AJAX Search"
+msgstr ""
+
+#: admin/views/settings.php:87
+msgid "Performance"
+msgstr ""
+
+#: admin/views/settings.php:91
+msgid "Admin Features"
+msgstr ""
+
+#: admin/views/settings.php:95
+msgid "Related Products"
+msgstr ""
+
+#: admin/views/settings.php:99
+msgid "Integration"
+msgstr ""
+
+#: admin/views/settings.php:112
+msgid "Manticore Connection"
+msgstr ""
+
+#: admin/views/settings.php:113
+msgid "Configure connection to your Manticore Search server"
+msgstr ""
+
+#: admin/views/settings.php:119
+msgid "Host Address"
+msgstr ""
+
+#: admin/views/settings.php:124
+msgid "IP address of your Manticore Search server"
+msgstr ""
+
+#: admin/views/settings.php:129
+msgid "Port Number"
+msgstr ""
+
+#: admin/views/settings.php:134
+msgid "MySQL protocol port (default: 9306)"
+msgstr ""
+
+#. translators: %s: auto-generated index name
+#: admin/views/settings.php:149
+#, php-format
+msgid "Name of the Manticore search index. Auto-generated unique name: %s"
+msgstr ""
+
+#: admin/views/settings.php:161
+msgid "Test Connection"
+msgstr ""
+
+#: admin/views/settings.php:170
+msgid "Manage your search index and reindex products"
+msgstr ""
+
+#: admin/views/settings.php:177
+msgid "Rebuild Index Now"
+msgstr ""
+
+#: admin/views/settings.php:181
+msgid "Abort Rebuild"
+msgstr ""
+
+#: admin/views/settings.php:198
+msgid "When to rebuild:"
+msgstr ""
+
+#: admin/views/settings.php:200
+msgid "After changing index settings"
+msgstr ""
+
+#: admin/views/settings.php:201
+msgid "If search results seem outdated"
+msgstr ""
+
+#: admin/views/settings.php:202
+msgid "After bulk product imports"
+msgstr ""
+
+#: admin/views/settings.php:205
+msgid "Note: Auto-indexing keeps your index up-to-date automatically. Manual rebuilds are rarely needed!"
+msgstr ""
+
+#: admin/views/settings.php:215
+msgid "General Settings"
+msgstr ""
+
+#: admin/views/settings.php:219
+msgid "Enable MantiLoad"
+msgstr ""
+
+#: admin/views/settings.php:224
+msgid "Activate search functionality"
+msgstr ""
+
+#: admin/views/settings.php:230
+msgid "Post Types"
+msgstr ""
+
+#: admin/views/settings.php:243
+msgid "Select which content types to include in search"
+msgstr ""
+
+#: admin/views/settings.php:248
+msgid "Instant Search"
+msgstr ""
+
+#: admin/views/settings.php:253
+msgid "Show results as user types"
+msgstr ""
+
+#: admin/views/settings.php:259
+msgid "Keyboard Shortcut"
+msgstr ""
+
+#: admin/views/settings.php:270
+msgid "Choose keyboard shortcut to open search modal (works on admin & frontend)"
+msgstr ""
+
+#: admin/views/settings.php:271
+msgid "Tip: Change this if WordPress or another plugin uses Ctrl+K in the future"
+msgstr ""
+
+#: admin/views/settings.php:278
+msgid "Stock Priority"
+msgstr ""
+
+#: admin/views/settings.php:283
+msgid "Show in-stock products first"
+msgstr ""
+
+#: admin/views/settings.php:285
+msgid "Push out-of-stock items to the end regardless of sort order"
+msgstr ""
+
+#: admin/views/settings.php:290
+msgid "Search Logging"
+msgstr ""
+
+#: admin/views/settings.php:295
+msgid "Log queries for analytics"
+msgstr ""
+
+#: admin/views/settings.php:301
+msgid "Batch Size"
+msgstr ""
+
+#: admin/views/settings.php:306
+msgid "Posts per batch (higher = faster, more memory)"
+msgstr ""
+
+#: admin/views/settings.php:311
+msgid "Index Product Content"
+msgstr ""
+
+#: admin/views/settings.php:316
+msgid "Index product descriptions and excerpts in search"
+msgstr ""
+
+#: admin/views/settings.php:349
+msgid "Search Relevance Weights"
+msgstr ""
+
+#: admin/views/settings.php:350
+msgid "Control how different fields affect search ranking (higher = more important)"
+msgstr ""
+
+#: admin/views/settings.php:357
+msgid "Title Weight"
+msgstr ""
+
+#: admin/views/settings.php:366
+msgid "SKU Weight"
+msgstr ""
+
+#: admin/views/settings.php:375
+msgid "Content Weight"
+msgstr ""
+
+#: admin/views/settings.php:384
+msgid "Categories Weight"
+msgstr ""
+
+#: admin/views/settings.php:393
+msgid "Tags Weight"
+msgstr ""
+
+#: admin/views/settings.php:402
+msgid "Attributes Weight"
+msgstr ""
+
+#: admin/views/settings.php:414
+msgid "Exclude Attributes from Search"
+msgstr ""
+
+#: admin/views/settings.php:438
+msgid "No product attributes found"
+msgstr ""
+
+#: admin/views/settings.php:443
+msgid "Select attributes to exclude from search results. These attributes will still be indexed for filters but won't affect search relevance."
+msgstr ""
+
+#: admin/views/settings.php:447
+msgid "Use Case:"
+msgstr ""
+
+#: admin/views/settings.php:448
+msgid "Exclude attributes like \"color\" or \"size\" if you don't want customers searching for \"red\" or \"large\" to get results based on those attributes. Perfect for stores where attribute values might conflict with product names."
+msgstr ""
+
+#: admin/views/settings.php:460
+msgid "AJAX Search Settings"
+msgstr ""
+
+#: admin/views/settings.php:464
+msgid "Search Delay"
+msgstr ""
+
+#: admin/views/settings.php:469
+msgid "Milliseconds to wait before searching (debounce)"
+msgstr ""
+
+#: admin/views/settings.php:474
+msgid "Min Characters"
+msgstr ""
+
+#: admin/views/settings.php:479
+msgid "Minimum characters to trigger search"
+msgstr ""
+
+#: admin/views/settings.php:484
+msgid "Max Results"
+msgstr ""
+
+#: admin/views/settings.php:489
+msgid "Maximum results in dropdown"
+msgstr ""
+
+#: admin/views/settings.php:494
+msgid "Show Categories"
+msgstr ""
+
+#: admin/views/settings.php:499
+msgid "Show matching categories in search dropdown"
+msgstr ""
+
+#: admin/views/settings.php:501
+msgid "Display product categories and tags above search results (like Amazon)"
+msgstr ""
+
+#: admin/views/settings.php:506
+msgid "Max Categories"
+msgstr ""
+
+#: admin/views/settings.php:511
+msgid "Maximum categories to show in dropdown"
+msgstr ""
+
+#: admin/views/settings.php:521
+msgid "Performance & Caching"
+msgstr ""
+
+#: admin/views/settings.php:522
+msgid "Redis-powered caching for lightning-fast category pages"
+msgstr ""
+
+#: admin/views/settings.php:528
+msgid "Redis Query Cache"
+msgstr ""
+
+#: admin/views/settings.php:533
+msgid "Enable category query caching"
+msgstr ""
+
+#: admin/views/settings.php:537
+msgid "433x Faster Category Pages!"
+msgstr ""
+
+#: admin/views/settings.php:538
+msgid "Caches category product queries in Redis. Reduces query time from ~130ms to ~0.3ms. Automatically invalidates when products are updated."
+msgstr ""
+
+#: admin/views/settings.php:548
+msgid "Redis connected"
+msgstr ""
+
+#: admin/views/settings.php:550
+#: admin/views/settings.php:553
+msgid "Redis not available"
+msgstr ""
+
+#: admin/views/settings.php:561
+msgid "Auto Query Interception"
+msgstr ""
+
+#: admin/views/settings.php:566
+msgid "Automatically intercept product archive queries"
+msgstr ""
+
+#: admin/views/settings.php:570
+msgid "Drop-In ElasticPress-Style Integration!"
+msgstr ""
+
+#: admin/views/settings.php:571
+msgid "Automatically routes WooCommerce product category, tag, and shop pages to Manticore. No theme modifications needed! Gracefully falls back to MySQL on errors."
+msgstr ""
+
+#: admin/views/settings.php:575
+#: admin/views/settings.php:917
+msgid "How it works:"
+msgstr ""
+
+#: admin/views/settings.php:576
+msgid "Intercepts queries using WordPress posts_pre_query hook"
+msgstr ""
+
+#: admin/views/settings.php:577
+msgid "Only affects main product archive queries (shop, categories, tags)"
+msgstr ""
+
+#: admin/views/settings.php:578
+msgid "Works alongside Redis cache for maximum performance"
+msgstr ""
+
+#: admin/views/settings.php:579
+msgid "If disabled, you can still use manual template integration"
+msgstr ""
+
+#: admin/views/settings.php:585
+msgid "WooCommerce Filter Integration"
+msgstr ""
+
+#: admin/views/settings.php:590
+msgid "Turbocharge layered nav filters"
+msgstr ""
+
+#: admin/views/settings.php:594
+msgid "Use Manticore to speed up WooCommerce & WoodMart layered nav filters (color, size, attributes, etc.). Works with existing filter widgets!"
+msgstr ""
+
+#: admin/views/settings.php:604
+msgid "Turbo Mode"
+msgstr ""
+
+#: admin/views/settings.php:605
+msgid "Disable unnecessary plugins during AJAX search for 5-10x faster responses"
+msgstr ""
+
+#: admin/views/settings.php:611
+msgid "Enable Turbo Mode"
+msgstr ""
+
+#: admin/views/settings.php:616
+msgid "Selective plugin loading for AJAX search"
+msgstr ""
+
+#: admin/views/settings.php:620
+msgid "🚀 5-10x Faster Search!"
+msgstr ""
+
+#: admin/views/settings.php:621
+msgid "Only loads essential plugins during search requests. Other plugins are temporarily disabled for that request only."
+msgstr ""
+
+#: admin/views/settings.php:629
+msgid "MU-Plugin Required"
+msgstr ""
+
+#: admin/views/settings.php:630
+msgid "Copy mantiload-turbo.php to wp-content/mu-plugins/ for Turbo Mode to work."
+msgstr ""
+
+#: admin/views/settings.php:638
+msgid "Apply Turbo Mode To"
+msgstr ""
+
+#: admin/views/settings.php:648
+msgid "Frontend Search"
+msgstr ""
+
+#: admin/views/settings.php:650
+msgid "AJAX search box, instant search dropdown"
+msgstr ""
+
+#: admin/views/settings.php:658
+msgid "Frontend Filters"
+msgstr ""
+
+#: admin/views/settings.php:660
+msgid "Product filtering, layered navigation, load more"
+msgstr ""
+
+#: admin/views/settings.php:668
+#: admin/views/settings.php:792
+msgid "Admin Search (Cmd/Ctrl+K)"
+msgstr ""
+
+#: admin/views/settings.php:670
+msgid "Quick search in WordPress admin"
+msgstr ""
+
+#: admin/views/settings.php:676
+msgid "Select which MantiLoad actions should use Turbo Mode. Frontend Search is recommended for most sites."
+msgstr ""
+
+#: admin/views/settings.php:682
+msgid "Additional Plugins to Keep"
+msgstr ""
+
+#: admin/views/settings.php:685
+msgid "MantiLoad and WooCommerce are always kept. Select any additional plugins needed for search:"
+msgstr ""
+
+#: admin/views/settings.php:719
+msgid "✓ Always Loaded:"
+msgstr ""
+
+#: admin/views/settings.php:729
+msgid "⚠ Recommended to Keep:"
+msgstr ""
+
+#: admin/views/settings.php:745
+msgid "Other Plugins:"
+msgstr ""
+
+#: admin/views/settings.php:759
+msgid "Tip:"
+msgstr ""
+
+#: admin/views/settings.php:760
+msgid "Start with none selected. If search breaks, add plugins one by one to find which is needed."
+msgstr ""
+
+#: admin/views/settings.php:785
+msgid "Admin Superpowers"
+msgstr ""
+
+#: admin/views/settings.php:786
+msgid "Revolutionary features that make WordPress admin blazing fast"
+msgstr ""
+
+#: admin/views/settings.php:797
+msgid "Enable lightning-fast admin search"
+msgstr ""
+
+#: admin/views/settings.php:801
+msgid "The FIRST EVER WordPress Admin Search!"
+msgstr ""
+
+#: admin/views/settings.php:802
+msgid "Press Cmd+K (Mac) or Ctrl+K (Windows) to instantly search products, orders, and posts. Sub-50ms response times!"
+msgstr ""
+
+#: admin/views/settings.php:809
+msgid "Index Orders & Customers"
+msgstr ""
+
+#: admin/views/settings.php:814
+msgid "Enable fast order & customer search in admin"
+msgstr ""
+
+#: admin/views/settings.php:818
+msgid "Game Changer!"
+msgstr ""
+
+#: admin/views/settings.php:819
+msgid "Index WooCommerce orders and customers for lightning-fast admin search. Find any order by number, customer name, email, or phone instantly (5-15ms vs 500-2000ms with WordPress). Press Cmd+K/Ctrl+K and search for orders #12345 or customer email!"
+msgstr ""
+
+#: admin/views/settings.php:824
+msgid "⚠️ Important:"
+msgstr ""
+
+#: admin/views/settings.php:824
+msgid "After enabling this, you must rebuild the index to add orders and customers to Manticore."
+msgstr ""
+
+#: admin/views/settings.php:831
+msgid "Product List Optimization"
+msgstr ""
+
+#: admin/views/settings.php:836
+msgid "Optimize product admin search"
+msgstr ""
+
+#: admin/views/settings.php:840
+msgid "Replace slow LIKE queries (300-500ms) with instant Manticore search (5-30ms) in Products > All Products"
+msgstr ""
+
+#: admin/views/settings.php:854
+msgid "Smart Related Products"
+msgstr ""
+
+#: admin/views/settings.php:855
+msgid "Lightning-fast, intelligent related products that understand attributes, categories, and price ranges"
+msgstr ""
+
+#: admin/views/settings.php:861
+msgid "Enable Related Products"
+msgstr ""
+
+#: admin/views/settings.php:866
+msgid "Replace WooCommerce related products with MantiLoad"
+msgstr ""
+
+#: admin/views/settings.php:870
+msgid "Performance:"
+msgstr ""
+
+#: admin/views/settings.php:870
+msgid "20-30x faster than WooCommerce default (2-5ms vs 50-150ms)"
+msgstr ""
+
+#: admin/views/settings.php:871
+msgid "Intelligence:"
+msgstr ""
+
+#: admin/views/settings.php:871
+msgid "Matches product attributes, categories, price range, and more"
+msgstr ""
+
+#: admin/views/settings.php:872
+msgid "Compatibility:"
+msgstr ""
+
+#: admin/views/settings.php:872
+msgid "Works automatically with all themes, Elementor, Divi, and page builders"
+msgstr ""
+
+#: admin/views/settings.php:879
+msgid "Matching Algorithm"
+msgstr ""
+
+#: admin/views/settings.php:883
+msgid "Combo (Attributes + Categories + Price) - Recommended"
+msgstr ""
+
+#: admin/views/settings.php:886
+msgid "Attributes & Categories (Ignores Price)"
+msgstr ""
+
+#: admin/views/settings.php:889
+msgid "Price & Categories (Ignores Attributes)"
+msgstr ""
+
+#: admin/views/settings.php:892
+msgid "Fabric + Category - Perfect for Fashion"
+msgstr ""
+
+#: admin/views/settings.php:896
+msgid "Combo:"
+msgstr ""
+
+#: admin/views/settings.php:896
+msgid "Finds products with similar attributes (color, brand, size), same category, and similar price (±30%). Most intelligent!"
+msgstr ""
+
+#: admin/views/settings.php:897
+msgid "Attributes & Categories:"
+msgstr ""
+
+#: admin/views/settings.php:897
+msgid "Focuses on product characteristics. Great for fashion/apparel stores."
+msgstr ""
+
+#: admin/views/settings.php:898
+msgid "Price & Categories:"
+msgstr ""
+
+#: admin/views/settings.php:898
+msgid "Finds alternatives at similar price point. Perfect for competitive products."
+msgstr ""
+
+#: admin/views/settings.php:899
+msgid "Fabric + Category:"
+msgstr ""
+
+#: admin/views/settings.php:899
+msgid "Prioritizes fabric attribute matching (satin, lace, chiffon, etc.) within same category. Custom algorithm for fashion stores like Jovani."
+msgstr ""
+
+#: admin/views/settings.php:905
+msgid "Number of Products"
+msgstr ""
+
+#: admin/views/settings.php:910
+msgid "Number of related products to show (if your theme supports it)"
+msgstr ""
+
+#: admin/views/settings.php:918
+msgid "MantiLoad automatically hooks into WooCommerce's related products system. No code changes needed! Works with:"
+msgstr ""
+
+#: admin/views/settings.php:920
+msgid "All WooCommerce themes (WoodMart, Flatsome, Storefront, Astra, etc.)"
+msgstr ""
+
+#: admin/views/settings.php:921
+msgid "Elementor Pro, Divi, WPBakery, Beaver Builder"
+msgstr ""
+
+#: admin/views/settings.php:922
+msgid "WooCommerce blocks (Gutenberg)"
+msgstr ""
+
+#: admin/views/settings.php:923
+msgid "Any plugin using woocommerce_related_products()"
+msgstr ""
+
+#: admin/views/settings.php:934
+msgid "Shortcodes for Header Builders"
+msgstr ""
+
+#: admin/views/settings.php:935
+msgid "Use these shortcodes in Elementor, WPBakery, WoodMart Header Builder, or any page builder"
+msgstr ""
+
+#: admin/views/settings.php:942
+msgid "1. Search Icon (Mobile Modal Style)"
+msgstr ""
+
+#: admin/views/settings.php:945
+msgid "Displays a search icon that opens a full-screen modal. Perfect for headers!"
+msgstr ""
+
+#: admin/views/settings.php:954
+#: admin/views/settings.php:1023
+msgid "Available Parameters:"
+msgstr ""
+
+#: admin/views/settings.php:959
+msgid "Icon size: small, medium, large"
+msgstr ""
+
+#: admin/views/settings.php:964
+msgid "Icon style: default, circle, rounded"
+msgstr ""
+
+#: admin/views/settings.php:969
+msgid "Custom label text"
+msgstr ""
+
+#: admin/views/settings.php:974
+msgid "Show label next to icon: true/false"
+msgstr ""
+
+#: admin/views/settings.php:979
+msgid "Show product prices in results: true/false"
+msgstr ""
+
+#: admin/views/settings.php:984
+msgid "Show stock status in results: true/false"
+msgstr ""
+
+#: admin/views/settings.php:989
+#: admin/views/settings.php:1078
+msgid "Custom CSS class"
+msgstr ""
+
+#: admin/views/settings.php:997
+#: admin/views/settings.php:1086
+msgid "Examples:"
+msgstr ""
+
+#: admin/views/settings.php:1011
+msgid "2. Full Search Box"
+msgstr ""
+
+#: admin/views/settings.php:1014
+msgid "Displays a complete search box with autocomplete dropdown. Great for search pages or sidebars!"
+msgstr ""
+
+#: admin/views/settings.php:1028
+msgid "Placeholder text"
+msgstr ""
+
+#: admin/views/settings.php:1033
+msgid "Post types to search (comma-separated)"
+msgstr ""
+
+#: admin/views/settings.php:1038
+msgid "Show search button: true/false"
+msgstr ""
+
+#: admin/views/settings.php:1043
+msgid "Search button text"
+msgstr ""
+
+#: admin/views/settings.php:1048
+msgid "Show icon instead of text on button: true/false"
+msgstr ""
+
+#: admin/views/settings.php:1053
+msgid "Hide clear (X) button: true/false"
+msgstr ""
+
+#: admin/views/settings.php:1058
+msgid "\"View all\" link text"
+msgstr ""
+
+#: admin/views/settings.php:1063
+msgid "Search box width (px, %, em, rem, vw)"
+msgstr ""
+
+#: admin/views/settings.php:1068
+msgid "Show product prices: true/false"
+msgstr ""
+
+#: admin/views/settings.php:1073
+msgid "Show stock status: true/false"
+msgstr ""
+
+#: admin/views/settings.php:1103
+msgid "Usage Tips:"
+msgstr ""
+
+#: admin/views/settings.php:1105
+msgid "For WoodMart Header Builder: Use \"HTML Block\" element and paste shortcode"
+msgstr ""
+
+#: admin/views/settings.php:1106
+msgid "For Elementor: Use \"Shortcode\" widget"
+msgstr ""
+
+#: admin/views/settings.php:1107
+msgid "For PHP templates: <?php echo do_shortcode('[mantiload_search_icon]'); ?>"
+msgstr ""
+
+#: admin/views/settings.php:1108
+msgid "Recommended for headers: [mantiload_search_icon] for mobile-friendly experience"
+msgstr ""
+
+#: admin/views/settings.php:1116
+msgid "Custom CSS"
+msgstr ""
+
+#: admin/views/settings.php:1121
+msgid "Custom Styles"
+msgstr ""
+
+#: admin/views/settings.php:1128
+msgid "Add custom CSS to style the search box and results. These styles will be loaded on the frontend and survive plugin updates."
+msgstr ""
+
+#: admin/views/settings.php:1132
+msgid "Tips:"
+msgstr ""
+
+#: admin/views/settings.php:1133
+msgid "Use high specificity selectors (e.g., body .mantiload-inline-form) to override default styles"
+msgstr ""
+
+#: admin/views/settings.php:1134
+msgid "Add !important to ensure your styles take priority"
+msgstr ""
+
+#: admin/views/settings.php:1135
+msgid "Changes apply immediately after saving - no cache clearing needed"
+msgstr ""
+
+#: admin/views/settings.php:1150
+msgid "Save All Settings"
+msgstr ""
+
+#: includes/class-admin-search.php:112
+#: includes/class-ajax-search.php:132
+#: includes/class-ajax-search.php:168
+msgid "No results found"
+msgstr ""
+
+#: includes/class-admin-search.php:113
+#: includes/class-ajax-search.php:131
+#: includes/class-ajax-search.php:169
+msgid "Searching..."
+msgstr ""
+
+#: includes/class-ajax-search.php:130
+#: includes/class-ajax-search.php:1171
+#: includes/class-search-widget.php:47
+#: includes/class-search-widget.php:68
+#: mantiload.php:892
+#: mantiload.php:996
+#: mantiload.php:1373
+#: templates/search-modal.php:37
+#: widgets/class-search-icon-widget.php:82
+msgid "Search products..."
+msgstr ""
+
+#: includes/class-ajax-search.php:133
+#: includes/class-ajax-search.php:1177
+#: mantiload.php:898
+msgid "View all results"
+msgstr ""
+
+#: includes/class-ajax-search.php:134
+msgid "Press Enter to search"
+msgstr ""
+
+#: includes/class-ajax-search.php:135
+msgid "results"
+msgstr ""
+
+#: includes/class-ajax-search.php:136
+msgid "in"
+msgstr ""
+
+#: includes/class-ajax-search.php:137
+msgid "ms"
+msgstr ""
+
+#: includes/class-ajax-search.php:139
+#: includes/filters/class-filter-renderer.php:159
+msgid "Categories"
+msgstr ""
+
+#: includes/class-ajax-search.php:1174
+#: includes/class-search-widget.php:50
+#: includes/class-search-widget.php:70
+#: mantiload.php:895
+#: mantiload.php:943
+#: templates/search-box.php:39
+#: templates/search-modal.php:16
+#: templates/search-modal.php:42
+#: templates/search-modal.php:94
+#: widgets/class-search-icon-widget.php:48
+#: widgets/class-search-icon-widget.php:105
+#: widgets/class-search-icon-widget.php:201
+#: widgets/class-search-widget.php:32
+msgid "Search"
+msgstr ""
+
+#. translators: %s: index name
+#: includes/class-database-indexes.php:244
+#: includes/class-database-indexes.php:348
+#, php-format
+msgid "Index %s not found in definitions"
+msgstr ""
+
+#. translators: %s: table name
+#: includes/class-database-indexes.php:260
+#: includes/class-database-indexes.php:364
+#, php-format
+msgid "Table %s does not exist"
+msgstr ""
+
+#. translators: %s: index name
+#: includes/class-database-indexes.php:272
+#, php-format
+msgid "Index %s already exists"
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-database-indexes.php:294
+#, php-format
+msgid "Failed to create index: %s"
+msgstr ""
+
+#. translators: %s: index name
+#: includes/class-database-indexes.php:304
+#, php-format
+msgid "Index %s created successfully"
+msgstr ""
+
+#: includes/class-database-indexes.php:325
+msgid "Index already exists or table not available"
+msgstr ""
+
+#. translators: %s: index name
+#: includes/class-database-indexes.php:376
+#, php-format
+msgid "Index %s does not exist"
+msgstr ""
+
+#. translators: %s: error message
+#: includes/class-database-indexes.php:397
+#, php-format
+msgid "Failed to remove index: %s"
+msgstr ""
+
+#. translators: %s: index name
+#: includes/class-database-indexes.php:407
+#, php-format
+msgid "Index %s removed successfully"
+msgstr ""
+
+#: includes/class-database-indexes.php:428
+msgid "Index does not exist"
+msgstr ""
+
+#: includes/class-search-widget.php:23
+#: widgets/class-search-widget.php:9
+msgid "MantiLoad Search"
+msgstr ""
+
+#: includes/class-search-widget.php:25
+msgid "Ultra-fast AJAX search powered by Manticore"
+msgstr ""
+
+#: includes/class-search-widget.php:81
+#: includes/filters/class-filter-widget.php:76
+#: widgets/class-popular-searches-widget.php:47
+#: widgets/class-search-widget.php:35
+msgid "Title:"
+msgstr ""
+
+#: includes/class-search-widget.php:88
+msgid "Placeholder Text:"
+msgstr ""
+
+#: includes/class-search-widget.php:94
+msgid "Search Post Types:"
+msgstr ""
+
+#: includes/class-search-widget.php:106
+msgid "Show search button"
+msgstr ""
+
+#: includes/class-search-widget.php:112
+msgid "Button Text:"
+msgstr ""
+
+#: includes/filters/class-filter-ajax.php:98
+msgid "Failed to retrieve products"
+msgstr ""
+
+#. translators: %d: star rating
+#: includes/filters/class-filter-ajax.php:354
+#, php-format
+msgid "%d stars & up"
+msgstr ""
+
+#: includes/filters/class-filter-ajax.php:372
+#: includes/filters/class-filter-renderer.php:417
+msgid "In Stock"
+msgstr ""
+
+#: includes/filters/class-filter-ajax.php:373
+#: includes/filters/class-filter-renderer.php:418
+msgid "Out of Stock"
+msgstr ""
+
+#: includes/filters/class-filter-ajax.php:374
+#: includes/filters/class-filter-renderer.php:419
+msgid "On Backorder"
+msgstr ""
+
+#: includes/filters/class-filter-manager.php:167
+msgid "No products found"
+msgstr ""
+
+#: includes/filters/class-filter-manager.php:168
+msgid "Clear All Filters"
+msgstr ""
+
+#: includes/filters/class-filter-manager.php:169
+msgid "Apply Filters"
+msgstr ""
+
+#: includes/filters/class-filter-manager.php:170
+msgid "Showing"
+msgstr ""
+
+#: includes/filters/class-filter-manager.php:171
+msgid "of"
+msgstr ""
+
+#: includes/filters/class-filter-manager.php:172
+msgid "products"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:71
+#: includes/filters/class-filter-widget.php:71
+msgid "Filter Products"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:74
+msgid "Clear All"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:88
+msgid "products found"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:210
+msgid "Price Range"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:374
+msgid "Customer Rating"
+msgstr ""
+
+#. translators: %d: star rating
+#: includes/filters/class-filter-renderer.php:397
+#, php-format
+msgid "%d & Up"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:424
+msgid "Availability"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:468
+msgid "On Sale"
+msgstr ""
+
+#: includes/filters/class-filter-renderer.php:482
+msgid "No products found matching your selection."
+msgstr ""
+
+#: includes/filters/class-filter-widget.php:28
+msgid "MantiLoad Filters"
+msgstr ""
+
+#: includes/filters/class-filter-widget.php:30
+msgid "Revolutionary product filters powered by Manticore Search"
+msgstr ""
+
+#: includes/filters/class-filter-widget.php:88
+msgid "Filter Types (comma-separated):"
+msgstr ""
+
+#: includes/filters/class-filter-widget.php:97
+msgid "Examples: category, price, pa_brand, pa_color, rating, stock, on_sale"
+msgstr ""
+
+#. translators: 1: Manticore host address, 2: Manticore port number
+#: mantiload.php:812
+#, php-format
+msgid "Cannot connect to Manticore Search at %1$s:%2$d. Please ensure Manticore is installed and running. You can configure connection settings in MantiLoad > Settings."
+msgstr ""
+
+#. translators: %s: current PHP version
+#: mantiload.php:822
+#, php-format
+msgid "MantiLoad requires PHP 7.4 or higher. You are running PHP %s."
+msgstr ""
+
+#: mantiload.php:829
+msgid "MantiLoad requires either mysqli or PDO MySQL extension."
+msgstr ""
+
+#: mantiload.php:979
+#: templates/search-modal.php:88
+#: widgets/class-search-icon-widget.php:65
+msgid "Open search"
+msgstr ""
+
+#: mantiload.php:980
+#: widgets/class-search-icon-widget.php:66
+msgid "Search products"
+msgstr ""
+
+#: templates/search-box.php:45
+#: templates/search-modal.php:48
+msgid "Clear search"
+msgstr ""
+
+#: templates/search-modal.php:17
+msgid "Close search"
+msgstr ""
+
+#: templates/search-modal.php:66
+msgid "Search results"
+msgstr ""
+
+#: templates/search-modal.php:72
+msgid "Navigate"
+msgstr ""
+
+#: templates/search-modal.php:73
+msgid "Select"
+msgstr ""
+
+#: templates/search-modal.php:74
+msgid "Close"
+msgstr ""
+
+#: templates/search-modal.php:77
+msgid "Powered by"
+msgstr ""
+
+#: widgets/class-popular-searches-widget.php:9
+msgid "MantiLoad Popular Searches"
+msgstr ""
+
+#: widgets/class-popular-searches-widget.php:10
+msgid "Show popular search queries"
+msgstr ""
+
+#: widgets/class-popular-searches-widget.php:24
+msgid "No searches yet"
+msgstr ""
+
+#: widgets/class-popular-searches-widget.php:44
+msgid "Popular Searches"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:27
+msgid "MantiLoad Search Icon"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:29
+msgid "Mobile-friendly search icon that opens MantiLoad search box (perfect for mobile menus)"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:118
+msgid "Icon only (no label)"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:120
+msgid "Perfect for mobile menus and navigation bars"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:133
+msgid "Show text label next to icon"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:139
+msgid "Label text:"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:153
+msgid "Icon size:"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:160
+msgid "Small (20px)"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:161
+msgid "Medium (24px)"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:162
+msgid "Large (32px)"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:168
+msgid "Icon style:"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:175
+msgid "Default (no background)"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:176
+msgid "Circle background"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:177
+msgid "Rounded square"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:183
+msgid "Usage:"
+msgstr ""
+
+#: widgets/class-search-icon-widget.php:184
+msgid "Add this widget to your mobile menu or header. When clicked, it opens the MantiLoad search modal."
+msgstr ""
+
+#: widgets/class-search-widget.php:10
+msgid "Ultra-fast search powered by Manticore"
+msgstr ""
+
+#: widgets/class-search-widget.php:23
+msgctxt "placeholder"
+msgid "Search..."
+msgstr ""

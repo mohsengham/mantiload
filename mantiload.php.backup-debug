@@ -1,0 +1,1459 @@
+<?php
+/**
+ * Plugin Name: MantiLoad - Ultra-Fast Search & Filter
+ * Plugin URI: https://mantiload.com/
+ * Description: Lightning-fast search and filtering powered by Manticore Search. Optimized for WooCommerce with beautiful UI, advanced filters, and sub-millisecond search responses.
+ * Version: 1.5.1
+ * Author: MantiLoad
+ * Author URI: https://mantiload.com/
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: mantiload
+ * Domain Path: /languages
+ * Requires at least: 5.8
+ * Requires PHP: 7.4
+ * WC requires at least: 6.0
+ * WC tested up to: 10.2
+ */
+
+namespace MantiLoad;
+
+defined( 'ABSPATH' ) || exit;
+
+// Define plugin constants
+define( 'MANTILOAD_VERSION', '1.5.1' ); // Fixed SSL/TLS connection issues with Manticore
+define( 'MANTILOAD_PLUGIN_FILE', __FILE__ );
+define( 'MANTILOAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'MANTILOAD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'MANTILOAD_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+
+// Manticore connection settings
+define( 'MANTILOAD_HOST', '127.0.0.1' );
+define( 'MANTILOAD_PORT', 9306 );
+define( 'MANTILOAD_HTTP_PORT', 9308 );
+
+/**
+ * Main MantiLoad Class
+ *
+ * @class MantiLoad
+ * @version 1.0.0
+ */
+final class MantiLoad {
+
+	/**
+	 * The single instance of the class
+	 *
+	 * @var MantiLoad
+	 */
+	protected static $_instance = null;
+
+	/**
+	 * Core components
+	 */
+	public $indexer = null;
+	public $search = null;
+	public $ajax = null;
+	public $ajax_search = null;
+	public $admin = null;
+	public $filters = null;
+	public $filter_ajax = null;
+	public $cli = null;
+
+	/**
+	 * Flag to track if search icon is being used
+	 */
+	private static $search_icon_used = false;
+
+	/**
+	 * Main MantiLoad Instance
+	 *
+	 * Ensures only one instance of MantiLoad is loaded or can be loaded.
+	 *
+	 * @static
+	 * @return MantiLoad - Main instance
+	 */
+	public static function instance() {
+		if ( is_null( self::$_instance ) ) {
+			self::$_instance = new self();
+		}
+		return self::$_instance;
+	}
+
+	/**
+	 * Constructor
+	 */
+	public function __construct() {
+		$this->init_hooks();
+	}
+
+	/**
+	 * Hook into actions and filters
+	 */
+	private function init_hooks() {
+		register_activation_hook( __FILE__, array( $this, 'activate' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
+
+		// Declare WooCommerce feature compatibility
+		\add_action( 'before_woocommerce_init', array( $this, 'declare_woocommerce_compatibility' ) );
+
+		\add_action( 'plugins_loaded', array( $this, 'init' ), 0 );
+		\add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_assets' ) );
+
+		// Search icon toggle script - use wp_footer so it fires AFTER shortcode is processed
+		\add_action( 'wp_footer', array( $this, 'enqueue_search_icon_assets' ), 5 );
+	}
+
+	/**
+	 * Declare WooCommerce feature compatibility
+	 */
+	public function declare_woocommerce_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+		}
+	}
+
+	/**
+	 * Initialize the plugin
+	 */
+	public function init() {
+		// Always load core classes first (needed for Admin_Controller and others)
+		$this->includes();
+
+		// ALWAYS initialize Admin_Controller (needed for AJAX handlers)
+		// The constructor registers AJAX hooks, which must happen early
+		$this->admin = new Admin\Admin_Controller();
+
+		// Simple AJAX handler
+		new Admin\Admin_AJAX();
+
+		// Register background reindex action
+		\add_action( 'mantiload_background_reindex', array( $this, 'background_reindex' ) );
+
+		// Check dependencies (but don't stop initialization completely)
+		$dependencies_ok = $this->check_dependencies();
+
+		// Initialize Admin Search (THE REVOLUTION!) in admin OR for admins on frontend
+		if ( $dependencies_ok && (is_admin() || current_user_can('administrator')) ) {
+			new Admin\Admin_Search();
+		}
+
+		// Optimize WooCommerce filters on search pages - now with Fast Filter Counts!
+		if ( $dependencies_ok ) {
+			\add_action( 'wp', array( $this, 'optimize_woocommerce_filters' ) );
+		}
+
+		// Only initialize search components if dependencies are met
+		if ( ! $dependencies_ok ) {
+			return;
+		}
+
+		// Initialize components
+		$this->indexer = new Indexer\Indexer();
+		$this->search = new Search\Search_Engine();
+		// $this->ajax = new Ajax\Ajax_Handler(); // DEPRECATED: Replaced by AJAX_Search
+		$this->ajax_search = new Search\AJAX_Search();
+		// Filters removed for v1.0 - focusing on core search functionality
+
+		// Initialize WooCommerce/WoodMart filter integration (makes layered nav FAST!)
+		if ( class_exists( 'WooCommerce' ) ) {
+			new Integrations\WooCommerce_Integration();
+
+			// Initialize Filter Widget Interceptor (KILLS slow price filter queries!)
+			// Handles search page price filter optimization
+			new Filters\Filter_Widget_Interceptor();
+
+			// Initialize Pagination Optimizer (ELIMINATES SQL_CALC_FOUND_ROWS!)
+			new Optimization\Pagination_Optimizer();
+
+			// Initialize Frontend-Only Cache (SAFE - never touches admin!)
+			// CRITICAL: Only enabled on frontend, admin uses MySQL directly
+			$frontend_cache = new Cache\Frontend_Cache();
+
+			// Category cache can be disabled via wp-config.php if incompatible with custom sorting plugins
+			if ( ! defined( 'MANTILOAD_DISABLE_CATEGORY_CACHE' ) || ! MANTILOAD_DISABLE_CATEGORY_CACHE ) {
+				new Cache\Category_Query_Cache( $frontend_cache );
+			}
+
+			new Cache\Menu_Cache( $frontend_cache );
+
+			// Initialize Query Integration (ElasticPress-style auto-interception)
+			// This accelerates WooCommerce filters by using Manticore for queries
+			new Query_Integration();
+		}
+
+		// Initialize WP-CLI commands
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			$this->cli = new CLI\CLI_Commands();
+		}
+
+		// Register search widgets only (filter widgets removed)
+		\add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+
+		// Force classic widgets interface to avoid REST API issues
+		\add_filter( 'gutenberg_use_widgets_block_editor', '__return_false' );
+		\add_filter( 'use_widgets_block_editor', '__return_false' );
+
+		// Fix Persian/Arabic slugs for WooCommerce chosen attributes
+		// Must run BEFORE WooCommerce's get_layered_nav_chosen_attributes() is called
+		\add_action( 'wp', array( $this, 'fix_woocommerce_chosen_attributes_early' ), 5 );
+
+		// Mobile filter drawer REMOVED
+
+		// Register shortcodes
+		add_shortcode( 'mantiload_search', array( $this, 'search_shortcode' ) );
+		add_shortcode( 'mantiload_search_icon', array( $this, 'search_icon_shortcode' ) );
+
+		// WooCommerce Related Products integration
+		\add_filter( 'woocommerce_related_products', array( $this, 'get_fast_related_products' ), 10, 3 );
+
+		// CRITICAL: Check Manticore health and show admin notice if down
+		\add_action( 'admin_notices', array( $this, 'check_manticore_health_notice' ) );
+
+		\do_action( 'mantiload_loaded' );
+	}
+
+
+
+	/**
+	 * Optimize WooCommerce filters on search pages
+	 *
+	 * Intercepts slow filter queries and replaces them with fast MantiLoad queries.
+	 */
+	public function optimize_woocommerce_filters() {
+		// Only on search pages
+		if ( ! is_search() ) {
+			return;
+		}
+
+		// Intercept slow filter queries
+		\add_filter( 'query', array( $this, 'intercept_price_filter_query' ), 9999 );
+		\add_filter( 'query', array( $this, 'intercept_attribute_count_query' ), 9999 );
+	}
+
+	/**
+	 * Intercept slow price filter queries on search pages
+	 */
+	public function intercept_price_filter_query( $query ) {
+		// Check if this is a price filter query with search
+		if ( strpos( $query, 'wp_wc_product_meta_lookup' ) !== false &&
+		     (strpos( $query, 'min_price' ) !== false || strpos( $query, 'min(' ) !== false) &&
+		     (strpos( $query, 'max_price' ) !== false || strpos( $query, 'max(' ) !== false) &&
+		     strpos( $query, 'product_id IN' ) !== false &&
+		     (strpos( $query, 'LIKE' ) !== false || strpos( $query, 'MATCH' ) !== false) ) {
+
+			// Get current search term
+			$search_term = '';
+			if ( isset( $_GET['s'] ) ) {
+				$search_term = sanitize_text_field( wp_unslash( $_GET['s'] ) );
+			}
+
+			if ( ! empty( $search_term ) ) {
+				try {
+					// Get fast prices from MantiLoad
+					$price_range = $this->get_fast_price_range( $search_term );
+
+					if ( $price_range['min'] > 0 || $price_range['max'] > 0 ) {
+						global $wpdb;
+						$result = $wpdb->prepare(
+							"SELECT %f as min_price, %f as max_price",
+							$price_range['min'],
+							$price_range['max']
+						);
+
+						return $result;
+					}
+				} catch ( Exception $e ) {
+					// Silently fail and use original query
+				}
+			}
+		}
+
+		return $query;
+	}
+
+	/**
+	 * Get fast price range from MantiLoad
+	 */
+	private function get_fast_price_range( $search_term ) {
+		try {
+			$client = new \MantiLoad\Manticore_Client();
+			if ( ! $client->is_healthy() ) {
+				return array( 'min' => 0, 'max' => 0 );
+			}
+
+			$index_name = MantiLoad::get_option( 'index_name', MantiLoad::get_default_index_name() );
+
+			// Build query
+			$where = "post_type = 'product' AND post_status = 'publish'";
+			$where .= " AND (visibility = 'visible' OR visibility = 'catalog' OR visibility = '')";
+			$where .= " AND price > 0";
+
+			// Hide out of stock if configured
+			if ( 'yes' === \get_option( 'woocommerce_hide_out_of_stock_items', 'no' ) ) {
+				$where .= " AND stock_status = 'instock'";
+			}
+
+			// Add search
+			$safe_query = $client->get_connection()->real_escape_string( $search_term );
+			$where .= " AND MATCH('$safe_query')";
+
+			$sql = "SELECT MIN(price) as min_price, MAX(price) as max_price FROM {$index_name} WHERE {$where}";
+
+			$result = $client->query( $sql );
+			if ( $result ) {
+				$row = $result->fetch_assoc();
+				return array(
+					'min' => isset( $row['min_price'] ) ? (float) $row['min_price'] : 0,
+					'max' => isset( $row['max_price'] ) ? (float) $row['max_price'] : 0,
+				);
+			}
+		} catch ( Exception $e ) {
+			// Silently fail
+		}
+
+		return array( 'min' => 0, 'max' => 0 );
+	}
+
+	/**
+	 * Intercept slow attribute count queries on search pages
+	 */
+	public function intercept_attribute_count_query( $query ) {
+		// Only intercept attribute count GROUP BY queries with search
+		if ( strpos( $query, 'wp_wc_product_attributes_lookup' ) !== false &&
+		     strpos( $query, 'COUNT(DISTINCT product_or_parent_id)' ) !== false &&
+		     strpos( $query, 'GROUP BY' ) !== false &&
+		     strpos( $query, 'term_id IN' ) !== false &&
+		     (strpos( $query, 'LIKE' ) !== false || strpos( $query, 'MATCH' ) !== false) ) {
+
+			// Get current search term
+			$search_term = '';
+			if ( isset( $_GET['s'] ) ) {
+				$search_term = sanitize_text_field( wp_unslash( $_GET['s'] ) );
+			}
+
+			if ( ! empty( $search_term ) ) {
+				try {
+					// Parse taxonomy and term_ids from query
+					$taxonomy = 'pa_unknown';
+					if ( preg_match( "/taxonomy\s*=\s*'([^']+)'/", $query, $matches ) ) {
+						$taxonomy = $matches[1];
+					}
+
+					$term_ids = array();
+					if ( preg_match( '/term_id IN \(([^)]+)\)/', $query, $matches ) ) {
+						$term_list = trim( $matches[1] );
+						if ( ! empty( $term_list ) ) {
+							// Remove quotes and split
+							$term_list = str_replace( "'", '', $term_list );
+							$term_ids = array_map( 'intval', explode( ',', $term_list ) );
+						}
+					}
+
+					if ( $taxonomy !== 'pa_unknown' && ! empty( $term_ids ) ) {
+						// Get fast counts from MantiLoad
+						$counts = $this->get_fast_attribute_counts( $taxonomy, $term_ids, $search_term );
+
+						if ( ! empty( $counts ) ) {
+							// Build UNION query to return proper GROUP BY format
+							global $wpdb;
+							$union_parts = array();
+							foreach ( $term_ids as $term_id ) {
+								$count = isset( $counts[ $term_id ] ) ? $counts[ $term_id ] : 0;
+								$union_parts[] = $wpdb->prepare(
+									"SELECT %d as term_count, %d as term_count_id",
+									$count, $term_id
+								);
+							}
+
+							$result_query = implode( ' UNION ALL ', $union_parts );
+
+							return $result_query;
+						}
+					}
+				} catch ( Exception $e ) {
+					// Silently fail and use original query
+				}
+			}
+		}
+
+		return $query;
+	}
+
+	/**
+	 * Get fast attribute term counts from MantiLoad - SINGLE QUERY APPROACH
+	 */
+	private function get_fast_attribute_counts( $taxonomy, $term_ids, $search_term ) {
+		try {
+			$client = new \MantiLoad\Manticore_Client();
+			if ( ! $client->is_healthy() ) {
+				return array_fill_keys( $term_ids, 0 );
+			}
+
+			$index_name = MantiLoad::get_option( 'index_name', MantiLoad::get_default_index_name() );
+
+			// Get field name for this attribute
+			$field_name = str_replace( '-', '_', $taxonomy ) . '_ids';
+
+			// Build WHERE clause
+			$where = "post_type = 'product' AND post_status = 'publish'";
+			$where .= " AND (visibility = 'visible' OR visibility = 'catalog' OR visibility = '')";
+
+			// Hide out of stock if configured
+			if ( 'yes' === \get_option( 'woocommerce_hide_out_of_stock_items', 'no' ) ) {
+				$where .= " AND stock_status = 'instock'";
+			}
+
+			// Add search
+			$safe_query = $client->get_connection()->real_escape_string( $search_term );
+			$where .= " AND MATCH('$safe_query')";
+
+			// Get ALL products matching search, then filter by terms in PHP
+			$sql = "SELECT id, {$field_name} FROM {$index_name} WHERE {$where}";
+
+			$result = $client->query( $sql );
+			if ( ! $result ) {
+				return array_fill_keys( $term_ids, 0 );
+			}
+
+			// Count term occurrences in PHP (much faster than multiple queries)
+			$counts = array_fill_keys( $term_ids, 0 );
+			while ( $row = $result->fetch_assoc() ) {
+				$product_terms = $row[ $field_name ];
+
+				// Handle both single values and arrays
+				if ( is_array( $product_terms ) ) {
+					foreach ( $product_terms as $term_id ) {
+						if ( isset( $counts[ $term_id ] ) ) {
+							$counts[ $term_id ]++;
+						}
+					}
+				} elseif ( isset( $counts[ $product_terms ] ) ) {
+					$counts[ $product_terms ]++;
+				}
+			}
+
+			return $counts;
+		} catch ( Exception $e ) {
+			// Silently fail
+		}
+
+		return array_fill_keys( $term_ids, 0 );
+	}
+
+	/**
+	 * Check Manticore health and display admin notice if down
+	 */
+	public function check_manticore_health_notice() {
+		// Only check on MantiLoad admin pages
+		$screen = get_current_screen();
+		if ( ! $screen || strpos( $screen->id, 'mantiload' ) === false ) {
+			return;
+		}
+
+		// Check health (use transient to avoid checking on every page load)
+		$health_status = \get_transient( 'mantiload_health_check' );
+
+		if ( $health_status === false ) {
+			// Run health check
+			$client = new \MantiLoad\Manticore_Client();
+			$health_status = $client->is_healthy() ? 'healthy' : 'down';
+
+			// Cache for 5 minutes
+			\set_transient( 'mantiload_health_check', $health_status, 5 * MINUTE_IN_SECONDS );
+		}
+
+		// Show notice if Manticore is down
+		if ( $health_status === 'down' ) {
+			?>
+			<div class="notice notice-error">
+				<p>
+					<strong>⚠️ MantiLoad: Manticore Search is not available</strong><br>
+					MantiLoad cannot connect to Manticore Search. Your site is using WordPress default search as fallback.<br>
+					<strong>Action required:</strong> Please check that Manticore Search is running on
+					<?php echo \esc_html( self::get_option( 'manticore_host', '127.0.0.1' ) ); ?>:<?php echo \esc_html( self::get_option( 'manticore_port', 9306 ) ); ?>
+				</p>
+			</div>
+			<?php
+		}
+	}
+
+	/**
+	 * Fix WooCommerce chosen attributes for Persian/Arabic slugs
+	 *
+	 * WooCommerce's get_layered_nav_chosen_attributes() uses sanitize_title() which mangles
+	 * URL-encoded Persian slugs. We populate WC_Query::$chosen_attributes directly before
+	 * WooCommerce does, using direct database queries that work with encoded slugs.
+	 *
+	 * This runs early (priority 5) on the 'wp' hook.
+	 */
+	public function fix_woocommerce_chosen_attributes_early() {
+		try {
+			// Debug: Check if this is being called
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				error_log( 'MantiLoad: fix_woocommerce_chosen_attributes_early() called' );
+				error_log( 'MantiLoad: is_shop=' . ( is_shop() ? 'yes' : 'no' ) . ', is_product_taxonomy=' . ( is_product_taxonomy() ? 'yes' : 'no' ) );
+			}
+
+			// Only on shop/product pages
+			if ( ! is_shop() && ! is_product_taxonomy() ) {
+				return;
+			}
+
+			// Access WC_Query's static property via reflection
+			$wc_query_class = new \ReflectionClass( 'WC_Query' );
+			$chosen_attr_property = $wc_query_class->getProperty( 'chosen_attributes' );
+			$chosen_attr_property->setAccessible( true );
+
+			global $wpdb;
+			$chosen_attributes = array();
+
+			// Debug: Check $_GET
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$filter_keys = array_filter( array_keys( $_GET ), function( $k ) { return strpos( $k, 'filter_' ) === 0; } );
+				error_log( 'MantiLoad: Found filter keys in $_GET: ' . implode( ', ', $filter_keys ) );
+			}
+
+			// Check all filter_* parameters in $_GET
+			foreach ( $_GET as $key => $value ) {
+				if ( strpos( $key, 'filter_' ) === 0 && ! empty( $value ) ) {
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+						error_log( 'MantiLoad: Processing ' . $key . ' = ' . $value );
+					}
+					$attribute = \wc_sanitize_taxonomy_name( str_replace( 'filter_', '', $key ) );
+					$taxonomy = \wc_attribute_taxonomy_name( $attribute );
+
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+						error_log( 'MantiLoad: attribute=' . $attribute . ', taxonomy=' . $taxonomy );
+					}
+
+					// Check taxonomy validation separately
+					$taxonomy_exists = taxonomy_exists( $taxonomy );
+					$attribute_id = \wc_attribute_taxonomy_id_by_name( $attribute );
+
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+						error_log( 'MantiLoad: taxonomy_exists=' . ( $taxonomy_exists ? 'yes' : 'no' ) . ', attribute_id=' . ( $attribute_id ? $attribute_id : 'false' ) );
+					}
+
+					// Skip if not a valid attribute taxonomy
+					if ( ! $taxonomy_exists || ! $attribute_id ) {
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							error_log( 'MantiLoad: Skipping this filter' );
+						}
+						continue;
+					}
+
+					// Get term slugs from URL
+					// DO NOT use wc_clean() - it strips % characters from URL-encoded Persian slugs
+					// Instead, just sanitize_text_field() after url-decoding
+					$raw_value = wp_unslash( $value );
+					$filter_terms = explode( ',', $raw_value );
+					$term_slugs = array();
+
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+						error_log( 'MantiLoad: raw_value = ' . $raw_value );
+						error_log( 'MantiLoad: filter_terms = ' . print_r( $filter_terms, true ) );
+					}
+
+					// Look up terms using direct database query (bypasses sanitize_title issues)
+					foreach ( $filter_terms as $slug ) {
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							error_log( 'MantiLoad: About to DB lookup for slug "' . trim( $slug ) . '" in ' . $taxonomy );
+						}
+
+						$term = $wpdb->get_row( $wpdb->prepare(
+							"SELECT t.slug FROM {$wpdb->terms} t
+							INNER JOIN {$wpdb->term_taxonomy} tt ON t.term_id = tt.term_id
+							WHERE tt.taxonomy = %s AND t.slug = %s",
+							$taxonomy,
+							trim( $slug )
+						) );
+
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							error_log( 'MantiLoad: DB lookup result = ' . ( $term ? 'FOUND: ' . $term->slug : 'NOT FOUND' ) );
+							if ( $wpdb->last_error ) {
+								error_log( 'MantiLoad: DB ERROR: ' . $wpdb->last_error );
+							}
+						}
+
+						if ( $term ) {
+							$term_slugs[] = $term->slug;
+						}
+					}
+
+					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+						error_log( 'MantiLoad: term_slugs found = ' . print_r( $term_slugs, true ) );
+					}
+
+					// Add to chosen attributes if we found terms
+					if ( ! empty( $term_slugs ) ) {
+						$query_type = ! empty( $_GET[ 'query_type_' . $attribute ] ) && in_array( $_GET[ 'query_type_' . $attribute ], array( 'and', 'or' ), true ) ? \wc_clean( wp_unslash( $_GET[ 'query_type_' . $attribute ] ) ) : '';
+
+						$chosen_attributes[ $taxonomy ] = array(
+							'terms'      => $term_slugs,
+							'query_type' => $query_type ? $query_type : 'and',
+						);
+
+						if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+							error_log( 'MantiLoad: Added to chosen_attributes for ' . $taxonomy );
+						}
+					}
+				}
+			}
+
+			// Set WC_Query::$chosen_attributes if we found any
+			if ( ! empty( $chosen_attributes ) ) {
+				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					error_log( 'MantiLoad: About to set WC_Query::$chosen_attributes' );
+				}
+
+				$chosen_attr_property->setValue( null, $chosen_attributes );
+
+				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					error_log( 'MantiLoad: Successfully set WC_Query::$chosen_attributes = ' . print_r( $chosen_attributes, true ) );
+				}
+			} else {
+				if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+					error_log( 'MantiLoad: chosen_attributes is empty, not setting WC_Query property' );
+				}
+			}
+		} catch ( \Exception $e ) {
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				error_log( 'MantiLoad: EXCEPTION in fix_woocommerce_chosen_attributes_early: ' . $e->getMessage() );
+				error_log( 'MantiLoad: Stack trace: ' . $e->getTraceAsString() );
+			}
+		}
+	}
+
+	/**
+	 * Mobile filter drawer removed - using WooCommerce/theme native filters
+	 */
+
+	/**
+	 * Fix WoodMart active filters for Persian/Arabic slugs (DEPRECATED)
+	 *
+	 * WoodMart tries to look up terms by slug from $_GET, but URL-encoded slugs fail.
+	 * This filter decodes the slugs so WoodMart can find the terms.
+	 *
+	 * @param array $filters WoodMart's detected filters
+	 * @return array Fixed filters
+	 */
+	public function fix_woodmart_active_filters( $filters ) {
+		// Check for attribute filters in $_GET
+		foreach ( $_GET as $key => $value ) {
+			if ( strpos( $key, 'filter_' ) === 0 && ! empty( $value ) ) {
+				$attribute = str_replace( 'filter_', '', $key );
+
+				// Skip non-attribute filters
+				if ( $attribute === 'category' || $attribute === 'stock' || $attribute === 'sale' ) {
+					continue;
+				}
+
+				// Get term slugs
+				$term_slugs = explode( ',', $value );
+
+				foreach ( $term_slugs as $slug ) {
+					// Try to find the term
+					$taxonomy = 'pa_' . $attribute;
+					$term = get_term_by( 'slug', $slug, $taxonomy );
+
+					// If not found, try URL-decoding (for Persian/Arabic)
+					if ( ! $term || is_wp_error( $term ) ) {
+						$decoded = urldecode( $slug );
+						$encoded = rawurlencode( $decoded );
+						$term = get_term_by( 'slug', $encoded, $taxonomy );
+					}
+
+					// Add to filters array if found
+					if ( $term && ! is_wp_error( $term ) ) {
+						if ( ! isset( $filters[ $taxonomy ] ) ) {
+							$filters[ $taxonomy ] = array();
+						}
+						if ( ! in_array( $term->term_id, $filters[ $taxonomy ], true ) ) {
+							$filters[ $taxonomy ][] = $term->term_id;
+						}
+					}
+				}
+			}
+		}
+
+		return $filters;
+	}
+
+	/**
+	 * Get fast related products using MantiLoad
+	 * Automatically replaces WooCommerce related products
+	 *
+	 * @param array $related_ids Original related product IDs from WooCommerce
+	 * @param int $product_id Current product ID
+	 * @param array $args Arguments (limit, etc.)
+	 * @return array Related product IDs
+	 */
+	public function get_fast_related_products( $related_ids, $product_id, $args ) {
+		// Feature disabled? Let WooCommerce handle it
+		if ( ! self::get_option( 'enable_related_products', false ) ) {
+			return $related_ids;
+		}
+
+		// Check if WooCommerce is active
+		if ( ! class_exists( 'WooCommerce' ) ) {
+			return $related_ids;
+		}
+
+		// Manticore health check (graceful fallback)
+		$client = new \MantiLoad\Manticore_Client();
+		if ( ! $client->is_healthy() ) {
+			return $related_ids;
+		}
+
+		// Get MantiLoad related products
+		try {
+			$related = new \MantiLoad\Related_Products();
+			$limit = isset( $args['limit'] ) ? (int) $args['limit'] : 10;
+			$mantiload_ids = $related->get_related( $product_id, $limit );
+
+			// Success! Return our results
+			if ( ! empty( $mantiload_ids ) ) {
+				return $mantiload_ids;
+			}
+
+			// No results? Fallback to WooCommerce
+			return $related_ids;
+
+		} catch ( \Exception $e ) {
+			// Error? Fallback to WooCommerce
+			return $related_ids;
+		}
+	}
+
+	/**
+	 * Include required core files
+	 */
+	public function includes() {
+		// Core classes
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-icons.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-manticore-client.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-indexer.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-search-engine.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-ajax-handler.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-ajax-search.php';
+		// Filter system removed for v1.0
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-query-builder.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-result-formatter.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-synonyms.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-search-insights.php';
+
+		// WooCommerce/WoodMart filter integration
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-woocommerce-integration.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-related-products.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-filter-widget-interceptor.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-pagination-optimizer.php';
+
+		// Frontend-only cache (SAFE - never touches admin!)
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-frontend-cache.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-category-query-cache.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-menu-cache.php';
+
+		// Query integration (ElasticPress-style auto-interception)
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-query-integration.php';
+
+		// Revolutionary Filter System 🚀 (v1.3.0)
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/filters/class-filter-manager.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/filters/class-filter-query.php'; // Ensure Filter_Query is loaded
+
+		// Admin classes (always load controller for AJAX handlers)
+		require_once MANTILOAD_PLUGIN_DIR . 'admin/class-admin-controller.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'admin/class-admin-ajax.php'; // NEW SIMPLE AJAX
+		// Note: Admin_AJAX is instantiated in init() method, not here
+
+		// Admin Search class (needed on frontend for admins)
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-admin-search.php'; // THE REVOLUTION!
+
+		// Other admin classes only when in admin
+		if ( is_admin() ) {
+			require_once MANTILOAD_PLUGIN_DIR . 'admin/class-admin-settings.php';
+			require_once MANTILOAD_PLUGIN_DIR . 'admin/class-admin-indexing.php';
+			require_once MANTILOAD_PLUGIN_DIR . 'admin/class-admin-weights.php';
+			require_once MANTILOAD_PLUGIN_DIR . 'admin/class-admin-analytics.php';
+		}
+
+		// Widgets - Search only
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-search-widget.php';
+		require_once MANTILOAD_PLUGIN_DIR . 'widgets/class-search-icon-widget.php';
+
+		// WP-CLI
+		if ( defined( 'WP_CLI' ) && WP_CLI ) {
+			require_once MANTILOAD_PLUGIN_DIR . 'includes/class-cli-commands.php';
+		}
+	}
+
+	/**
+	 * Check plugin dependencies
+	 *
+	 * @return bool
+	 */
+	private function check_dependencies() {
+		$errors = array();
+
+		// Check if Manticore is accessible
+		if ( ! $this->test_manticore_connection() ) {
+			$host = self::get_option( 'manticore_host', MANTILOAD_HOST );
+			$port = (int) self::get_option( 'manticore_port', MANTILOAD_PORT );
+			$errors[] = sprintf(
+				/* translators: 1: Manticore host address, 2: Manticore port number */
+				__( 'Cannot connect to Manticore Search at %1$s:%2$d. Please ensure Manticore is installed and running. You can configure connection settings in MantiLoad > Settings.', 'mantiload' ),
+				$host,
+				$port
+			);
+		}
+
+		// Check PHP version
+		if ( version_compare( PHP_VERSION, '7.4', '<' ) ) {
+			$errors[] = sprintf(
+				/* translators: %s: current PHP version */
+				__( 'MantiLoad requires PHP 7.4 or higher. You are running PHP %s.', 'mantiload' ),
+				PHP_VERSION
+			);
+		}
+
+		// Check required PHP extensions
+		if ( ! extension_loaded( 'mysqli' ) && ! extension_loaded( 'pdo_mysql' ) ) {
+			$errors[] = __( 'MantiLoad requires either mysqli or PDO MySQL extension.', 'mantiload' );
+		}
+
+		// Display errors if any
+		if ( ! empty( $errors ) ) {
+			\add_action( 'admin_notices', function() use ( $errors ) {
+				foreach ( $errors as $error ) {
+					echo '<div class="error"><p><strong>MantiLoad:</strong> ' . \esc_html( $error ) . '</p></div>';
+				}
+			} );
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 * Test Manticore connection
+	 *
+	 * @return bool
+	 */
+	private function test_manticore_connection() {
+		try {
+			// Get connection settings
+			$host = self::get_option( 'manticore_host', MANTILOAD_HOST );
+			$port = (int) self::get_option( 'manticore_port', MANTILOAD_PORT );
+
+			\mysqli_report( MYSQLI_REPORT_OFF ); // phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_report -- Direct mysqli required for Manticore Search connection
+			$mysqli = \mysqli_init(); // phpcs:ignore WordPress.DB.RestrictedFunctions.mysql_mysqli_init -- Direct mysqli required for Manticore Search connection
+			if ( ! $mysqli ) {
+				return false;
+			}
+			$mysqli->options( MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, false );
+			$mysqli->options( MYSQLI_CLIENT_SSL, false );
+			if ( ! $mysqli->real_connect( $host, '', '', '', $port, null, MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT ) ) {
+				return false;
+			}
+			$mysqli->close();
+			return true;
+		} catch ( \Exception $e ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Register widgets
+	 */
+	public function register_widgets() {
+		// Only register search widgets - filter widgets removed
+		register_widget( 'MantiLoad\Widgets\Search_Widget' );
+		register_widget( 'MantiLoad\Widgets\Search_Icon_Widget' );
+	}
+
+	/**
+	 * Search shortcode handler
+	 *
+	 * Usage: [mantiload_search placeholder="Search..." post_types="product" show_button="true" show_price="true" show_stock="true"]
+	 *
+	 * @param array $atts Shortcode attributes
+	 * @return string
+	 */
+	public function search_shortcode( $atts ) {
+		$args = shortcode_atts( array(
+			'placeholder'   => __( 'Search products...', 'mantiload' ),
+			'post_types'    => 'product',
+			'show_button'   => 'true',
+			'button_text'   => __( 'Search', 'mantiload' ),
+			'button_icon'   => 'false',
+			'hide_clear'    => 'false',
+			'view_all_text' => __( 'View all results', 'mantiload' ),
+			'width'         => '100%',
+			'class'         => '',
+			'show_price'    => 'true',
+			'show_stock'    => 'true',
+		), $atts );
+
+		// Convert post_types string to array
+		if ( is_string( $args['post_types'] ) ) {
+			$args['post_types'] = array_map( 'trim', explode( ',', $args['post_types'] ) );
+		}
+
+		// Convert boolean strings
+		$args['show_button'] = filter_var( $args['show_button'], FILTER_VALIDATE_BOOLEAN );
+		$args['button_icon'] = filter_var( $args['button_icon'], FILTER_VALIDATE_BOOLEAN );
+		$args['hide_clear'] = filter_var( $args['hide_clear'], FILTER_VALIDATE_BOOLEAN );
+		$args['show_price'] = filter_var( $args['show_price'], FILTER_VALIDATE_BOOLEAN );
+		$args['show_stock'] = filter_var( $args['show_stock'], FILTER_VALIDATE_BOOLEAN );
+
+		// Sanitize width (allow px, %, em, rem, vw)
+		$args['width'] = \sanitize_text_field( $args['width'] );
+		if ( ! preg_match( '/^\d+(px|%|em|rem|vw)$/', $args['width'] ) ) {
+			$args['width'] = '100%'; // Default if invalid
+		}
+
+		return Search\AJAX_Search::get_search_box( $args );
+	}
+
+	/**
+	 * Search icon shortcode handler
+	 *
+	 * Usage: [mantiload_search_icon size="medium" style="default" label="Search" show_label="false" show_price="true" show_stock="true"]
+	 *
+	 * Perfect for mobile menus - displays a clean search icon that opens the MantiLoad search modal
+	 *
+	 * @param array $atts Shortcode attributes
+	 * @return string
+	 */
+	public function search_icon_shortcode( $atts ) {
+		// Mark that search icon is being used
+		self::$search_icon_used = true;
+
+		$args = shortcode_atts( array(
+			'size'        => 'medium',  // small, medium, large
+			'style'       => 'default', // default, circle, rounded
+			'label'       => __( 'Search', 'mantiload' ),
+			'show_label'  => 'false',   // true or false
+			'show_price'  => 'true',    // true or false - show product price
+			'show_stock'  => 'true',    // true or false - show stock status
+			'fullscreen'  => 'false',   // true or false - fullscreen mode
+			'class'       => '',
+		), $atts );
+
+		// Convert boolean strings
+		$show_label = filter_var( $args['show_label'], FILTER_VALIDATE_BOOLEAN );
+		$show_price = filter_var( $args['show_price'], FILTER_VALIDATE_BOOLEAN );
+		$show_stock = filter_var( $args['show_stock'], FILTER_VALIDATE_BOOLEAN );
+		$fullscreen = filter_var( $args['fullscreen'], FILTER_VALIDATE_BOOLEAN );
+
+		// Sanitize values
+		$size = sanitize_key( $args['size'] );
+		$style = sanitize_key( $args['style'] );
+		$label = \sanitize_text_field( $args['label'] );
+		$custom_class = sanitize_html_class( $args['class'] );
+
+		// Size and style classes
+		$size_class = 'mantiload-icon-' . $size;
+		$style_class = 'mantiload-icon-style-' . $style;
+		$fullscreen_class = $fullscreen ? 'mantiload-fullscreen-trigger' : '';
+
+		// Generate unique ID for this instance
+		$unique_id = 'mantiload-icon-' . uniqid();
+
+		ob_start();
+		?>
+		<div class="mantiload-search-icon-wrapper">
+			<button
+				type="button"
+				class="mantiload-search-icon-trigger <?php echo \esc_attr( $size_class ); ?> <?php echo \esc_attr( $style_class ); ?> <?php echo \esc_attr( $fullscreen_class ); ?> <?php echo \esc_attr( $custom_class ); ?>"
+				data-toggle-search="<?php echo \esc_attr( $unique_id ); ?>"
+				data-fullscreen="<?php echo $fullscreen ? 'true' : 'false'; ?>"
+				aria-label="<?php esc_attr_e( 'Open search', 'mantiload' ); ?>"
+				title="<?php esc_attr_e( 'Search products', 'mantiload' ); ?>"
+			>
+				<svg class="mantiload-search-icon-svg" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M19 19l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				<?php if ( $show_label ) : ?>
+					<span class="mantiload-search-icon-label"><?php echo \esc_html( $label ); ?></span>
+				<?php endif; ?>
+			</button>
+
+			<div id="<?php echo \esc_attr( $unique_id ); ?>" class="mantiload-icon-search-container <?php echo $fullscreen ? 'mantiload-fullscreen-container' : ''; ?>" style="display:none;">
+				<?php
+				// Output the EXISTING working search box with 100% width
+				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_search_box() method handles its own escaping
+				echo \MantiLoad\Search\AJAX_Search::get_search_box( array(
+					'placeholder'  => esc_attr__( 'Search products...', 'mantiload' ),
+					'post_types'   => array( 'product' ),
+					'show_button'  => false,
+					'width'        => '100%',
+					'class'        => 'mantiload-icon-search-box',
+					'show_price'   => (bool) $show_price,
+					'show_stock'   => (bool) $show_stock,
+				) );
+				?>
+			</div>
+		</div>
+		<?php
+		return ob_get_clean();
+	}
+
+	/**
+	 * Enqueue search icon assets
+	 */
+	public function enqueue_search_icon_assets() {
+		// Only output if search icon is being used
+		if ( ! self::$search_icon_used ) {
+			return;
+		}
+
+		// Get settings from admin
+		$search_delay = (int) self::get_option( 'search_delay', 300 );
+		$min_chars = (int) self::get_option( 'min_chars', 2 );
+
+		// Output CSS and JS directly in footer
+		?>
+		<style>
+		/* Search Icon Button - Clean, no background */
+		.mantiload-search-icon-trigger {
+			background: transparent !important;
+			border: none;
+			padding: 8px;
+			cursor: pointer;
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			color: currentColor;
+		}
+
+		.mantiload-search-icon-trigger:hover {
+			opacity: 0.7;
+		}
+
+		.mantiload-search-icon-svg {
+			width: 24px;
+			height: 24px;
+			display: block;
+		}
+
+		/* Beautiful Modal Overlay - Blurry Background */
+		.mantiload-search-modal-overlay {
+			display: none;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.6);
+			backdrop-filter: blur(8px);
+			-webkit-backdrop-filter: blur(8px);
+			z-index: 99999998 !important;
+			animation: fadeIn 0.3s ease;
+		}
+
+		.mantiload-search-modal-overlay.active {
+			display: block;
+		}
+
+		/* Search Modal Container - Slides DOWN from top */
+		.mantiload-icon-search-container {
+			position: fixed !important;
+			top: 60px !important;
+			left: 50% !important;
+			transform: translateX(-50%) translateY(-100%);
+			z-index: 99999999 !important;
+			background: white !important;
+			box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
+			border-radius: 12px;
+			width: 90%;
+			max-width: 600px;
+			max-height: 80vh;
+			overflow: visible;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s 0.4s;
+		}
+
+		.mantiload-icon-search-container.active {
+			transform: translateX(-50%) translateY(0);
+			opacity: 1;
+			visibility: visible;
+			pointer-events: auto;
+			transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, visibility 0s 0s;
+		}
+
+		/* Close button - Above search box, visible on dark overlay */
+		.mantiload-search-close {
+			position: absolute;
+			top: -50px;
+			right: 0;
+			background: rgba(0, 0, 0, 0.6);
+			border: 2px solid rgba(255, 255, 255, 0.3);
+			font-size: 28px;
+			cursor: pointer;
+			color: #fff;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			transition: all 0.2s;
+			z-index: 10;
+			backdrop-filter: blur(4px);
+			-webkit-backdrop-filter: blur(4px);
+		}
+
+		.mantiload-search-close:hover {
+			background: rgba(255, 255, 255, 0.95);
+			color: #333;
+			border-color: rgba(255, 255, 255, 0.8);
+			transform: scale(1.1);
+		}
+
+		/* Make sure search box and results are visible */
+		.mantiload-icon-search-container .mantiload-search-box-inline {
+			max-width: 100% !important;
+			padding: 20px;
+			position: relative !important;
+			z-index: 1 !important;
+		}
+
+		.mantiload-icon-search-container .mantiload-inline-results-dropdown {
+			position: relative !important;
+			display: block !important;
+			box-shadow: none !important;
+			border: none !important;
+			margin-top: 0 !important;
+			max-height: 60vh !important;
+			overflow-y: auto !important;
+			z-index: 1 !important;
+		}
+
+		/* Mobile adjustments */
+		@media (max-width: 768px) {
+			.mantiload-icon-search-container {
+				top: 20px;
+				width: 95%;
+				max-width: 95%;
+			}
+
+			body.admin-bar .mantiload-icon-search-container {
+				top: 66px; /* WP admin bar height on mobile */
+			}
+		}
+
+		/* Desktop with admin bar */
+		body.admin-bar .mantiload-icon-search-container {
+			top: 92px; /* 32px admin bar + 60px spacing */
+		}
+
+		/* Animations */
+		@keyframes fadeIn {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+
+		/* RTL Support */
+		[dir='rtl'] .mantiload-search-close {
+			right: auto;
+			left: 0;
+		}
+
+		/* Prevent body scroll when modal open */
+		body.mantiload-modal-open {
+			overflow: hidden;
+		}
+		</style>
+
+		<script>
+		jQuery(document).ready(function($) {
+			// Create overlay if it doesn't exist
+			if (!$('.mantiload-search-modal-overlay').length) {
+				$('body').append('<div class="mantiload-search-modal-overlay"></div>');
+			}
+
+			// Open modal when icon clicked
+			$(document).on('click', '[data-toggle-search]', function(e) {
+				e.preventDefault();
+				var targetId = $(this).data('toggle-search');
+				var container = $('#' + targetId);
+				var overlay = $('.mantiload-search-modal-overlay');
+
+				console.log('MantiLoad: Icon clicked');
+				console.log('MantiLoad: Container found:', container.length);
+				console.log('MantiLoad: Overlay found:', overlay.length);
+
+				if (container.length === 0) {
+					console.error('MantiLoad: Search container not found!');
+					return;
+				}
+
+				// Move container to body level (fix stacking context!)
+				if (container.parent()[0] !== document.body) {
+					container.data('original-parent', container.parent());
+					container.appendTo('body');
+					console.log('MantiLoad: Moved container to body');
+				}
+
+				// Add close button if not exists
+				if (!container.find('.mantiload-search-close').length) {
+					container.prepend('<button class="mantiload-search-close" aria-label="Close">&times;</button>');
+				}
+
+				// Show overlay and modal
+				overlay.addClass('active');
+				container.css('display', 'block'); // Remove inline display:none
+				container.addClass('active');
+				$('body').addClass('mantiload-modal-open');
+
+				console.log('MantiLoad: Modal opened');
+
+				// Update search settings from admin (sync with admin settings)
+				if (typeof window.mantiloadSearch !== 'undefined') {
+					window.mantiloadSearch.minChars = <?php echo esc_js( $min_chars ); ?>;
+					window.mantiloadSearch.searchDelay = <?php echo esc_js( $search_delay ); ?>;
+					console.log('MantiLoad: Settings synced - minChars:', <?php echo esc_js( $min_chars ); ?>, 'delay:', <?php echo esc_js( $search_delay ); ?>);
+				}
+
+				// Focus on input after animation
+				setTimeout(function() {
+					container.find('.mantiload-inline-search-input').focus();
+				}, 400);
+			});
+
+			// Close modal
+			function closeModal() {
+				var container = $('.mantiload-icon-search-container');
+				container.removeClass('active');
+				// Hide after animation completes
+				setTimeout(function() {
+					container.css('display', 'none');
+				}, 400);
+				$('.mantiload-search-modal-overlay').removeClass('active');
+				$('body').removeClass('mantiload-modal-open');
+			}
+
+			// Close button click
+			$(document).on('click', '.mantiload-search-close', function(e) {
+				e.preventDefault();
+				closeModal();
+			});
+
+			// Click overlay to close
+			$(document).on('click', '.mantiload-search-modal-overlay', function() {
+				closeModal();
+			});
+
+			// ESC key to close
+			$(document).on('keydown', function(e) {
+				if (e.key === 'Escape') {
+					closeModal();
+				}
+			});
+		});
+		</script>
+		<?php
+	}
+
+	/**
+	 * Render search icon modal (deprecated - no longer needed)
+	 */
+	public function render_search_icon_modal() {
+		// Removed - using inline search box instead
+	}
+
+	/**
+	 * Enqueue frontend assets
+	 */
+	public function enqueue_frontend_assets() {
+		// MantiLoad filter assets removed - using WooCommerce/theme native filters
+		// Query_Integration still accelerates filter queries via Manticore
+	}
+
+	/**
+	 * Background reindex handler for WordPress cron
+	 */
+	public function background_reindex() {
+		if ( $this->indexer ) {
+			$this->indexer->reindex_all();
+			\update_option( 'mantiload_last_reindex_time', time() );
+		}
+
+		// Clear transients
+		\delete_transient( 'mantiload_reindex_status' );
+		\delete_transient( 'mantiload_reindex_started_time' );
+	}
+
+	/**
+	 * Plugin activation
+	 */
+	public function activate() {
+		// Set default options
+		$this->set_default_options();
+
+		// Create synonyms table (require class first)
+		require_once MANTILOAD_PLUGIN_DIR . 'includes/class-synonyms.php';
+		$synonyms = new Search\Synonyms();
+		$synonyms->create_table();
+
+		// NOTE: We don't create Manticore indexes or check connection here
+		// Users can install Manticore after plugin activation
+		// Indexes will be created via admin panel or WP-CLI
+
+		// Schedule cron events
+		if ( ! wp_next_scheduled( 'mantiload_auto_index' ) ) {
+			wp_schedule_event( time(), 'hourly', 'mantiload_auto_index' );
+		}
+
+		// Set activation flag for redirect
+		\set_transient( 'mantiload_activation_redirect', true, 30 );
+	}
+
+	/**
+	 * Plugin deactivation
+	 */
+	public function deactivate() {
+		// Clear scheduled events
+		wp_clear_scheduled_hook( 'mantiload_auto_index' );
+
+		// Clear transients
+		\delete_transient( 'mantiload_activation_redirect' );
+	}
+
+	/**
+	 * Set default plugin options
+	 */
+	private function set_default_options() {
+		global $wpdb;
+
+		// Generate unique index name based on table prefix (ensures no conflicts on shared Manticore servers)
+		// Example: wp_ → mantiload_wp_index, wp_uyqsre_ → mantiload_wp_uyqsre_index
+		$sanitized_prefix = preg_replace( '/[^a-zA-Z0-9_]/', '', $wpdb->prefix );
+		$unique_index_name = 'mantiload_' . $sanitized_prefix . 'index';
+
+		$defaults = array(
+			'enabled' => true,
+			'post_types' => array( 'post', 'page', 'product' ),
+			'search_fields' => array(
+				'post_title' => array( 'enabled' => true, 'weight' => 100 ),
+				'post_content' => array( 'enabled' => true, 'weight' => 50 ),
+				'post_excerpt' => array( 'enabled' => true, 'weight' => 75 ),
+				'sku' => array( 'enabled' => true, 'weight' => 150 ),
+				'categories' => array( 'enabled' => true, 'weight' => 60 ),
+				'tags' => array( 'enabled' => true, 'weight' => 40 ),
+				'attributes' => array( 'enabled' => true, 'weight' => 30 ),
+			),
+			'results_per_page' => 20,
+			'instant_search' => true,
+			'fuzzy_search' => true,
+			'typo_tolerance' => 2,
+			'highlight_results' => true,
+			'log_searches' => true,
+			'index_batch_size' => 100,
+
+			// MantiCore connection settings (NEW in 1.1.0!)
+			'manticore_host' => '127.0.0.1',
+			'manticore_port' => 9306,
+			'index_name' => $unique_index_name,
+
+			// AJAX Search settings
+			'enable_search_modal' => false,
+			'search_placeholder' => __( 'Search products...', 'mantiload' ),
+			'search_delay' => 300,
+			'min_chars' => 2,
+			'max_results' => 10,
+			'show_thumbnail' => true,
+			'show_price' => true,
+			'show_sku' => false,
+			'show_excerpt' => false,
+			'ajax_search_post_types' => array( 'product' ),
+			'prioritize_in_stock' => true,
+
+			// Admin optimization settings
+			'enable_admin_search' => true,
+			'enable_admin_product_search_optimization' => true,
+
+			// Performance & Caching options
+			'enable_redis_cache' => true,
+			'enable_query_interception' => false, // Keep disabled by default as it was
+			'enable_woocommerce_filter_integration' => true,
+		);
+
+		add_option( 'mantiload_settings', $defaults );
+	}
+
+	/**
+	 * Create Manticore indexes
+	 */
+	private function create_indexes() {
+		// Will be handled by the Indexer class after full initialization
+		\update_option( 'mantiload_needs_index', true );
+	}
+
+	/**
+	 * Get default index name based on WordPress table prefix
+	 * Ensures unique index name per installation to avoid conflicts on shared Manticore servers
+	 *
+	 * @return string
+	 */
+	public static function get_default_index_name() {
+		global $wpdb;
+
+		// Sanitize DB prefix
+		$sanitized_prefix = preg_replace( '/[^a-zA-Z0-9_]/', '', $wpdb->prefix );
+
+		// Add site-specific hash to prevent staging/production conflicts
+		// Uses home_url which is different for staging (jovani.wordup.pro) vs production (jovani.com)
+		$site_hash = substr( md5( \home_url() ), 0, 8 );
+
+		return 'mantiload_' . $sanitized_prefix . $site_hash;
+	}
+
+	/**
+	 * Get plugin option
+	 *
+	 * @param string $key Option key
+	 * @param mixed $default Default value
+	 * @return mixed
+	 */
+	public static function get_option( $key, $default = null ) {
+		$settings = \get_option( 'mantiload_settings', array() );
+
+		// Special handling for index_name: use installation-specific default
+		if ( $key === 'index_name' && ! isset( $settings[ $key ] ) ) {
+			return self::get_default_index_name();
+		}
+
+		return isset( $settings[ $key ] ) ? $settings[ $key ] : $default;
+	}
+
+	/**
+	 * Update plugin option
+	 *
+	 * @param string $key Option key
+	 * @param mixed $value Option value
+	 * @return bool
+	 */
+	public static function update_option( $key, $value ) {
+		$settings = \get_option( 'mantiload_settings', array() );
+		$settings[ $key ] = $value;
+		return \update_option( 'mantiload_settings', $settings );
+	}
+
+}
+
+/**
+ * Returns the main instance of MantiLoad
+ *
+ * @return MantiLoad
+ */
+function mantiload() {
+	return MantiLoad::instance();
+}
+
+// Initialize the plugin
+mantiload();

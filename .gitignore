@@ -1,0 +1,98 @@
+# WordPress
+.htaccess
+wp-config.php
+wp-content/uploads/
+wp-content/blogs.dir/
+wp-content/upgrade/*
+wp-content/backup-db/*
+wp-content/advanced-cache.php
+wp-content/wp-cache-config.php
+wp-content/cache/*
+wp-content/cache/supercache/*
+
+# IDE & Editor
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Claude Code
+.claude/
+.claude/settings.local.json
+
+# Node modules (if any build tools added later)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Composer
+vendor/
+composer.lock
+
+# Build artifacts
+*.zip
+*.tar.gz
+*.tgz
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+error_log
+debug.log
+
+# Temporary files
+*.tmp
+*.temp
+tmp/
+temp/
+
+# OS files
+Thumbs.db
+Desktop.ini
+._*
+
+# Development files
+DEVELOPMENT.md
+INVESTIGATION_SUMMARY.txt
+ELASTICPRESS_*.md
+FEATURES_COMPLETE.md
+FEATURE_INDEX.md
+FEATURE_SUMMARY.md
+FILTER_ENHANCEMENT_PLAN.md
+MOBILE_DRAWER_README.md
+CRITICAL_OPTIONS.md
+RESET-SETTINGS.md
+
+# Database
+*.sql
+*.sqlite
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test files
+tests/
+phpunit.xml
+.phpunit.result.cache
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# MantiLoad specific
+reset_mantiload.php
