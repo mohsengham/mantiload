@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: MantiLoad - Ultra-Fast Search & Filter
+ * Plugin Name: MantiLoad
  * Plugin URI: https://mantiload.com/
- * Description: Lightning-fast search and filtering powered by Manticore Search. Optimized for WooCommerce with beautiful UI, advanced filters, and sub-millisecond search responses.
+ * Description: High-performance search engine for WordPress and WooCommerce powered by Manticore Search. Delivers fast, relevant search results with advanced filtering capabilities.
  * Version: 1.6.1
  * Author: MantiLoad
  * License: GPL v2 or later

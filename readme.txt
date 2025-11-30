@@ -1,4 +1,4 @@
-=== MantiLoad - Ultra-Fast Search & Filter ===
+=== MantiLoad ===
 Contributors: mantiload, mohsengham
 Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
@@ -8,180 +8,102 @@ Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Lightning-fast search powered by Manticore Search. 2000+ products searched in 5ms! Perfect for WooCommerce stores.
+High-performance search engine for WordPress and WooCommerce powered by Manticore Search.
 
 == Description ==
 
-**MantiLoad** transforms your WordPress/WooCommerce site with **blazing-fast search** powered by Manticore Search engine. Get sub-millisecond search responses, advanced filtering, and a beautiful user experience.
+MantiLoad integrates Manticore Search into WordPress, delivering professional-grade search performance for content and WooCommerce products. Built for sites that need reliable, fast search at scale.
 
-= 🚀 Why MantiLoad? =
+**Core Capabilities**
 
-* **⚡ Ultra-Fast**: Search 2000+ products in under 5ms
-* **🛡️ Bulletproof**: Graceful fallback ensures your site never breaks
-* **🎯 Smart Results**: Advanced relevance scoring with BM25 algorithm
-* **🔍 Smart Synonyms**: "gown" finds "dress" automatically
-* **✨ AJAX Search**: Instant results as you type
-* **🎨 Beautiful UI**: Modern, mobile-responsive interface
-* **🛒 WooCommerce Ready**: Optimized for product search with filters
-* **🆓 100% Free**: No premium version, no limitations!
+* Full-text search with BM25 relevance ranking
+* Product search with SKU, category, and attribute filtering
+* Real-time indexing with automatic updates
+* AJAX search interface with keyboard navigation
+* Synonym management for improved discoverability
+* Search analytics and performance monitoring
 
-= ⚡ Performance Benchmarks =
+**Performance**
 
-Real-world performance on a store with 4,441 products:
+Tested on a WooCommerce store with 4,400+ products:
+* Single-word queries: 3-5ms
+* Multi-word queries: 5-10ms
+* Filtered queries: 10-20ms
 
-* **Single word**: 3-5ms response time
-* **Multi-word**: 5-10ms response time
-* **With filters**: 10-20ms response time
-* **2000+ products**: Still under 5ms!
+Standard WordPress search on the same dataset: 200-1000ms
 
-Compare this to:
-* Default WordPress search: 200-1000ms
-* Relevanssi: 100-500ms
-* WooCommerce default: 300-800ms
+**Search Features**
 
-= 🎯 Key Features =
+* AJAX search with live results
+* Keyboard shortcuts (Cmd/Ctrl+K)
+* Wildcard and prefix matching
+* Synonym support with bidirectional mapping
+* Multi-word query handling
+* SKU search for WooCommerce products
 
-**Lightning-Fast Search**
-* Sub-millisecond search responses
-* Instant AJAX search dropdown
-* Real-time search-as-you-type
-* Modal search with Cmd/Ctrl+K shortcut
-* Wildcard prefix matching ("dre" finds "dress")
+**WooCommerce Integration**
 
-**Smart Synonyms System**
-* Create bidirectional synonyms
-* Automatic query expansion
-* Works across all search contexts
-* Easy admin management
-* Zero-result prevention
+* Product filtering by price, category, attributes, stock status
+* Related products algorithm
+* Cart integration for quick add-to-order
+* Variable product support
+* Admin order search optimization
 
-**Advanced WooCommerce Support**
-* Product search with SKU matching
-* Smart related products (20-30x faster, AI-like intelligence)
-* Price range filtering
-* Category & tag filtering
-* Attribute filtering (color, size, etc.)
-* Stock status filtering
-* On-sale filtering
-* Rating filtering
+**Interface Options**
 
-**Beautiful User Interface**
-* Modern, responsive design
-* Mobile-friendly
-* Customizable colors
+* Modal search overlay
+* Dropdown search results
+* Dedicated search results page
+* Widget and shortcode support
+* Mobile-responsive design
 * RTL language support
-* Accessibility compliant
-* Keyboard navigation (arrow keys, Enter, Esc)
 
-**Developer Friendly**
-* Full WP-CLI support
-* REST API endpoints
-* Hooks and filters
-* Well-documented code
-* Namespaced and PSR-4 compliant
-* GitHub repository available
+**Administration**
 
-= 🛠️ Installation Requirements =
+* Search analytics dashboard
+* Synonym management
+* Index configuration
+* Performance monitoring
+* WP-CLI commands for bulk operations
 
-**Server Requirements:**
+= Requirements =
+
+* WordPress 5.8 or higher
 * PHP 7.4 or higher
-* MySQL/MariaDB
-* MySQLi extension
-
-**WordPress:**
-* WordPress 5.8+
+* MySQL/MariaDB with MySQLi extension
+* Manticore Search 13.0 or higher installed on server
 * WooCommerce 6.0+ (optional, for product features)
 
-**Manticore Search:**
-* Manticore Search 13.0+ must be installed on your server
-* See installation instructions in FAQ
+= Developer API =
 
-= 💡 Use Cases =
+**WP-CLI Commands**
 
-* **WooCommerce Stores**: Fast product search with filters
-* **E-commerce Sites**: Instant search with facets
-* **Blogs**: Lightning-fast post search
-* **Documentation Sites**: Fast content discovery
-* **Membership Sites**: User content search
-* **Multi-vendor Marketplaces**: Scale to millions of products
+* wp mantiload create_indexes - Initialize search indexes
+* wp mantiload reindex - Rebuild all indexes
+* wp mantiload optimize - Optimize index performance
+* wp mantiload stats - View index statistics
+* wp mantiload search "query" - Test search queries
 
-= 🎨 Search Display Options =
+**Hooks and Filters**
 
-**Multiple Search Interfaces:**
-1. **Modal Search**: Cmd/Ctrl+K keyboard shortcut
-2. **AJAX Dropdown**: Instant results as you type
-3. **Search Page**: Full results with pagination
-4. **Widget**: Add search box anywhere
-5. **Shortcode**: `[mantiload_search]`
+* mantiload_index_schema - Modify index structure
+* mantiload_post_data - Customize indexed data
+* mantiload_search_results - Process search results
+* mantiload_query_integration_args - Modify query parameters
 
-= 🔌 Developer Features =
+**Programmatic Search**
 
-**WP-CLI Commands:**
-```
-wp mantiload create_indexes
-wp mantiload reindex
-wp mantiload optimize
-wp mantiload stats
-wp mantiload search "query"
-```
+Use the search API directly in your code:
 
-**Hooks & Filters:**
-```php
-// Modify index schema
-add_filter( 'mantiload_index_schema', $callback, 10, 2 );
-
-// Modify indexed data
-add_filter( 'mantiload_post_data', $callback, 10, 2 );
-
-// After search results
-add_action( 'mantiload_search_results', $callback, 10, 2 );
-```
-
-**Programmatic Search:**
-```php
-$search_engine = MantiLoad\Search\Search_Engine();
+`$search_engine = MantiLoad\Search\Search_Engine();
 $results = $search_engine->search( 'laptop', array(
     'post_type' => 'product',
     'limit' => 20,
     'filters' => array(
         'min_price' => 500,
         'max_price' => 2000,
-        'categories' => array( 12, 15 ),
-        'on_sale' => true,
     ),
-) );
-```
-
-= 🌍 Translations =
-
-MantiLoad is translation-ready and includes:
-* English (default)
-* Persian (Farsi) - included
-* German - planned
-* Spanish - planned
-* French - planned
-
-Want to help translate? Contact us!
-
-= 🎯 What Makes MantiLoad Different? =
-
-**vs. Relevanssi:**
-* 20x faster search responses
-* Better relevance scoring
-* Real-time indexing (no cron jobs needed)
-* Free and open source forever
-
-**vs. ElasticPress:**
-* No external service required
-* Easier installation
-* Lower server requirements
-* Self-hosted privacy
-
-**vs. WooCommerce Default:**
-* 100x faster
-* Advanced filters without page reload
-* Synonym support
-* Better relevance
+) );`
 
 == Installation ==
 
