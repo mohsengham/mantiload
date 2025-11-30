@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -355,6 +355,11 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.6.1 - 2025-11-30 =
+* FIX: Fixed orderby=date showing no products on shop page
+* FIX: Empty ORDER direction in SQL queries now defaults to DESC
+* IMPROVE: Better handling of WooCommerce sort parameters
 
 = 1.6.0 - 2025-11-29 =
 * IMPROVE: Removed Author URI for WordPress.org compliance

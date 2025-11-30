@@ -3,7 +3,7 @@
  * Plugin Name: MantiLoad - Ultra-Fast Search & Filter
  * Plugin URI: https://mantiload.com/
  * Description: Lightning-fast search and filtering powered by Manticore Search. Optimized for WooCommerce with beautiful UI, advanced filters, and sub-millisecond search responses.
- * Version: 1.6.0
+ * Version: 1.6.1
  * Author: MantiLoad
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ namespace MantiLoad;
 defined( 'ABSPATH' ) || exit;
 
 // Define plugin constants
-define( 'MANTILOAD_VERSION', '1.6.0' );
+define( 'MANTILOAD_VERSION', '1.6.1' );
 define( 'MANTILOAD_PLUGIN_FILE', __FILE__ );
 define( 'MANTILOAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MANTILOAD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

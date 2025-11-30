@@ -154,13 +154,13 @@ class Query_Integration {
 
 		// Allow custom opt-out filter
 		if ( \apply_filters( 'mantiload_skip_query_integration', false, $query ) ) {
-			
+
 			return null;
 		}
 
 		// Check Manticore connection
 		if ( ! $this->client->is_healthy() ) {
-			
+
 			return null;
 		}
 
@@ -169,7 +169,7 @@ class Query_Integration {
 			$manticore_query = $this->build_manticore_query( $query );
 
 			if ( ! $manticore_query ) {
-				
+
 				return null;
 			}
 
@@ -177,7 +177,7 @@ class Query_Integration {
 			$results = $this->execute_manticore_query( $manticore_query, $query );
 
 			if ( ! $results ) {
-				
+
 				return null;
 			}
 
@@ -752,7 +752,9 @@ class Query_Integration {
 			$order_clause = 'ORDER BY post_date DESC';
 		} else {
 			$orderby = $manticore_query['orderby'] ?? 'date';
-			$order   = strtoupper( $manticore_query['order'] ?? 'DESC' );
+			$order   = $manticore_query['order'] ?? '';
+			// Ensure $order is not empty - default to DESC if empty
+			$order   = ! empty( $order ) ? strtoupper( $order ) : 'DESC';
 
 			// PHP 7.4+ compatible switch instead of match
 			// Support WooCommerce orderby values: https://woocommerce.com/document/woocommerce-customizer/
@@ -871,7 +873,7 @@ class Query_Integration {
 			$result = $this->client->query( $sql );
 
 			if ( ! $result ) {
-				
+
 				return false;
 			}
 
