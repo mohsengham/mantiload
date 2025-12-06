@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.2
+Stable tag: 1.6.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,10 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.6.3 - 2025-12-06 =
+* FIX: Exact SKU matching now works for alphanumeric SKUs (e.g., ZM-33751013)
+* IMPROVE: Exact SKU matches are now prioritized at the top of search results for all SKU formats
 
 = 1.6.2 - 2025-12-06 =
 * FIX: Admin product search now prioritizes SKU over product ID for numeric searches

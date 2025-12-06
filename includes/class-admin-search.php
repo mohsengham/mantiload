@@ -938,24 +938,22 @@ class Admin_Search {
 		$search_query = \sanitize_text_field( $search_query );
 		$product_ids = array();
 
-		// PRIORITY 0: For numeric searches, check for exact SKU match
+		// PRIORITY 0: ALWAYS check for exact SKU match first
 		// This is the most common admin search pattern - users search by SKU
-		if ( is_numeric( $search_query ) ) {
-			// Check for exact SKU match (products and variations)
-			$sku_products = $wpdb->get_col( $wpdb->prepare(
-				"SELECT p.ID FROM {$wpdb->posts} p
-				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-				WHERE p.post_type IN ('product', 'product_variation')
-				AND p.post_status = 'publish'
-				AND pm.meta_key = '_sku'
-				AND pm.meta_value = %s
-				LIMIT 10",
-				$search_query
-			) );
+		// Works for both numeric (11010) and alphanumeric (ZM-33751013) SKUs
+		$sku_products = $wpdb->get_col( $wpdb->prepare(
+			"SELECT p.ID FROM {$wpdb->posts} p
+			INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+			WHERE p.post_type IN ('product', 'product_variation')
+			AND p.post_status = 'publish'
+			AND pm.meta_key = '_sku'
+			AND pm.meta_value = %s
+			LIMIT 10",
+			$search_query
+		) );
 
-			if ( ! empty( $sku_products ) ) {
-				$product_ids = array_merge( $product_ids, $sku_products );
-			}
+		if ( ! empty( $sku_products ) ) {
+			$product_ids = array_merge( $product_ids, $sku_products );
 		}
 
 		// PRIORITY 1: Try MantiCore for INSTANT search (with synonyms!)
