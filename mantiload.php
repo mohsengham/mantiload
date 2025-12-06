@@ -3,7 +3,7 @@
  * Plugin Name: MantiLoad
  * Plugin URI: https://mantiload.com/
  * Description: High-performance search engine for WordPress and WooCommerce powered by Manticore Search. Delivers fast, relevant search results with advanced filtering capabilities.
- * Version: 1.6.1
+ * Version: 1.6.2
  * Author: MantiLoad
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,7 +20,7 @@ namespace MantiLoad;
 defined( 'ABSPATH' ) || exit;
 
 // Define plugin constants
-define( 'MANTILOAD_VERSION', '1.6.1' );
+define( 'MANTILOAD_VERSION', '1.6.2' );
 define( 'MANTILOAD_PLUGIN_FILE', __FILE__ );
 define( 'MANTILOAD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'MANTILOAD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

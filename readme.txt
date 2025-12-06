@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,12 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.6.2 - 2025-12-06 =
+* FIX: Admin product search now prioritizes SKU over product ID for numeric searches
+* FIX: Removed conflicting ID IN filters from other plugins that prevented search results
+* FIX: Improved query_vars detection with $_GET fallback for admin searches
+* IMPROVE: Clean admin search code with production-ready optimization
 
 = 1.6.1 - 2025-11-30 =
 * FIX: Fixed orderby=date showing no products on shop page

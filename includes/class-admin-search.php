@@ -54,7 +54,8 @@ class Admin_Search {
 		}
 
 		// Product List Search Optimization
-		if ( $settings['enable_admin_product_search_optimization'] ?? true ) {
+		$product_search_enabled = $settings['enable_admin_product_search_optimization'] ?? true;
+		if ( $product_search_enabled ) {
 			// INTERCEPT SLOW PRODUCT LIST SEARCH! Multiple approaches for different contexts
 			\add_filter( 'posts_search', array( $this, 'bypass_slow_search' ), 999, 2 );
 			\add_filter( 'posts_where', array( $this, 'add_manticore_ids' ), 999, 2 );
@@ -860,22 +861,40 @@ class Admin_Search {
 	public function bypass_slow_search( $search, $query ) {
 		global $wpdb;
 
+	
 		// Only in admin
 		if ( ! is_admin() ) {
 			return $search;
 		}
 
-		// Only for product searches with search term
-		if ( empty( $query->query_vars['s'] ) ) {
+		// Get search term from either query_vars or $_GET (admin list uses $_GET)
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter
+		$from_query_vars = ! empty( $query->query_vars['s'] ) ? $query->query_vars['s'] : '';
+		$from_get = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		$search_term = $from_query_vars ? $from_query_vars : $from_get;
+
+		// If search term is empty but $search parameter has content, we're being called after WordPress built the search
+		// In this case, we still want to bypass the slow search
+		if ( empty( $search_term ) && empty( $search ) ) {
+			return $search;
+		}
+
+		if ( empty( $search_term ) && ! empty( $search ) ) {
 			return $search;
 		}
 
 		// Check if this is a product query
-		$post_type = isset( $query->query_vars['post_type'] ) ? $query->query_vars['post_type'] : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only post_type parameter
+		$query_post_type = isset( $query->query_vars['post_type'] ) ? $query->query_vars['post_type'] : '';
+		$get_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
+
+		// Prefer query_vars post_type, but fallback to $_GET if query_vars is empty or wrong
+		// This handles cases where WordPress hasn't populated query_vars yet
+		$post_type = ! empty( $query_post_type ) && $query_post_type !== 'page' ? $query_post_type : $get_post_type;
+
 		if ( $post_type !== 'product' ) {
 			return $search;
 		}
-
 		// KILL the slow LIKE search! We'll use MantiCore IDs instead
 		return '';
 	}
@@ -895,28 +914,60 @@ class Admin_Search {
 			return $where;
 		}
 
-		// Only for product searches with search term
-		if ( empty( $query->query_vars['s'] ) ) {
+		// Get search term from either query_vars or $_GET (admin list uses $_GET)
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter
+		$search_query = ! empty( $query->query_vars['s'] ) ? $query->query_vars['s'] : ( isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '' );
+
+		if ( empty( $search_query ) ) {
 			return $where;
 		}
 
 		// Check if this is a product query
-		$post_type = isset( $query->query_vars['post_type'] ) ? $query->query_vars['post_type'] : '';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only post_type parameter
+		$query_post_type = isset( $query->query_vars['post_type'] ) ? $query->query_vars['post_type'] : '';
+		$get_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
+
+		// Prefer query_vars post_type, but fallback to $_GET if query_vars is empty or wrong
+		// This handles cases where WordPress hasn't populated query_vars yet
+		$post_type = ! empty( $query_post_type ) && $query_post_type !== 'page' ? $query_post_type : $get_post_type;
+
 		if ( $post_type !== 'product' ) {
 			return $where;
 		}
 
-		$search_query = \sanitize_text_field( $query->query_vars['s'] );
+		$search_query = \sanitize_text_field( $search_query );
 		$product_ids = array();
 
-		// Expand query with synonyms
-		$synonyms_manager = new \MantiLoad\Search\Synonyms();
-		$expanded_query = $synonyms_manager->expand_query( $search_query );
+		// PRIORITY 0: For numeric searches, check for exact SKU match
+		// This is the most common admin search pattern - users search by SKU
+		if ( is_numeric( $search_query ) ) {
+			// Check for exact SKU match (products and variations)
+			$sku_products = $wpdb->get_col( $wpdb->prepare(
+				"SELECT p.ID FROM {$wpdb->posts} p
+				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE p.post_type IN ('product', 'product_variation')
+				AND p.post_status = 'publish'
+				AND pm.meta_key = '_sku'
+				AND pm.meta_value = %s
+				LIMIT 10",
+				$search_query
+			) );
 
-		// Try MantiCore for INSTANT search (with synonyms!)
-		// Get connection details from settings
-		$host = \MantiLoad\MantiLoad::get_option( 'manticore_host', MANTILOAD_HOST );
-		$port = (int) \MantiLoad\MantiLoad::get_option( 'manticore_port', MANTILOAD_PORT );
+			if ( ! empty( $sku_products ) ) {
+				$product_ids = array_merge( $product_ids, $sku_products );
+			}
+		}
+
+		// PRIORITY 1: Try MantiCore for INSTANT search (with synonyms!)
+		// Only if we didn't already find product by exact ID
+		if ( empty( $product_ids ) ) {
+			// Expand query with synonyms
+			$synonyms_manager = new \MantiLoad\Search\Synonyms();
+			$expanded_query = $synonyms_manager->expand_query( $search_query );
+
+			// Get connection details from settings
+			$host = \MantiLoad\MantiLoad::get_option( 'manticore_host', MANTILOAD_HOST );
+			$port = (int) \MantiLoad\MantiLoad::get_option( 'manticore_port', MANTILOAD_PORT );
 
 		// phpcs:ignore WordPress.DB.RestrictedClasses.mysql__mysqli -- Direct mysqli required for Manticore Search connection
 		\mysqli_report( MYSQLI_REPORT_OFF );
@@ -955,8 +1006,9 @@ class Admin_Search {
 				}
 			}
 		}
+		} // End if ( empty( $product_ids ) ) - Manticore search only if no exact ID match
 
-		// FALLBACK: If MantiCore returns nothing, use optimized WordPress search
+		// PRIORITY 2: FALLBACK - If MantiCore returns nothing, use optimized WordPress search
 		// This ensures products not in MantiCore index are still searchable in admin
 		if ( empty( $product_ids ) ) {
 
@@ -986,6 +1038,11 @@ class Admin_Search {
 			$product_ids = array_map( 'intval', array_unique( $product_ids ) );
 			$product_ids = array_slice( $product_ids, 0, 1000 );
 		}
+
+		// IMPORTANT: Remove any existing ID IN clauses that other plugins/filters may have added
+		// These restrictive filters prevent our search results from showing up
+		// Use a regex to remove patterns like "AND wp_posts.ID IN (1,2,3)"
+		$where = preg_replace( '/AND\s+' . preg_quote( $wpdb->posts, '/' ) . '\.ID\s+IN\s*\([^)]+\)/', '', $where );
 
 		if ( empty( $product_ids ) ) {
 			// No results found at all
