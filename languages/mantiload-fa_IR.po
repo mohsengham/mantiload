@@ -2,465 +2,932 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MantiLoad - Ultra-Fast Search & Filter 1.5.1\n"
+"Project-Id-Version: MantiLoad 1.6.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mantiload\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: فارسی\n"
+"POT-Creation-Date: 2025-12-06T21:57:08+00:00\n"
+"PO-Revision-Date: 2025-12-07 02:43+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-19T21:08:10+00:00\n"
-"PO-Revision-Date: 2025-11-20 15:11+0000\n"
-"X-Generator: Loco https://localise.biz/\n"
+"X-Generator: Poedit 3.8\n"
 "X-Domain: mantiload\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);"
 
-#: admin/views/settings.php:869
-msgid "\"View all\" link text"
+#. Plugin Name of the plugin
+#. Author of the plugin
+#: mantiload.php admin/class-admin-controller.php:34
+#: admin/class-admin-controller.php:35
+msgid "MantiLoad"
+msgstr "منتی‌لود"
+
+#. Plugin URI of the plugin
+#: mantiload.php
+msgid "https://mantiload.com/"
+msgstr "https://mantiload.com/"
+
+#. Description of the plugin
+#: mantiload.php
+msgid ""
+"High-performance search engine for WordPress and WooCommerce powered by "
+"Manticore Search. Delivers fast, relevant search results with advanced "
+"filtering capabilities."
 msgstr ""
+"موتور جستجوی پرکاربرد برای وردپرس و ووکامرس با قدرت منتی‌کور سرچ. نتایج "
+"جستجوی سریع و مرتبط با قابلیت‌های فیلترینگ پیشرفته ارائه می‌دهد."
 
-#. translators: %d: star rating
-#: includes/filters/class-filter-renderer.php:397
+#: admin/class-admin-ajax.php:39 admin/class-admin-ajax.php:91
+#: admin/class-admin-ajax.php:132 admin/class-admin-ajax.php:161
+#: admin/class-admin-ajax.php:200 admin/class-admin-ajax.php:236
+#: admin/class-admin-ajax.php:279 admin/class-admin-ajax.php:346
+#: admin/class-admin-ajax.php:389 admin/class-admin-ajax.php:470
+msgid "Unauthorized"
+msgstr "غیرمجاز"
+
+#: admin/class-admin-ajax.php:146
+msgid ""
+"Index created successfully with multi-language support! Now you can start "
+"indexing."
+msgstr ""
+"ایندکس با موفقیت و با پشتیبانی از چندزبانگی ایجاد شد! اکنون می‌توانید ایندکس "
+"کنید."
+
+#: admin/class-admin-ajax.php:149
+msgid "Failed to create index. Check that Manticore is running and accessible."
+msgstr ""
+"ایجاد ایندکس ناموفق بود. بررسی کنید که منتی‌کور در حال اجرا و در دسترس باشد."
+
+#: admin/class-admin-ajax.php:172 admin/class-admin-ajax.php:211
+msgid "Manticore client not available"
+msgstr "کلاینت منتی‌کور در دسترس نیست"
+
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:184
 #, php-format
-msgid "%d & Up"
-msgstr ""
+msgid "Index \"%s\" truncated successfully"
+msgstr "ایندکس \"%s\" با موفقیت خالی شد"
 
-#. translators: %d: star rating
-#: includes/filters/class-filter-ajax.php:354
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:188
 #, php-format
-msgid "%d stars & up"
-msgstr ""
+msgid "Failed to truncate index \"%s\""
+msgstr "خالی کردن ایندکس \"%s\" ناموفق بود"
 
-#: admin/views/settings.php:763
-msgid "1. Search Icon (Mobile Modal Style)"
-msgstr ""
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:220
+#, php-format
+msgid "Index \"%s\" optimized successfully"
+msgstr "ایندکس \"%s\" با موفقیت بهینه‌سازی شد"
 
-#: admin/views/settings.php:832
-msgid "2. Full Search Box"
-msgstr ""
+#. translators: %s: index name
+#: admin/class-admin-ajax.php:224
+#, php-format
+msgid "Failed to optimize index \"%s\""
+msgstr "بهینه‌سازی ایندکس \"%s\" ناموفق بود"
 
-#: admin/views/settings.php:691
-msgid "20-30x faster than WooCommerce default (2-5ms vs 50-150ms)"
-msgstr ""
+#: admin/class-admin-controller.php:43
+msgid "Dashboard"
+msgstr "پیشخوان"
 
-#: admin/views/settings.php:537
-msgid "433x Faster Category Pages!"
-msgstr ""
+#: admin/class-admin-controller.php:44 admin/views/indexing-new.php:13
+msgid "Indexing"
+msgstr "ایندکس‌ها"
 
-#: includes/class-admin.php:418
-msgid "A plugin is consuming resources during cron jobs"
-msgstr ""
+#: admin/class-admin-controller.php:45
+msgid "DB Indexes"
+msgstr "ایندکس‌های دیتابیس"
 
-#: includes/class-admin.php:417
-msgid "A plugin is running during AJAX when it shouldn't be"
-msgstr ""
+#: admin/class-admin-controller.php:46
+msgid "Synonyms"
+msgstr "مترادف‌ها"
 
-#: admin/views/indexing-new.php:32
-msgid "Abort"
-msgstr ""
+#: admin/class-admin-controller.php:47 admin/views/settings.php:18
+msgid "Settings"
+msgstr "تنظیمات"
 
-#: admin/views/settings.php:181
-msgid "Abort Rebuild"
-msgstr ""
+#: admin/class-admin-controller.php:48
+msgid "Analytics"
+msgstr "تحلیل آماری"
 
-#: admin/views/settings.php:224
-msgid "Activate search functionality"
+#: admin/class-admin-controller.php:73
+msgid ""
+"Are you sure you want to abort indexing?\\n\\nProgress will be saved, but "
+"remaining posts will not be indexed."
 msgstr ""
+"آیا مطمئنید که می‌خواهید ساختن ایندکس را لغو کنید؟\\n\\nپیشرفت ذخیره خواهد "
+"شد، اما پست‌های باقی‌مانده ایندکس نخواهند شد."
 
-#: includes/class-admin.php:118
+#: admin/class-admin-controller.php:74
+msgid "Aborting..."
+msgstr "در حال لغو..."
+
+#: admin/class-admin-controller.php:75
+msgid ""
+"Are you sure you want to reindex all products?\\n\\nThis will reindex all "
+"products with full categories, attributes, and filter data."
+msgstr ""
+"آیا از ایندکس کردن دوباره همه محصولات مطمئن هستید؟\\n\\nاین عمل، همه محصولات "
+"را به همراه دسته‌بندی‌ها، ویژگی‌ها و داده‌های فیلتر به طور کامل بازنمایه‌سازی "
+"خواهد کرد."
+
+#: admin/class-admin-controller.php:76
+msgid "Are you sure you want to clear all cached search results?"
+msgstr "آیا از پاک‌کردن همه نتایج جستجوی ذخیره‌شده مطمئن هستید؟"
+
+#: admin/class-admin-controller.php:77
+msgid "Error"
+msgstr "خطا"
+
+#: admin/class-admin-controller.php:78
+msgid "Unknown error"
+msgstr "خطای ناشناخته"
+
+#: admin/class-admin-controller.php:79
+msgid "AJAX Error"
+msgstr "خطای ایجکس"
+
+#: admin/class-admin-controller.php:80
+msgid "Network error"
+msgstr "خطای شبکه"
+
+#: admin/class-admin-controller.php:81
+msgid "Index optimized successfully!"
+msgstr "ایندکس با موفقیت بهینه‌سازی شد!"
+
+#: admin/class-admin-controller.php:82
+msgid "Optimization failed"
+msgstr "بهینه‌سازی ناموفق بود"
+
+#: admin/class-admin-controller.php:83
+msgid "Error loading hidden notices"
+msgstr "خطا در بارگذاری اعلان‌های پنهان"
+
+#: admin/class-admin-controller.php:122
+msgid "Failed to create indexes: "
+msgstr "ایجاد ایندکس‌ها ناموفق بود: "
+
+#: admin/class-admin-controller.php:125
+msgid "Indexes created successfully for: "
+msgstr "ایندکس‌ها با موفقیت ایجاد شدند برای:"
+
+#. translators: 1: number of items indexed, 2: time in seconds
+#: admin/class-admin-controller.php:151
+#, php-format
+msgid "Reindex completed! Indexed %1$d items in %2$.2f seconds."
+msgstr "ساختن ایندکس تکمیل شد! %1$d مورد در %2$.2f ثانیه ایندکس شد."
+
+#: admin/class-admin-controller.php:162
+msgid "Indexer not available. Please check Manticore connection."
+msgstr "ایندکس‌ساز در دسترس نیست. لطفاً اتصال منتی‌کور را بررسی کنید."
+
+#. translators: %d: number of indexes cleared
+#: admin/class-admin-controller.php:176
+#, php-format
+msgid "Cleared %d indexes! All indexed data removed."
+msgstr "%d ایندکس پاک شد! تمام داده‌های ایندکس شده حذف شدند."
+
+#: admin/class-admin-controller.php:182
+msgid "Indexes optimized!"
+msgstr "ایندکس‌ها بهینه شدند!"
+
+#: admin/class-admin-controller.php:187
+msgid "Search logs cleared!"
+msgstr "لاگ‌های جستجو پاک شدند!"
+
+#: admin/class-admin-controller.php:194
+msgid "Search cache cleared successfully! Next searches will rebuild cache."
+msgstr "کش جستجو با موفقیت پاک شد! جستجوهای بعدی کش را دوباره می‌سازند."
+
+#: admin/class-admin-controller.php:553
+msgid "Security verification failed. Please try again."
+msgstr "احراز هویت امنیتی ناموفق بود. لطفاً دوباره تلاش کنید."
+
+#. translators: %1$d: installed count, %2$d: failed count
+#: admin/class-admin-controller.php:632
+#, php-format
+msgid "Installed %1$d indexes, %2$d failed"
+msgstr "%1$d ایندکس نصب شد، %2$d مورد ناموفق بود"
+
+#. translators: %d: installed count
+#: admin/class-admin-controller.php:645
+#, php-format
+msgid "Successfully installed %d indexes"
+msgstr "%d ایندکس با موفقیت نصب شدند"
+
+#. translators: %1$d: removed count, %2$d: failed count
+#: admin/class-admin-controller.php:727
+#, php-format
+msgid "Removed %1$d indexes, %2$d failed"
+msgstr ""
+"%1$d ایندکس حذف شد، %2$d مورد ناموفق بود%1$d ایندکس حذف شد، %2$d مورد ناموفق "
+"بود"
+
+#. translators: %d: removed count
+#: admin/class-admin-controller.php:740
+#, php-format
+msgid "Successfully removed %d indexes"
+msgstr "%d ایندکس با موفقیت حذف شدند"
+
+#: admin/views/dashboard.php:405
+msgid "💎 Hidden Gem Recommendation"
+msgstr "💎 پیشنهاد الماس پنهان"
+
+#: admin/views/database-indexes.php:34
+msgid "Database Indexes"
+msgstr "ایندکس‌های دیتابیس"
+
+#: admin/views/database-indexes.php:36
+msgid "Optimize MySQL query performance for admin panel and reliability"
+msgstr "بهینه‌سازی عملکرد کوئری MySQL برای پیشخوان و اطمینان از عملکرد"
+
+#: admin/views/database-indexes.php:41 admin/views/settings.php:25
+msgid "Index Status"
+msgstr "وضعیت ایندکس"
+
+#: admin/views/database-indexes.php:47
+msgid "Installed:"
+msgstr "نصب‌شده:"
+
+#: admin/views/database-indexes.php:49
+msgid "indexes"
+msgstr "ایندکس‌ها"
+
+#: admin/views/database-indexes.php:53
+msgid "Available:"
+msgstr "در دسترس:"
+
+#: admin/views/database-indexes.php:55
+msgid "ready to install"
+msgstr "آماده نصب"
+
+#: admin/views/database-indexes.php:59
+msgid "Unavailable:"
+msgstr "غیرقابل دسترس:"
+
+#: admin/views/database-indexes.php:61
+msgid "(table missing)"
+msgstr "(جدول در دسترس نیست)"
+
+#: admin/views/database-indexes.php:67
+msgid "Total Indexes:"
+msgstr "کل ایندکس‌ها:"
+
+#: admin/views/database-indexes.php:74
+msgid "Index WP MySQL:"
+msgstr "Index WP MySQL:"
+
+#: admin/views/database-indexes.php:76
+msgid "Detected"
+msgstr "شناسایی شد"
+
+#: admin/views/database-indexes.php:89 admin/views/database-indexes.php:367
+msgid "About Database Indexes"
+msgstr "درباره ایندکس‌های دیتابیس"
+
+#: admin/views/database-indexes.php:94
+msgid "When Indexes Help"
+msgstr "چه زمانی ایندکس‌ها مفید هستند:"
+
+#: admin/views/database-indexes.php:96
+msgid "WooCommerce admin panel (orders, products, reports)"
+msgstr "پیشخوان ووکامرس (سفارش‌ها، محصولات، گزارش‌ها)"
+
+#: admin/views/database-indexes.php:97
+msgid "Reliability when Manticore is unavailable"
+msgstr "اطمینان از عملکرد بدون نقص سایت در زمان در دسترس نبودن سرویس Manticore"
+
+#: admin/views/database-indexes.php:98
+msgid "Secondary queries (widgets, sidebars)"
+msgstr "کوئری‌های ثانویه (ابزارک‌ها، نوارهای کناری)"
+
+#: admin/views/database-indexes.php:99
+msgid "Variable product variation loading"
+msgstr "بارگذاری متغیر‌های محصولات متغیر"
+
+#: admin/views/database-indexes.php:104
+msgid "How They Work With MantiLoad"
+msgstr "چگونه با منتی‌لود کار می‌کنند:"
+
+#: admin/views/database-indexes.php:106
+msgid "Frontend:"
+msgstr "فرانت‌اند:"
+
+#: admin/views/database-indexes.php:106
+msgid "MantiLoad uses Manticore (indexes dormant)"
+msgstr "منتی‌لود از منتی‌کور استفاده می‌کند (ایندکس‌ها غیرفعال هستند)"
+
+#: admin/views/database-indexes.php:107
+msgid "Admin:"
+msgstr "پیشخوان:"
+
+#: admin/views/database-indexes.php:107
+msgid "Indexes speed up MySQL (40-80% faster)"
+msgstr "ایندکس‌ها MySQL را سریع‌تر می‌کنند (۴۰-۸۰٪ سریع‌تر)"
+
+#: admin/views/database-indexes.php:108
+msgid "Fallback:"
+msgstr "راه‌حل جایگزین:"
+
+#: admin/views/database-indexes.php:108
+msgid "Essential safety net for reliability"
+msgstr "تأمین امنیت ضروری برای اطمینان از عملکرد"
+
+#: admin/views/database-indexes.php:115
+msgid "Pro Tip:"
+msgstr "نکته حرفه‌ای:"
+
+#: admin/views/database-indexes.php:116
+msgid ""
+"For maximum performance, also install \"Index WP MySQL For Speed\" plugin. "
+"It optimizes meta tables while MantiLoad handles taxonomy and WooCommerce "
+"queries."
+msgstr ""
+"برای حداکثر عملکرد، افزونه \"Index WP MySQL For Speed\" را نیز نصب کنید. این "
+"افزونه جداول متا را بهینه می‌کند در حالی که منتی‌لود کوئری‌های طبقه‌بندی و "
+"ووکامرس را مدیریت می‌کند."
+
+#: admin/views/database-indexes.php:126
+msgid "Quick Installation"
+msgstr "نصب سریع"
+
+#: admin/views/database-indexes.php:129
+msgid "Install all available indexes with one click for improved performance"
+msgstr "همه ایندکس‌های موجود را با یک کلیک برای بهبود عملکرد نصب کنید"
+
+#. translators: %d: number of indexes
+#: admin/views/database-indexes.php:136
+#, php-format
+msgid "Install All Indexes (%d)"
+msgstr "نصب همه ایندکس‌ها (%d)"
+
+#: admin/views/database-indexes.php:156
+msgid "Taxonomy"
+msgstr "طبقه‌بندی"
+
+#: admin/views/database-indexes.php:160
+msgid "WooCommerce"
+msgstr "ووکامرس"
+
+#: admin/views/database-indexes.php:164 includes/class-ajax-search.php:138
+msgid "Products"
+msgstr "محصولات"
+
+#: admin/views/database-indexes.php:168
+msgid "About"
+msgstr "درباره"
+
+#: admin/views/database-indexes.php:176
+msgid "Taxonomy Indexes"
+msgstr "ایندکس‌های طبقه‌بندی"
+
+#: admin/views/database-indexes.php:182
+msgid ""
+"Optimizes category filtering, hierarchical queries, and product attribute "
+"filtering."
+msgstr ""
+"فیلتر کردن دسته‌ها، کويری‌های سلسله‌مراتبی و فیلتر کردن ویژگی‌های محصول را بهینه "
+"می‌کند."
+
+#: admin/views/database-indexes.php:189 admin/views/database-indexes.php:253
+#: admin/views/database-indexes.php:317 admin/views/settings.php:139
+msgid "Index Name"
+msgstr "نام ایندکس"
+
+#: admin/views/database-indexes.php:190 admin/views/database-indexes.php:254
+#: admin/views/database-indexes.php:318
+msgid "Table"
+msgstr "جدول"
+
+#: admin/views/database-indexes.php:191 admin/views/database-indexes.php:255
+#: admin/views/database-indexes.php:319
+msgid "Benefit"
+msgstr "مزایا"
+
+#: admin/views/database-indexes.php:192 admin/views/database-indexes.php:256
+#: admin/views/database-indexes.php:320
+msgid "Status"
+msgstr "وضعیت"
+
+#: admin/views/database-indexes.php:193 admin/views/database-indexes.php:257
+#: admin/views/database-indexes.php:321
+msgid "Actions"
+msgstr "اقدام‌ها"
+
+#: admin/views/database-indexes.php:211 admin/views/database-indexes.php:275
+#: admin/views/database-indexes.php:339
+msgid "N/A"
+msgstr "N/A"
+
+#: admin/views/database-indexes.php:213 admin/views/database-indexes.php:277
+#: admin/views/database-indexes.php:341
 msgid "Active"
 msgstr "فعال"
 
-#: admin/views/settings.php:942
-msgid "Add !important to ensure your styles take priority"
-msgstr ""
+#: admin/views/database-indexes.php:215 admin/views/database-indexes.php:279
+#: admin/views/database-indexes.php:343
+msgid "Not Installed"
+msgstr "نصب نشده"
 
-#: admin/views/settings.php:936
+#: admin/views/database-indexes.php:221 admin/views/database-indexes.php:285
+#: admin/views/database-indexes.php:349 admin/views/database-indexes.php:488
+#: admin/views/database-indexes.php:493
+msgid "Install"
+msgstr "نصب"
+
+#: admin/views/database-indexes.php:225 admin/views/database-indexes.php:289
+#: admin/views/database-indexes.php:353 admin/views/database-indexes.php:522
+#: admin/views/database-indexes.php:527
+msgid "Remove"
+msgstr "حذف"
+
+#: admin/views/database-indexes.php:240
+msgid "WooCommerce HPOS Indexes"
+msgstr "ایندکس‌های HPOS ووکامرس"
+
+#: admin/views/database-indexes.php:246
 msgid ""
-"Add custom CSS to style the search box and results. These styles will be "
-"loaded on the frontend and survive plugin updates."
+"Optimizes WooCommerce High-Performance Order Storage (HPOS) queries for "
+"faster order management."
 msgstr ""
+"کوئری‌های ذخیره‌سازی سفارش با کارایی بالا (HPOS) ووکامرس را برای مدیریت سریع‌تر "
+"سفارش‌ها بهینه می‌کند."
 
-#: widgets/class-search-icon-widget.php:184
+#: admin/views/database-indexes.php:304
+msgid "Product Optimization Indexes"
+msgstr "ایندکس‌های بهینه‌سازی محصولات"
+
+#: admin/views/database-indexes.php:310
 msgid ""
-"Add this widget to your mobile menu or header. When clicked, it opens the "
-"MantiLoad search modal."
+"Optimizes product catalog queries and variable product loading for faster "
+"shop pages."
 msgstr ""
+"کوئری‌های کاتالوگ محصولات و بارگذاری محصولات متغیر را برای سریع‌تر شدن صفحه‌های "
+"فروشگاه بهینه می‌کند."
 
-#: admin/views/settings.php:91
-msgid "Admin Features"
-msgstr ""
+#: admin/views/database-indexes.php:370
+msgid "What These Indexes Do"
+msgstr "این ایندکس‌ها چه کاری انجام می‌دهند"
 
-#: admin/views/settings.php:613
-msgid "Admin Search (Cmd/Ctrl+K)"
-msgstr ""
-
-#: admin/views/settings.php:606
-msgid "Admin Superpowers"
-msgstr ""
-
-#: includes/class-admin.php:367
-msgid "Advanced users only"
-msgstr ""
-
-#: admin/views/settings.php:202
-msgid "After bulk product imports"
-msgstr ""
-
-#: admin/views/settings.php:200
-msgid "After changing index settings"
-msgstr ""
-
-#: admin/views/settings.php:645
+#: admin/views/database-indexes.php:372
 msgid ""
-"After enabling this, you must rebuild the index to add orders and customers "
-"to Manticore."
+"Complement existing optimization plugins (Index WP MySQL For Speed, "
+"Scalability Pro)"
 msgstr ""
+"مکمل افزونه‌های بهینه‌سازی موجود هستند (Index WP MySQL For Speed، Scalability "
+"Pro)"
 
-#: includes/class-admin.php:274 includes/class-admin.php:317
-msgid "AJAX"
+#: admin/views/database-indexes.php:373
+msgid "Focus on taxonomy relationships and WooCommerce-specific queries"
+msgstr "بر روابط طبقه‌بندی و کوئری‌های خاص ووکامرس تمرکز می‌کنند"
+
+#: admin/views/database-indexes.php:374
+msgid "Avoid conflicts by using unique index names with \"mantiload_\" prefix"
 msgstr ""
+"با استفاده از نام‌های ایندکس یکتا با پیشوند \"mantiload_\" از بروز تداخل "
+"جلوگیری کنید"
 
-#: admin/views/settings.php:83
-msgid "AJAX Search"
-msgstr ""
-
-#: admin/views/settings.php:460
-msgid "AJAX Search Settings"
-msgstr ""
-
-#: admin/views/settings.php:741
-msgid "All WooCommerce themes (WoodMart, Flatsome, Storefront, Astra, etc.)"
-msgstr ""
-
-#: includes/class-admin.php:396
+#: admin/views/database-indexes.php:375
 msgid ""
-"Always test manual configurations on a staging site first. Check that all "
-"functionality still works."
+"Target specific performance bottlenecks in category filtering and product "
+"queries"
 msgstr ""
+"گلوگاه‌های عملکرد خاص در فیلتر دسته‌ها و کوئری‌های محصولات را هدف قرار می‌دهند"
 
-#: admin/views/settings.php:744
-msgid "Any plugin using woocommerce_related_products()"
-msgstr ""
+#: admin/views/database-indexes.php:378
+msgid "Index Size Impact"
+msgstr "تأثیر بر اندازه ایندکس"
 
-#: includes/filters/class-filter-manager.php:169
-msgid "Apply Filters"
-msgstr ""
-
-#: admin/views/settings.php:707
-msgid "Attributes & Categories (Ignores Price)"
-msgstr ""
-
-#: admin/views/settings.php:718
-msgid "Attributes & Categories:"
-msgstr ""
-
-#: admin/views/settings.php:402
-msgid "Attributes Weight"
-msgstr ""
-
-#: admin/views/settings.php:561
-msgid "Auto Query Interception"
-msgstr ""
-
-#: includes/class-admin.php:327
-msgid "Auto-optimized"
-msgstr ""
-
-#: admin/views/settings.php:566
-msgid "Automatically intercept product archive queries"
-msgstr ""
-
-#: includes/class-admin.php:153
-msgid "Automatically optimize plugin execution based on request context"
-msgstr ""
-
-#: admin/views/settings.php:571
+#: admin/views/database-indexes.php:380
 msgid ""
-"Automatically routes WooCommerce product category, tag, and shop pages to "
-"Manticore. No theme modifications needed! Gracefully falls back to MySQL on "
-"errors."
+"Each index: 5-50 MB depending on store size. Total for all 8 indexes on 10k "
+"product store: ~100-200 MB (negligible compared to typical WooCommerce "
+"database of 500MB-5GB)."
 msgstr ""
+"هر ایندکس: ۵-۵۰ مگابایت بسته به اندازه فروشگاه. مجموع برای همه ۸ ایندکس در "
+"فروشگاهی با ۱۰ هزار محصول: حدود ۱۰۰-۲۰۰ مگابایت (ناچیز در مقایسه با دیتابیس "
+"معمولی ووکامرس با حجم ۵۰۰ مگابایت تا ۵ گیگابایت)."
 
-#: includes/filters/class-filter-renderer.php:424
-msgid "Availability"
-msgstr ""
+#: admin/views/database-indexes.php:383
+msgid "Safety"
+msgstr "ایمنی"
 
-#: admin/views/settings.php:775 admin/views/settings.php:844
-msgid "Available Parameters:"
-msgstr ""
-
-#: admin/views/settings.php:301
-msgid "Batch Size"
-msgstr ""
-
-#: includes/class-search-widget.php:112
-msgid "Button Text:"
-msgstr ""
-
-#: admin/views/settings.php:538
+#: admin/views/database-indexes.php:385
 msgid ""
-"Caches category product queries in Redis. Reduces query time from ~130ms to "
-"~0.3ms. Automatically invalidates when products are updated."
+"All indexes can be safely removed without affecting your data. Only database "
+"query performance will be impacted. MySQL automatically maintains indexes - "
+"no ongoing management needed."
 msgstr ""
+"همه ایندکس‌ها را می‌توان بدون تأثیر بر داده‌های شما با خیال راحت حذف کرد. فقط "
+"عملکرد کوئری‌های دیتابیس تحت تأثیر قرار خواهد گرفت. MySQL به‌طور خودکار "
+"ایندکس‌ها را نگهداری می‌کند - هیچ مدیریت مداومی مورد نیاز نیست."
 
-#: includes/class-admin.php:368
-msgid "Can break functionality"
+#: admin/views/database-indexes.php:392
+msgid "Remove All Indexes"
+msgstr "حذف همه ایندکس‌ها"
+
+#: admin/views/database-indexes.php:395
+msgid ""
+"If you need to remove all MantiLoad indexes (for troubleshooting or "
+"uninstallation), use the button below."
 msgstr ""
+"اگر نیاز به حذف همه ایندکس‌های منتی‌لود دارید (برای عیب‌یابی یا حذف نصب)، از "
+"دکمه زیر استفاده کنید."
 
-#. translators: 1: Manticore host address, 2: Manticore port number
-#: mantiload.php:650
+#. translators: %d: number of installed indexes
+#: admin/views/database-indexes.php:402
 #, php-format
+msgid "Remove All Installed Indexes (%d)"
+msgstr "حذف همه ایندکس‌های نصب‌شده (%d)"
+
+#: admin/views/database-indexes.php:429
+msgid "This will install all available database indexes. Continue?"
+msgstr "این عمل همه ایندکس‌های دیتابیس موجود را نصب خواهد کرد. ادامه بدهیم؟"
+
+#: admin/views/database-indexes.php:440
+msgid "Installing indexes..."
+msgstr "در حال نصب ایندکس‌ها..."
+
+#: admin/views/database-indexes.php:462 admin/views/database-indexes.php:492
+msgid "Installation failed. Please try again."
+msgstr "نصب ناموفق بود. لطفاً دوباره تلاش کنید."
+
+#: admin/views/database-indexes.php:473
+msgid "Installing..."
+msgstr "در حال نصب..."
+
+#: admin/views/database-indexes.php:500
+msgid "Are you sure you want to remove this index?"
+msgstr "آیا از حذف این ایندکس مطمئن هستید؟"
+
+#: admin/views/database-indexes.php:507 admin/views/database-indexes.php:539
+msgid "Removing..."
+msgstr "در حال حذف..."
+
+#: admin/views/database-indexes.php:526 admin/views/database-indexes.php:557
+msgid "Removal failed. Please try again."
+msgstr "حذف ناموفق بود. لطفاً دوباره تلاش کنید."
+
+#: admin/views/database-indexes.php:534
 msgid ""
-"Cannot connect to Manticore Search at %1$s:%2$d. Please ensure Manticore is "
-"installed and running. You can configure connection settings in MantiLoad > "
-"Settings."
+"Are you sure you want to remove ALL MantiLoad indexes? This cannot be undone."
 msgstr ""
+"آیا از حذف **همه** ایندکس‌های منتی‌لود مطمئن هستید؟ این عمل برگشت‌ناپذیر است."
 
-#: includes/class-ajax-search.php:135
-#: includes/filters/class-filter-renderer.php:159
-msgid "Categories"
-msgstr "دسته‌ها"
+#: admin/views/database-indexes.php:553 admin/views/database-indexes.php:558
+msgid "Remove All Installed Indexes"
+msgstr "حذف همه ایندکس‌های نصب‌شده"
 
-#: admin/views/settings.php:384
-msgid "Categories Weight"
+#: admin/views/indexing-new.php:15
+msgid "Lightning-fast search indexing powered by Manticore Search"
+msgstr "ایندکس جستجو با سرعت برق‌آسا، قدرت گرفته از موتور جستجوی منتی‌کور"
+
+#: admin/views/indexing-new.php:20
+msgid "Full Reindex"
+msgstr "ایندکس کردن مجدد کامل"
+
+#: admin/views/indexing-new.php:21
+msgid "Reindex all products with categories, attributes, and filter data"
 msgstr ""
+"تمام محصولات را همراه با دسته‌بندی‌ها، ویژگی‌ها و داده‌های فیلتر، دوباره ایندکس "
+"کنید"
 
-#: admin/views/settings.php:943
-msgid "Changes apply immediately after saving - no cache clearing needed"
-msgstr ""
+#: admin/views/indexing-new.php:28
+msgid "Start Full Reindex"
+msgstr "شروع ایندکس کردن مجدد"
 
-#: includes/class-admin.php:365
-msgid ""
-"Check specific contexts to force plugins to run ONLY in those contexts. Use "
-"only when you know exactly what you're doing."
-msgstr ""
+#: admin/views/indexing-new.php:32
+msgid "Abort"
+msgstr "لغو"
 
-#: includes/class-admin.php:409
-msgid "Check the dashboard to see performance improvements"
-msgstr ""
+#: admin/views/indexing-new.php:39
+msgid "Starting..."
+msgstr "در حال شروع..."
 
-#: admin/views/settings.php:33
-msgid "Checking..."
-msgstr ""
+#: admin/views/indexing-new.php:51 admin/views/settings.php:169
+msgid "Index Management"
+msgstr "مدیریت ایندکس"
 
-#: admin/views/settings.php:270
-msgid ""
-"Choose keyboard shortcut to open search modal (works on admin & frontend)"
-msgstr ""
+#: admin/views/indexing-new.php:53
+msgid "Manage your Manticore search index with these powerful tools"
+msgstr "ایندکس جستجوی منتی‌کور خود را با این ابزارهای قدرتمند مدیریت کنید"
 
-#: widgets/class-search-icon-widget.php:176
-msgid "Circle background"
-msgstr ""
+#: admin/views/indexing-new.php:62 admin/views/indexing-new.php:69
+msgid "Create Index"
+msgstr "ساختن ایندکس"
 
-#: includes/filters/class-filter-renderer.php:74
-msgid "Clear All"
-msgstr "پاک کردن همه"
+#: admin/views/indexing-new.php:65
+msgid "Create a new search index with multi-language support"
+msgstr "یک ایندکس جستجوی جدید با پشتیبانی از چندزبانگی ایجاد کنید"
 
-#: includes/filters/class-filter-manager.php:168
-msgid "Clear All Filters"
-msgstr ""
+#: admin/views/indexing-new.php:76 admin/views/indexing-new.php:83
+msgid "Truncate Index"
+msgstr "خالی کردن ایندکس"
 
-#: includes/class-admin.php:195
-msgid "Clear Log"
-msgstr "پاک کردن لاگ"
+#: admin/views/indexing-new.php:79
+msgid "Remove all indexed data and clear the entire search index"
+msgstr "حذف تمام داده‌های ایندکس شده و پاک‌سازی کامل ایندکس جستجو"
 
-#: templates/search-box.php:42 templates/search-modal.php:48
-msgid "Clear search"
-msgstr ""
+#: admin/views/indexing-new.php:90 admin/views/indexing-new.php:97
+msgid "Optimize Index"
+msgstr "بهینه‌سازی ایندکس"
 
-#: templates/search-modal.php:74
-msgid "Close"
-msgstr "بستن"
+#: admin/views/indexing-new.php:93
+msgid "Optimize the index for better query performance and reduced disk usage"
+msgstr "بهینه‌سازی ایندکس برای بهبود عملکرد کوئری‌ها و کاهش استفاده از دیسک"
 
-#: templates/search-modal.php:17
-msgid "Close search"
-msgstr ""
+#: admin/views/indexing-new.php:105
+msgid "Indexing Statistics"
+msgstr "آمار ایندکس‌ها"
 
-#: admin/views/settings.php:704
-msgid "Combo (Attributes + Categories + Price) - Recommended"
-msgstr ""
+#: admin/views/indexing-new.php:114
+msgid "Post Type"
+msgstr "نوع نوشته"
 
-#: admin/views/settings.php:717
-msgid "Combo:"
-msgstr ""
+#: admin/views/indexing-new.php:115
+msgid "Indexed"
+msgstr "ایندکس شده"
 
-#: admin/views/settings.php:693
-msgid "Compatibility:"
-msgstr ""
+#: admin/views/indexing-new.php:116
+msgid "Total"
+msgstr "کل"
 
-#: admin/views/settings.php:113
-msgid "Configure connection to your Manticore Search server"
-msgstr ""
-
-#: includes/class-admin.php:259
-msgid ""
-"Configure which plugins run in specific contexts. Admin contexts are handled "
-"automatically."
-msgstr ""
+#: admin/views/indexing-new.php:117
+msgid "Progress"
+msgstr "پیشرفت"
 
 #: admin/views/settings.php:20
 msgid "Configure your search engine for optimal performance"
 msgstr "موتور جستجوی خود را برای عملکرد بهینه پیکربندی کنید"
 
-#: admin/views/settings.php:71
-msgid "Connection"
-msgstr ""
-
 #: admin/views/settings.php:31
 msgid "Connection:"
-msgstr ""
+msgstr "اتصال:"
 
-#: admin/views/settings.php:375
-msgid "Content Weight"
-msgstr ""
+#: admin/views/settings.php:33
+msgid "Checking..."
+msgstr "در حال بررسی..."
 
-#: includes/class-admin.php:266
-msgid "Context Types:"
+#: admin/views/settings.php:37
+msgid "Documents:"
+msgstr "اسناد:"
+
+#: admin/views/settings.php:39 admin/views/settings.php:45
+#: includes/filters/class-filter-manager.php:166
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+#: admin/views/settings.php:43
+msgid "Index Size:"
+msgstr "اندازه ایندکس:"
+
+#: admin/views/settings.php:51
+msgid "Index:"
+msgstr "ایندکس:"
+
+#: admin/views/settings.php:57
+msgid "Server:"
+msgstr "سرور:"
+
+#: admin/views/settings.php:71
+msgid "Connection"
+msgstr "اتصال"
+
+#: admin/views/settings.php:75
+msgid "General"
+msgstr "عمومی"
+
+#: admin/views/settings.php:79
+msgid "Relevance"
+msgstr "ارتباط"
+
+#: admin/views/settings.php:83
+msgid "AJAX Search"
+msgstr "جستجوی ایجکس"
+
+#: admin/views/settings.php:87
+msgid "Performance"
+msgstr "عملکرد"
+
+#: admin/views/settings.php:91
+msgid "Admin Features"
+msgstr "امکانات پیشخوان"
+
+#: admin/views/settings.php:95
+msgid "Related Products"
+msgstr "محصولات مرتبط"
+
+#: admin/views/settings.php:99
+msgid "Integration"
+msgstr "یکپارچه‌سازی"
+
+#: admin/views/settings.php:112
+msgid "Manticore Connection"
+msgstr "اتصال منتی‌کور"
+
+#: admin/views/settings.php:113
+msgid "Configure connection to your Manticore Search server"
+msgstr "پیکربندی اتصال به سرور منتی‌کور شما"
+
+#: admin/views/settings.php:119
+msgid "Host Address"
+msgstr "آدرس میزبان"
+
+#: admin/views/settings.php:124
+msgid "IP address of your Manticore Search server"
+msgstr "آدرس IP سرور Manticore Search شما"
+
+#: admin/views/settings.php:129
+msgid "Port Number"
+msgstr "شماره پورت"
+
+#: admin/views/settings.php:134
+msgid "MySQL protocol port (default: 9306)"
+msgstr "پورت پروتکل MySQL (پیش‌فرض: 9306)"
+
+#. translators: %s: auto-generated index name
+#: admin/views/settings.php:149
+#, php-format
+msgid "Name of the Manticore search index. Auto-generated unique name: %s"
+msgstr "نام ایندکس جستجوی منتی‌کور. نام یکتای تولیدشده به صورت خودکار: %s"
+
+#: admin/views/settings.php:161
+msgid "Test Connection"
+msgstr "آزمایش اتصال"
+
+#: admin/views/settings.php:170
+msgid "Manage your search index and reindex products"
+msgstr "ایندکس جستجوی خود را مدیریت و محصولات را دوباره ایندکس کنید"
+
+#: admin/views/settings.php:177
+msgid "Rebuild Index Now"
+msgstr "همین حالا ایندکس را بازسازی کنید"
+
+#: admin/views/settings.php:181
+msgid "Abort Rebuild"
+msgstr "لغو بازسازی"
+
+#: admin/views/settings.php:198
+msgid "When to rebuild:"
+msgstr "زمان بازسازی:"
+
+#: admin/views/settings.php:200
+msgid "After changing index settings"
+msgstr "پس از تغییر تنظیمات ایندکس"
+
+#: admin/views/settings.php:201
+msgid "If search results seem outdated"
+msgstr "اگر نتایج جستجو قدیمی به نظر می‌رسند"
+
+#: admin/views/settings.php:202
+msgid "After bulk product imports"
+msgstr "پس از درون‌ریزی دسته‌جمعی محصولات"
+
+#: admin/views/settings.php:205
+msgid ""
+"Note: Auto-indexing keeps your index up-to-date automatically. Manual "
+"rebuilds are rarely needed!"
 msgstr ""
+"توجه: ایندکس خودکار، ایندکس شما را به‌طور خودکار به‌روز نگه می‌دارد. بازسازی "
+"دستی به ندرت مورد نیاز است!"
+
+#: admin/views/settings.php:215
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+#: admin/views/settings.php:219
+msgid "Enable MantiLoad"
+msgstr "فعال‌سازی منتی‌لود"
+
+#: admin/views/settings.php:224
+msgid "Activate search functionality"
+msgstr "فعال‌سازی قابلیت جستجو"
+
+#: admin/views/settings.php:230
+msgid "Post Types"
+msgstr "انواع نوشته"
+
+#: admin/views/settings.php:243
+msgid "Select which content types to include in search"
+msgstr "انتخاب کنید که چه نوع‌های محتوایی در جستجو گنجانده شوند"
+
+#: admin/views/settings.php:248
+msgid "Instant Search"
+msgstr "جستجوی فوری"
+
+#: admin/views/settings.php:253
+msgid "Show results as user types"
+msgstr "نمایش نتایج همزمان با تایپ کاربر"
+
+#: admin/views/settings.php:259
+msgid "Keyboard Shortcut"
+msgstr "میانبر صفحه‌کلید"
+
+#: admin/views/settings.php:270
+msgid ""
+"Choose keyboard shortcut to open search modal (works on admin & frontend)"
+msgstr ""
+"میانبر صفحه‌کلید برای باز کردن پنجره جستجو را انتخاب کنید (در پیشخوان و "
+"پیش‌نمایش کار می‌کند)"
+
+#: admin/views/settings.php:271
+msgid ""
+"Tip: Change this if WordPress or another plugin uses Ctrl+K in the future"
+msgstr ""
+"نکته: اگر وردپرس یا افزونه دیگری در آینده از Ctrl+K استفاده کرد، این را "
+"تغییر دهید"
+
+#: admin/views/settings.php:278
+msgid "Stock Priority"
+msgstr "اولویت براساس موجودی"
+
+#: admin/views/settings.php:283
+msgid "Show in-stock products first"
+msgstr "ابتدا محصولات موجود در انبار را نمایش دهید"
+
+#: admin/views/settings.php:285
+msgid "Push out-of-stock items to the end regardless of sort order"
+msgstr "صرف نظر از نوع مرتب‌سازی، اقلام ناموجود را به انتها منتقل کنید"
+
+#: admin/views/settings.php:290
+msgid "Search Logging"
+msgstr "لاگ‌کردن جستجوها"
+
+#: admin/views/settings.php:295
+msgid "Log queries for analytics"
+msgstr "لاگ کوئری‌ها برای تحلیل آماری"
+
+#: admin/views/settings.php:301
+msgid "Batch Size"
+msgstr "تعداد آیتم برای ایندکس"
+
+#: admin/views/settings.php:306
+msgid "Posts per batch (higher = faster, more memory)"
+msgstr "تعداد آیتم (بیشتر = سریع‌تر، نیازمند رم بیشتر)"
+
+#: admin/views/settings.php:311
+msgid "Index Product Content"
+msgstr "ایندکس محتوای محصول"
+
+#: admin/views/settings.php:316
+msgid "Index product descriptions and excerpts in search"
+msgstr "ایندکس کردن توضیحات و چکیده محصولات در جستجو"
+
+#: admin/views/settings.php:349
+msgid "Search Relevance Weights"
+msgstr "تناسب در جستجو"
 
 #: admin/views/settings.php:350
 msgid ""
 "Control how different fields affect search ranking (higher = more important)"
 msgstr ""
+"کنترل کنید که چگونه فیلدهای مختلف بر رتبه‌بندی جستجو تأثیر می‌گذارند (بالاتر = "
+"مهم‌تر)"
 
-#: includes/class-admin.php:142
-msgid "Control the overall behavior of Lean"
-msgstr ""
+#: admin/views/settings.php:357
+msgid "Title Weight"
+msgstr "عنوان"
 
-#: includes/class-admin.php:389
-msgid ""
-"Core plugins (WooCommerce, security, caching) are always allowed to run, "
-"even with manual settings."
-msgstr ""
+#: admin/views/settings.php:366
+msgid "SKU Weight"
+msgstr "SKU"
 
-#: admin/views/indexing-new.php:65
-msgid "Create a new search index with multi-language support"
-msgstr ""
+#: admin/views/settings.php:375
+msgid "Content Weight"
+msgstr "محتوا"
 
-#: admin/views/indexing-new.php:62 admin/views/indexing-new.php:69
-msgid "Create Index"
-msgstr ""
+#: admin/views/settings.php:384
+msgid "Categories Weight"
+msgstr "دسته‌ها"
 
-#: includes/class-admin.php:278 includes/class-admin.php:321
-msgid "Cron"
-msgstr ""
+#: admin/views/settings.php:393
+msgid "Tags Weight"
+msgstr "برچسب‌ها"
 
-#: includes/class-admin.php:123
-msgid "Current Context:"
-msgstr ""
-
-#: admin/views/settings.php:924
-msgid "Custom CSS"
-msgstr ""
-
-#: admin/views/settings.php:810 admin/views/settings.php:889
-msgid "Custom CSS class"
-msgstr ""
-
-#: admin/views/settings.php:790
-msgid "Custom label text"
-msgstr ""
-
-#: admin/views/settings.php:929
-msgid "Custom Styles"
-msgstr ""
-
-#: includes/filters/class-filter-renderer.php:374
-msgid "Customer Rating"
-msgstr ""
-
-#: includes/class-admin.php:180
-msgid "Debug & Testing"
-msgstr ""
-
-#: includes/class-admin.php:488
-msgid "Debug log cleared!"
-msgstr ""
-
-#: includes/class-admin.php:165
-msgid "Debug Mode"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:175
-msgid "Default (no background)"
-msgstr ""
-
-#: admin/views/settings.php:501
-msgid "Display product categories and tags above search results (like Amazon)"
-msgstr ""
-
-#: admin/views/settings.php:835
-msgid ""
-"Displays a complete search box with autocomplete dropdown. Great for search "
-"pages or sidebars!"
-msgstr ""
-
-#: admin/views/settings.php:766
-msgid ""
-"Displays a search icon that opens a full-screen modal. Perfect for headers!"
-msgstr ""
-
-#: admin/views/settings.php:37
-msgid "Documents:"
-msgstr ""
-
-#: admin/views/settings.php:570
-msgid "Drop-In ElasticPress-Style Integration!"
-msgstr ""
-
-#: admin/views/settings.php:742
-msgid "Elementor Pro, Divi, WPBakery, Beaver Builder"
-msgstr ""
-
-#: admin/views/settings.php:533
-msgid "Enable category query caching"
-msgstr ""
-
-#: admin/views/settings.php:635
-msgid "Enable fast order & customer search in admin"
-msgstr ""
-
-#: includes/class-admin.php:152
-msgid "Enable Lean Optimization"
-msgstr ""
-
-#: admin/views/settings.php:618
-msgid "Enable lightning-fast admin search"
-msgstr ""
-
-#: admin/views/settings.php:219
-msgid "Enable MantiLoad"
-msgstr ""
-
-#: admin/views/settings.php:682
-msgid "Enable Related Products"
-msgstr ""
-
-#: includes/class-admin.php:79
-msgid "Error saving settings"
-msgstr ""
-
-#: includes/class-admin.php:299
-msgid "Essential"
-msgstr ""
-
-#: includes/class-admin.php:388
-msgid "Essential Plugins Are Protected"
-msgstr ""
-
-#: admin/views/settings.php:818 admin/views/settings.php:897
-msgid "Examples:"
-msgstr ""
-
-#: includes/filters/class-filter-widget.php:97
-msgid "Examples: category, price, pa_brand, pa_color, rating, stock, on_sale"
-msgstr ""
+#: admin/views/settings.php:402
+msgid "Attributes Weight"
+msgstr "ویژگی‌ها"
 
 #: admin/views/settings.php:414
 msgid "Exclude Attributes from Search"
+msgstr "حذف ویژگی‌ها از جستجو"
+
+#: admin/views/settings.php:438
+msgid "No product attributes found"
+msgstr "هیچ ویژگی محصولی پیدا نشد"
+
+#: admin/views/settings.php:443
+msgid ""
+"Select attributes to exclude from search results. These attributes will "
+"still be indexed for filters but won't affect search relevance."
 msgstr ""
+"ویژگی‌هایی را برای حذف از نتایج جستجو انتخاب کنید. این ویژگی‌ها همچنان برای "
+"فیلترها ایندکس خواهند شد اما بر اولویت بخشی به نتایج جستجو تأثیری نخواهند "
+"داشت."
+
+#: admin/views/settings.php:447
+msgid "Use Case:"
+msgstr "موارد استفاده:"
 
 #: admin/views/settings.php:448
 msgid ""
@@ -468,1087 +935,1065 @@ msgid ""
 "searching for \"red\" or \"large\" to get results based on those attributes. "
 "Perfect for stores where attribute values might conflict with product names."
 msgstr ""
-
-#: includes/class-admin.php:215
-msgid "Executed:"
-msgstr ""
-
-#: admin/views/settings.php:713
-msgid "Fabric + Category - Perfect for Fashion"
-msgstr ""
-
-#: admin/views/settings.php:720
-msgid "Fabric + Category:"
-msgstr ""
-
-#: admin/class-admin-ajax.php:155
-msgid "Failed to create index. Check that Manticore is running and accessible."
-msgstr ""
-"ایجاد ایندکس شکست خورد. بررسی کنید که Manticore در حال اجرا و قابل دسترسی "
-"است."
-
-#. translators: %s: index name
-#: admin/class-admin-ajax.php:230
-#, php-format
-msgid "Failed to optimize index \"%s\""
-msgstr ""
-
-#: includes/filters/class-filter-ajax.php:98
-msgid "Failed to retrieve products"
-msgstr ""
-
-#. translators: %s: index name
-#: admin/class-admin-ajax.php:194
-#, php-format
-msgid "Failed to truncate index \"%s\""
-msgstr ""
-
-#: includes/filters/class-filter-renderer.php:71
-#: includes/filters/class-filter-widget.php:71
-msgid "Filter Products"
-msgstr ""
-
-#: includes/filters/class-filter-widget.php:88
-msgid "Filter Types (comma-separated):"
-msgstr ""
-
-#: includes/class-admin.php:225
-msgid "Filtered Plugins:"
-msgstr ""
-
-#: admin/views/settings.php:719
-msgid ""
-"Finds alternatives at similar price point. Perfect for competitive products."
-msgstr ""
-
-#: admin/views/settings.php:717
-msgid ""
-"Finds products with similar attributes (color, brand, size), same category, "
-"and similar price (±30%). Most intelligent!"
-msgstr ""
-
-#: admin/views/settings.php:718
-msgid "Focuses on product characteristics. Great for fashion/apparel stores."
-msgstr ""
-
-#: admin/views/settings.php:914
-msgid "For Elementor: Use \"Shortcode\" widget"
-msgstr ""
-
-#: admin/views/settings.php:915
-msgid ""
-"For PHP templates: <?php echo do_shortcode('[mantiload_search_icon]'); ?>"
-msgstr ""
-
-#: admin/views/settings.php:913
-msgid ""
-"For WoodMart Header Builder: Use \"HTML Block\" element and paste shortcode"
-msgstr ""
-
-#: includes/class-admin.php:270 includes/class-admin.php:313
-msgid "Frontend"
-msgstr ""
-
-#: admin/views/indexing-new.php:20
-msgid "Full Reindex"
-msgstr ""
-
-#: admin/views/settings.php:639
-msgid "Game Changer!"
-msgstr ""
-
-#: admin/views/settings.php:75
-msgid "General"
-msgstr ""
-
-#: admin/views/settings.php:215 includes/class-admin.php:140
-msgid "General Settings"
-msgstr ""
-
-#: admin/views/settings.php:119
-msgid "Host Address"
-msgstr ""
-
-#: admin/views/settings.php:575 admin/views/settings.php:738
-msgid "How it works:"
-msgstr ""
-
-#: includes/class-admin.php:342
-msgid "How Lean Works"
-msgstr ""
-
-#. Plugin URI of the plugin
-#. Author URI of the plugin
-#: mantiload.php
-msgid "https://mantiload.com/"
-msgstr "https://mantiload.com/"
-
-#: widgets/class-search-icon-widget.php:118
-msgid "Icon only (no label)"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:153
-msgid "Icon size:"
-msgstr ""
-
-#: admin/views/settings.php:780
-msgid "Icon size: small, medium, large"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:168
-msgid "Icon style:"
-msgstr ""
-
-#: admin/views/settings.php:785
-msgid "Icon style: default, circle, rounded"
-msgstr ""
-
-#: admin/views/settings.php:579
-msgid "If disabled, you can still use manual template integration"
-msgstr ""
-
-#: admin/views/settings.php:201
-msgid "If search results seem outdated"
-msgstr ""
-
-#: includes/class-admin.php:382
-msgid ""
-"If you check contexts for essential plugins (like WooCommerce, security "
-"plugins), they might not load when needed, breaking your site functionality."
-msgstr ""
-
-#: includes/class-ajax-search.php:132
-msgid "in"
-msgstr "در"
-
-#: includes/filters/class-filter-ajax.php:372
-#: includes/filters/class-filter-renderer.php:417
-msgid "In Stock"
-msgstr ""
-
-#: includes/class-admin.php:118
-msgid "Inactive"
-msgstr ""
-
-#. translators: %s: index name
-#: admin/class-admin-ajax.php:226
-#, php-format
-msgid "Index \"%s\" optimized successfully"
-msgstr ""
-
-#. translators: %s: index name
-#: admin/class-admin-ajax.php:190
-#, php-format
-msgid "Index \"%s\" truncated successfully"
-msgstr ""
-
-#: admin/class-admin-ajax.php:152
-msgid ""
-"Index created successfully with multi-language support! Now you can start "
-"indexing."
-msgstr ""
-"ایندکس با موفقیت با پشتیبانی چند زبانه ایجاد شد! اکنون می‌توانید شروع به "
-"ایندکس کردن کنید."
-
-#: admin/views/indexing-new.php:51 admin/views/settings.php:169
-msgid "Index Management"
-msgstr ""
-
-#: admin/views/settings.php:139
-msgid "Index Name"
-msgstr ""
-
-#: admin/views/settings.php:630
-msgid "Index Orders & Customers"
-msgstr ""
-
-#: admin/views/settings.php:311
-msgid "Index Product Content"
-msgstr ""
-
-#: admin/views/settings.php:316
-msgid "Index product descriptions and excerpts in search"
-msgstr ""
-
-#: admin/views/settings.php:43
-msgid "Index Size:"
-msgstr ""
-
-#: admin/views/settings.php:25
-msgid "Index Status"
-msgstr "وضعیت ایندکس"
-
-#: admin/views/settings.php:640
-msgid ""
-"Index WooCommerce orders and customers for lightning-fast admin search. Find "
-"any order by number, customer name, email, or phone instantly (5-15ms vs 500-"
-"2000ms with WordPress). Press Cmd+K/Ctrl+K and search for orders #12345 or "
-"customer email!"
-msgstr ""
-
-#: admin/views/settings.php:51
-msgid "Index:"
-msgstr ""
-
-#: admin/views/indexing-new.php:115
-msgid "Indexed"
-msgstr ""
-
-#: admin/views/indexing-new.php:13
-msgid "Indexing"
-msgstr ""
-
-#: admin/views/indexing-new.php:105
-msgid "Indexing Statistics"
-msgstr ""
-
-#: admin/views/settings.php:248
-msgid "Instant Search"
-msgstr ""
-
-#: admin/views/settings.php:99
-msgid "Integration"
-msgstr ""
-
-#: admin/views/settings.php:692
-msgid "Intelligence:"
-msgstr ""
-
-#: admin/views/settings.php:576
-msgid "Intercepts queries using WordPress posts_pre_query hook"
-msgstr ""
-
-#: admin/views/settings.php:124
-msgid "IP address of your Manticore Search server"
-msgstr ""
-
-#: admin/views/settings.php:259
-msgid "Keyboard Shortcut"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:139
-msgid "Label text:"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:162
-msgid "Large (32px)"
-msgstr ""
-
-#: includes/class-admin.php:348
-msgid ""
-"Lean makes plugins \"lazy\" - they only execute when actually needed. "
-"Instead of running on every page load, plugins conditionally execute based "
-"on the current request context (frontend, AJAX, cron)."
-msgstr ""
-
-#: includes/class-admin.php:109
-msgid "Lean Settings"
-msgstr ""
-
-#: includes/class-admin.php:356
-msgid ""
-"Leave all checkboxes unchecked. Lean uses AI-powered analysis to determine "
-"when plugins should run based on their purpose and the current request type."
-msgstr ""
-
-#. Description of the plugin
-#: mantiload.php
-msgid ""
-"Lightning-fast search and filtering powered by Manticore Search. Optimized "
-"for WooCommerce with beautiful UI, advanced filters, and sub-millisecond "
-"search responses."
-msgstr ""
-"جستجوی فوق سریع و فیلترینگ powered by Manticore Search. بهینه شده برای "
-"WooCommerce با رابط کاربری زیبا، فیلترهای پیشرفته، و پاسخ‌های جستجوی زیر "
-"میلی ثانیه."
-
-#: admin/views/indexing-new.php:15
-msgid "Lightning-fast search indexing powered by Manticore Search"
-msgstr ""
-
-#: admin/views/settings.php:676
-msgid ""
-"Lightning-fast, intelligent related products that understand attributes, "
-"categories, and price ranges"
-msgstr ""
-
-#: admin/views/settings.php:39 admin/views/settings.php:45
-#: includes/filters/class-filter-manager.php:166
-msgid "Loading..."
-msgstr ""
-
-#: includes/class-admin.php:166
-msgid "Log plugin execution decisions for testing and analysis"
-msgstr ""
-
-#: admin/views/settings.php:295
-msgid "Log queries for analytics"
-msgstr ""
-
-#: admin/views/indexing-new.php:53
-msgid "Manage your Manticore search index with these powerful tools"
-msgstr ""
-
-#: admin/views/settings.php:170
-msgid "Manage your search index and reindex products"
-msgstr ""
-
-#: admin/class-admin-ajax.php:178 admin/class-admin-ajax.php:217
-msgid "Manticore client not available"
-msgstr ""
-
-#: admin/views/settings.php:112
-msgid "Manticore Connection"
-msgstr ""
-
-#. Author of the plugin
-#: mantiload.php
-msgid "MantiLoad"
-msgstr "منتی‌لود"
-
-#. Plugin Name of the plugin
-#: mantiload.php
-msgid "MantiLoad - Ultra-Fast Search & Filter"
-msgstr "مانتی‌لود - جستجوی فوق سریع و فیلتر"
-
-#: admin/views/settings.php:739
-msgid ""
-"MantiLoad automatically hooks into WooCommerce's related products system. No "
-"code changes needed! Works with:"
-msgstr ""
-
-#: includes/filters/class-filter-widget.php:28
-msgid "MantiLoad Filters"
-msgstr ""
-
-#: mantiload.php:667
-msgid "MantiLoad requires either mysqli or PDO MySQL extension."
-msgstr ""
-
-#. translators: %s: current PHP version
-#: mantiload.php:660
-#, php-format
-msgid "MantiLoad requires PHP 7.4 or higher. You are running PHP %s."
-msgstr ""
-
-#: includes/class-search-widget.php:23
-msgid "MantiLoad Search"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:27
-msgid "MantiLoad Search Icon"
-msgstr ""
-
-#: includes/class-admin.php:415
-msgid "Manual configuration is only needed in specific cases:"
-msgstr ""
-
-#: admin/views/settings.php:692
-msgid "Matches product attributes, categories, price range, and more"
-msgstr ""
-
-#: admin/views/settings.php:700
-msgid "Matching Algorithm"
-msgstr ""
-
-#: admin/views/settings.php:506
-msgid "Max Categories"
-msgstr ""
-
-#: admin/views/settings.php:484
-msgid "Max Results"
-msgstr ""
-
-#: admin/views/settings.php:511
-msgid "Maximum categories to show in dropdown"
-msgstr ""
-
-#: admin/views/settings.php:489
-msgid "Maximum results in dropdown"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:161
-msgid "Medium (24px)"
-msgstr ""
+"ویژگی‌هایی مانند «رنگ» یا «سایز» را حذف کنید اگر نمی‌خواهید مشتریان با جستجوی "
+"«قرمز» یا «بزرگ» بر اساس آن ویژگی‌ها نتایجی دریافت کنند. برای فروشگاه‌هایی که "
+"مقادیر ویژگی‌ها ممکن است با نام محصولات تداخل داشته باشند، مناسب است."
+
+#: admin/views/settings.php:460
+msgid "AJAX Search Settings"
+msgstr "تنظیمات جستجوی ایجکس"
+
+#: admin/views/settings.php:464
+msgid "Search Delay"
+msgstr "تأخیر در جستجو"
 
 #: admin/views/settings.php:469
 msgid "Milliseconds to wait before searching (debounce)"
-msgstr ""
+msgstr "میلی‌ثانیه تأخیر قبل از انجام جستجو (debounce)"
 
 #: admin/views/settings.php:474
 msgid "Min Characters"
-msgstr ""
+msgstr "حداقل کاراکترها"
 
 #: admin/views/settings.php:479
 msgid "Minimum characters to trigger search"
-msgstr ""
+msgstr "حداقل کاراکترهای مورد نیاز برای فعال‌سازی جستجو"
 
-#: widgets/class-search-icon-widget.php:29
+#: admin/views/settings.php:484
+msgid "Max Results"
+msgstr "حداکثر نتایج"
+
+#: admin/views/settings.php:489
+msgid "Maximum results in dropdown"
+msgstr "حداکثر تعداد نتایج در منوی کشویی"
+
+#: admin/views/settings.php:494
+msgid "Show Categories"
+msgstr "نمایش دسته‌ها"
+
+#: admin/views/settings.php:499
+msgid "Show matching categories in search dropdown"
+msgstr "نمایش دسته‌های مرتبط در منوی کشویی جستجو"
+
+#: admin/views/settings.php:501
+msgid "Display product categories and tags above search results (like Amazon)"
+msgstr "نمایش دسته‌بندی‌ها و برچسب‌های محصول در بالای نتایج جستجو (مانند آمازون)"
+
+#: admin/views/settings.php:506
+msgid "Max Categories"
+msgstr "حداکثر تعداد دسته‌ها"
+
+#: admin/views/settings.php:511
+msgid "Maximum categories to show in dropdown"
+msgstr "حداکثر تعداد دسته‌ها برای نمایش در منوی کشویی"
+
+#: admin/views/settings.php:521
+msgid "Performance & Caching"
+msgstr "عملکرد و کش"
+
+#: admin/views/settings.php:522
+msgid "Redis-powered caching for lightning-fast category pages"
+msgstr "کش مبتنی بر ردیس برای بارگذاری فوق‌سریع صفحه‌های دسته‌بندی"
+
+#: admin/views/settings.php:528
+msgid "Redis Query Cache"
+msgstr "کوئری کش ردیس"
+
+#: admin/views/settings.php:533
+msgid "Enable category query caching"
+msgstr "فعال‌سازی کش کوئری‌های دسته‌بندی"
+
+#: admin/views/settings.php:537
+msgid "433x Faster Category Pages!"
+msgstr "صفحه‌های دسته‌بندی ۴۳۳ برابر سریع‌تر!"
+
+#: admin/views/settings.php:538
 msgid ""
-"Mobile-friendly search icon that opens MantiLoad search box (perfect for "
-"mobile menus)"
+"Caches category product queries in Redis. Reduces query time from ~130ms to "
+"~0.3ms. Automatically invalidates when products are updated."
 msgstr ""
+"کوئری‌های دسته‌بندی محصولات را در ردیس کش می‌کند. زمان کوئری را از حدود ۱۳۰ "
+"میلی‌ثانیه به حدود ۰.۳ میلی‌ثانیه کاهش می‌دهد. با به‌روزرسانی محصولات، به‌طور "
+"خودکار بی‌اعتبار می‌شود."
 
-#: includes/class-admin.php:182
-msgid "Monitor Lean's optimization decisions"
-msgstr ""
+#: admin/views/settings.php:548
+msgid "Redis connected"
+msgstr "ردیس متصل شد"
 
-#: includes/class-admin.php:407
-msgid "Monitor your site after changes to ensure everything works"
-msgstr ""
+#: admin/views/settings.php:550 admin/views/settings.php:553
+msgid "Redis not available"
+msgstr "ردیس در دسترس نیست"
 
-#: includes/class-ajax-search.php:133
-msgid "ms"
-msgstr "میلی ثانیه"
+#: admin/views/settings.php:561
+msgid "Auto Query Interception"
+msgstr "رهگیری خودکار کوئری"
 
-#: admin/views/settings.php:134
-msgid "MySQL protocol port (default: 9306)"
-msgstr ""
+#: admin/views/settings.php:566
+msgid "Automatically intercept product archive queries"
+msgstr "رهگیری خودکار کوئری‌های بایگانی محصول"
 
-#. translators: %s: auto-generated index name
-#: admin/views/settings.php:149
-#, php-format
-msgid "Name of the Manticore search index. Auto-generated unique name: %s"
-msgstr ""
+#: admin/views/settings.php:570
+msgid "Drop-In ElasticPress-Style Integration!"
+msgstr "یکپارچه‌سازی بی‌دردسر به سبک الاستیک‌پرس!"
 
-#: templates/search-modal.php:72
-msgid "Navigate"
-msgstr ""
-
-#: includes/class-admin.php:243
-msgid "Navigate your site to see Lean's optimization decisions in action."
-msgstr ""
-
-#: includes/class-admin.php:360
-msgid "No configuration needed"
-msgstr ""
-
-#: includes/class-admin.php:242
-msgid "No Debug Data Yet"
-msgstr ""
-
-#: admin/views/settings.php:438
-msgid "No product attributes found"
-msgstr ""
-
-#: includes/filters/class-filter-manager.php:167 mantiload.php:1157
-msgid "No products found"
-msgstr ""
-
-#: includes/filters/class-filter-renderer.php:482
-msgid "No products found matching your selection."
-msgstr ""
-
-#: includes/class-admin-search.php:108 includes/class-ajax-search.php:128
-#: includes/class-ajax-search.php:164
-msgid "No results found"
-msgstr ""
-
-#: admin/views/settings.php:205
+#: admin/views/settings.php:571
 msgid ""
-"Note: Auto-indexing keeps your index up-to-date automatically. Manual "
-"rebuilds are rarely needed!"
+"Automatically routes WooCommerce product category, tag, and shop pages to "
+"Manticore. No theme modifications needed! Gracefully falls back to MySQL on "
+"errors."
 msgstr ""
+"به‌طور خودکار صفحه‌های دسته‌بندی محصول، برچسب و فروشگاه ووکامرس را به منتی‌کور "
+"هدایت می‌کند. بدون نیاز به تغییر در پوسته! در صورت بروز خطا، به‌طور ایمن به "
+"MySQL بازمی‌گردد."
 
-#: admin/views/settings.php:726
-msgid "Number of Products"
-msgstr ""
+#: admin/views/settings.php:575 admin/views/settings.php:917
+msgid "How it works:"
+msgstr "نحوه عملکرد:"
 
-#: admin/views/settings.php:731
-msgid "Number of related products to show (if your theme supports it)"
-msgstr ""
-
-#: includes/filters/class-filter-manager.php:171
-msgid "of"
-msgstr ""
-
-#: includes/filters/class-filter-ajax.php:374
-#: includes/filters/class-filter-renderer.php:419
-msgid "On Backorder"
-msgstr ""
-
-#: includes/filters/class-filter-renderer.php:468
-msgid "On Sale"
-msgstr ""
+#: admin/views/settings.php:576
+msgid "Intercepts queries using WordPress posts_pre_query hook"
+msgstr "رهگیری کوئری‌ها با استفاده از هوک posts_pre_query وردپرس"
 
 #: admin/views/settings.php:577
 msgid "Only affects main product archive queries (shop, categories, tags)"
 msgstr ""
+"فقط کوئری‌های اصلی بایگانی محصولات (فروشگاه، دسته‌ها، برچسب‌ها) را تحت تأثیر "
+"قرار می‌دهد"
 
-#: includes/class-admin.php:406
-msgid "Only use manual control for specific performance issues"
-msgstr ""
-
-#: mantiload.php:813 templates/search-modal.php:88
-#: widgets/class-search-icon-widget.php:65
-msgid "Open search"
-msgstr ""
-
-#: admin/views/indexing-new.php:90 admin/views/indexing-new.php:97
-msgid "Optimize Index"
-msgstr ""
-
-#: admin/views/settings.php:657
-msgid "Optimize product admin search"
-msgstr ""
-
-#: admin/views/indexing-new.php:93
-msgid "Optimize the index for better query performance and reduced disk usage"
-msgstr ""
-
-#: includes/class-admin.php:219
-msgid "Optimized:"
-msgstr ""
-
-#: includes/filters/class-filter-ajax.php:373
-#: includes/filters/class-filter-renderer.php:418
-msgid "Out of Stock"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:120
-msgid "Perfect for mobile menus and navigation bars"
-msgstr ""
-
-#: admin/views/settings.php:87
-msgid "Performance"
-msgstr ""
-
-#: admin/views/settings.php:521
-msgid "Performance & Caching"
-msgstr ""
-
-#: includes/class-admin.php:420
-msgid "Performance monitoring shows a plugin causing issues"
-msgstr ""
-
-#: admin/views/settings.php:691
-msgid "Performance:"
-msgstr ""
-
-#: widgets/class-search-widget.php:23
-msgctxt "placeholder"
-msgid "Search..."
-msgstr ""
-
-#: admin/views/settings.php:849
-msgid "Placeholder text"
-msgstr ""
-
-#: includes/class-search-widget.php:88
-msgid "Placeholder Text:"
-msgstr ""
-
-#: includes/class-admin.php:256
-msgid "Plugin Context Control"
-msgstr ""
-
-#: admin/views/settings.php:129
-msgid "Port Number"
-msgstr ""
-
-#: admin/views/indexing-new.php:114
-msgid "Post Type"
-msgstr ""
-
-#: admin/views/settings.php:230
-msgid "Post Types"
-msgstr ""
-
-#: admin/views/settings.php:854
-msgid "Post types to search (comma-separated)"
-msgstr ""
-
-#: admin/views/settings.php:306
-msgid "Posts per batch (higher = faster, more memory)"
-msgstr ""
-
-#: templates/search-modal.php:77
-msgid "Powered by"
-msgstr ""
-
-#: admin/views/settings.php:623
-msgid ""
-"Press Cmd+K (Mac) or Ctrl+K (Windows) to instantly search products, orders, "
-"and posts. Sub-50ms response times!"
-msgstr ""
-
-#: includes/class-ajax-search.php:130
-msgid "Press Enter to search"
-msgstr ""
-
-#: admin/views/settings.php:710
-msgid "Price & Categories (Ignores Attributes)"
-msgstr ""
-
-#: admin/views/settings.php:719
-msgid "Price & Categories:"
-msgstr ""
-
-#: includes/filters/class-filter-renderer.php:210
-msgid "Price Range"
-msgstr ""
-
-#: admin/views/settings.php:720
-msgid ""
-"Prioritizes fabric attribute matching (satin, lace, chiffon, etc.) within "
-"same category. Custom algorithm for fashion stores like Jovani."
-msgstr ""
-
-#: admin/views/settings.php:652
-msgid "Product List Optimization"
-msgstr ""
-
-#: includes/class-ajax-search.php:134
-#, fuzzy
-#| msgid "products"
-msgid "Products"
-msgstr "محصولات"
-
-#: includes/filters/class-filter-manager.php:172
-msgid "products"
-msgstr ""
-
-#: includes/filters/class-filter-renderer.php:88
-msgid "products found"
-msgstr ""
-
-#: admin/views/indexing-new.php:117
-msgid "Progress"
-msgstr ""
-
-#: admin/views/settings.php:285
-msgid "Push out-of-stock items to the end regardless of sort order"
-msgstr ""
-
-#: includes/class-admin.php:430
-msgid "Ready to save changes"
-msgstr ""
-
-#: admin/views/settings.php:177
-msgid "Rebuild Index Now"
-msgstr ""
-
-#: includes/class-admin.php:192
-msgid "Recent Execution Logs"
-msgstr ""
-
-#: admin/views/settings.php:916
-msgid ""
-"Recommended for headers: [mantiload_search_icon] for mobile-friendly "
-"experience"
-msgstr ""
-
-#: admin/views/settings.php:548
-msgid "Redis connected"
-msgstr ""
-
-#: admin/views/settings.php:550 admin/views/settings.php:553
-msgid "Redis not available"
-msgstr ""
-
-#: admin/views/settings.php:528
-msgid "Redis Query Cache"
-msgstr ""
-
-#: admin/views/settings.php:522
-msgid "Redis-powered caching for lightning-fast category pages"
-msgstr ""
-
-#: admin/views/indexing-new.php:21
-msgid "Reindex all products with categories, attributes, and filter data"
-msgstr ""
-
-#: admin/views/settings.php:95
-msgid "Related Products"
-msgstr ""
-
-#: admin/views/settings.php:79
-msgid "Relevance"
-msgstr ""
-
-#: admin/views/indexing-new.php:79
-msgid "Remove all indexed data and clear the entire search index"
-msgstr ""
-
-#: admin/views/settings.php:661
-msgid ""
-"Replace slow LIKE queries (300-500ms) with instant Manticore search (5-30ms) "
-"in Products > All Products"
-msgstr ""
-
-#: admin/views/settings.php:687
-msgid "Replace WooCommerce related products with MantiLoad"
-msgstr ""
-
-#: includes/class-admin.php:369
-msgid "Requires testing"
-msgstr ""
-
-#: includes/class-admin.php:435
-msgid "Reset to Auto"
-msgstr ""
-
-#: includes/class-ajax-search.php:131
-msgid "results"
-msgstr "نتیجه"
-
-#: admin/views/settings.php:607
-msgid "Revolutionary features that make WordPress admin blazing fast"
-msgstr ""
-
-#: includes/filters/class-filter-widget.php:30
-msgid "Revolutionary product filters powered by Manticore Search"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:177
-msgid "Rounded square"
-msgstr ""
+#: admin/views/settings.php:578
+msgid "Works alongside Redis cache for maximum performance"
+msgstr "همراه با کش ردیس برای حداکثر بهبود در عملکرد کار می‌کند"
 
-#: includes/class-admin.php:358
-msgid "Safe and reliable"
+#: admin/views/settings.php:579
+msgid "If disabled, you can still use manual template integration"
 msgstr ""
+"در صورت غیرفعال‌سازی، همچنان می‌توانید از یکپارچه‌سازی دستی قالب استفاده کنید"
 
-#: admin/views/settings.php:958
-msgid "Save All Settings"
-msgstr ""
-
-#: includes/class-admin.php:439
-msgid "Save Settings"
-msgstr ""
-
-#: includes/class-admin.php:77
-msgid "Saving..."
-msgstr ""
-
-#: includes/class-ajax-search.php:1139 includes/class-search-widget.php:50
-#: includes/class-search-widget.php:70 mantiload.php:733 mantiload.php:777
-#: templates/search-box.php:37 templates/search-modal.php:16
-#: templates/search-modal.php:42 templates/search-modal.php:94
-#: widgets/class-search-icon-widget.php:48
-#: widgets/class-search-icon-widget.php:105
-#: widgets/class-search-icon-widget.php:201
-msgid "Search"
-msgstr ""
-
-#: admin/views/settings.php:874
-msgid "Search box width (px, %, em, rem, vw)"
-msgstr ""
-
-#: admin/views/settings.php:864
-msgid "Search button text"
-msgstr ""
-
-#: admin/views/settings.php:464
-msgid "Search Delay"
-msgstr ""
-
-#: admin/views/settings.php:290
-msgid "Search Logging"
-msgstr ""
-
-#: includes/class-search-widget.php:94
-msgid "Search Post Types:"
-msgstr ""
-
-#: mantiload.php:814 widgets/class-search-icon-widget.php:66
-msgid "Search products"
-msgstr ""
-
-#: includes/class-ajax-search.php:126 includes/class-ajax-search.php:1136
-#: includes/class-search-widget.php:47 includes/class-search-widget.php:68
-#: mantiload.php:730 mantiload.php:830 mantiload.php:1247
-#: templates/search-modal.php:37 widgets/class-search-icon-widget.php:82
-msgid "Search products..."
-msgstr ""
-
-#: admin/views/settings.php:349
-msgid "Search Relevance Weights"
-msgstr ""
-
-#: templates/search-modal.php:66
-msgid "Search results"
-msgstr ""
-
-#: includes/class-admin-search.php:109 includes/class-ajax-search.php:127
-#: includes/class-ajax-search.php:165
-msgid "Searching..."
-msgstr ""
-
-#: templates/search-modal.php:73
-msgid "Select"
-msgstr ""
-
-#: admin/views/settings.php:443
-msgid ""
-"Select attributes to exclude from search results. These attributes will "
-"still be indexed for filters but won't affect search relevance."
-msgstr ""
-
-#: admin/views/settings.php:243
-msgid "Select which content types to include in search"
-msgstr ""
-
-#: admin/views/settings.php:57
-msgid "Server:"
-msgstr ""
-
-#: admin/views/settings.php:18
-msgid "Settings"
-msgstr "تنظیمات"
-
-#: includes/class-admin.php:471
-msgid "Settings saved successfully!"
-msgstr ""
-
-#: includes/class-admin.php:78
-msgid "Settings saved!"
-msgstr ""
-
-#: admin/views/settings.php:755
-msgid "Shortcodes for Header Builders"
-msgstr ""
-
-#: admin/views/settings.php:494
-msgid "Show Categories"
-msgstr ""
-
-#: admin/views/settings.php:283
-msgid "Show in-stock products first"
-msgstr ""
-
-#: admin/views/settings.php:795
-msgid "Show label next to icon: true/false"
-msgstr ""
-
-#: admin/views/settings.php:499
-msgid "Show matching categories in search dropdown"
-msgstr ""
-
-#: admin/views/settings.php:800
-msgid "Show product prices in results: true/false"
-msgstr ""
-
-#: admin/views/settings.php:879
-msgid "Show product prices: true/false"
-msgstr ""
-
-#: admin/views/settings.php:253
-msgid "Show results as user types"
-msgstr ""
-
-#: includes/class-search-widget.php:106
-msgid "Show search button"
-msgstr ""
-
-#: admin/views/settings.php:859
-msgid "Show search button: true/false"
-msgstr ""
-
-#: admin/views/settings.php:805
-msgid "Show stock status in results: true/false"
-msgstr ""
-
-#: admin/views/settings.php:884
-msgid "Show stock status: true/false"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:133
-msgid "Show text label next to icon"
-msgstr ""
-
-#: includes/filters/class-filter-manager.php:170
-msgid "Showing"
-msgstr ""
-
-#: admin/views/settings.php:366
-msgid "SKU Weight"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:160
-msgid "Small (20px)"
-msgstr ""
-
-#: includes/class-admin.php:111
-msgid "Smart Plugin Execution Control"
-msgstr ""
-
-#: admin/views/settings.php:675
-msgid "Smart Related Products"
-msgstr ""
-
-#: admin/views/indexing-new.php:28
-msgid "Start Full Reindex"
-msgstr ""
-
-#: includes/class-admin.php:405
-msgid "Start with automatic mode - it's safe and effective"
-msgstr ""
-
-#: admin/views/indexing-new.php:39
-msgid "Starting..."
-msgstr ""
-
-#: admin/views/settings.php:278
-msgid "Stock Priority"
-msgstr ""
-
-#: admin/views/settings.php:393
-msgid "Tags Weight"
-msgstr ""
-
-#: includes/class-admin.php:395
-msgid "Test Before Going Live"
-msgstr ""
-
-#: admin/views/settings.php:161
-msgid "Test Connection"
-msgstr ""
-
-#: admin/views/settings.php:622
-msgid "The FIRST EVER WordPress Admin Search!"
-msgstr ""
-
-#: admin/views/settings.php:271
-msgid ""
-"Tip: Change this if WordPress or another plugin uses Ctrl+K in the future"
-msgstr ""
-
-#: admin/views/settings.php:940
-msgid "Tips:"
-msgstr ""
-
-#: admin/views/settings.php:357
-msgid "Title Weight"
-msgstr ""
-
-#: includes/class-search-widget.php:81
-#: includes/filters/class-filter-widget.php:76
-msgid "Title:"
-msgstr ""
-
-#: admin/views/indexing-new.php:116
-msgid "Total"
-msgstr ""
-
-#: includes/class-admin.php:211
-msgid "Total Plugins:"
-msgstr ""
-
-#: admin/views/indexing-new.php:76 admin/views/indexing-new.php:83
-msgid "Truncate Index"
-msgstr ""
+#: admin/views/settings.php:585
+msgid "WooCommerce Filter Integration"
+msgstr "یکپارچه‌سازی با فیلتر ووکامرس"
 
 #: admin/views/settings.php:590
 msgid "Turbocharge layered nav filters"
-msgstr ""
-
-#: includes/class-search-widget.php:25
-msgid "Ultra-fast AJAX search powered by Manticore"
-msgstr ""
-
-#: admin/views/settings.php:911
-msgid "Usage Tips:"
-msgstr ""
-
-#: widgets/class-search-icon-widget.php:183
-msgid "Usage:"
-msgstr ""
-
-#: admin/views/settings.php:447
-msgid "Use Case:"
-msgstr ""
-
-#: admin/views/settings.php:941
-msgid ""
-"Use high specificity selectors (e.g., body .mantiload-inline-form) to "
-"override default styles"
-msgstr ""
+msgstr "تقویت فیلترهای ناوبری لایه‌ای"
 
 #: admin/views/settings.php:594
 msgid ""
 "Use Manticore to speed up WooCommerce & WoodMart layered nav filters (color, "
 "size, attributes, etc.). Works with existing filter widgets!"
 msgstr ""
+"از منتی‌کور برای سرعت بخشیدن به فیلترهای ناوبری لایه‌ای ووکامرس و وودمارت "
+"(رنگ، سایز، ویژگی‌ها و غیره) استفاده کنید. با ویجت‌های فیلتر موجود کار می‌کند!"
 
-#: includes/class-admin.php:408
-msgid "Use the \"Reset to Auto\" button if you're unsure"
+#: admin/views/settings.php:604
+msgid "Turbo Mode"
+msgstr "حالت توربو"
+
+#: admin/views/settings.php:605
+msgid ""
+"Disable unnecessary plugins during AJAX search for 5-10x faster responses"
 msgstr ""
+"غیرفعال‌سازی افزونه‌های غیرضروری در حین جستجوی ایجکس برای پاسخ‌های ۵-۱۰ برابر "
+"سریع‌تر"
 
-#: admin/views/settings.php:756
+#: admin/views/settings.php:611
+msgid "Enable Turbo Mode"
+msgstr "فعال‌سازی حالت توربو"
+
+#: admin/views/settings.php:616
+msgid "Selective plugin loading for AJAX search"
+msgstr "بارگذاری انتخابی افزونه‌ها برای جستجوی ایجکس"
+
+#: admin/views/settings.php:620
+msgid "🚀 5-10x Faster Search!"
+msgstr "🚀 جستجوی ۵-۱۰ برابر سریع‌تر!"
+
+#: admin/views/settings.php:621
+msgid ""
+"Only loads essential plugins during search requests. Other plugins are "
+"temporarily disabled for that request only."
+msgstr ""
+"فقط افزونه‌های ضروری را در حین درخواست‌های جستجو بارگذاری می‌کند. سایر افزونه‌ها "
+"فقط برای همان درخواست به طور موقت غیرفعال می‌شوند."
+
+#: admin/views/settings.php:629
+msgid "MU-Plugin Required"
+msgstr "افزونه MU مورد نیاز است."
+
+#: admin/views/settings.php:630
+msgid ""
+"Copy mantiload-turbo.php to wp-content/mu-plugins/ for Turbo Mode to work."
+msgstr ""
+"فایل mantiload-turbo.php را در مسیر wp-content/mu-plugins/ کپی کنید تا حالت "
+"توربو فعال شود."
+
+#: admin/views/settings.php:638
+msgid "Apply Turbo Mode To"
+msgstr "اعمال حالت توربو بر روی"
+
+#: admin/views/settings.php:648
+msgid "Frontend Search"
+msgstr "جستجوی فرانت‌اند"
+
+#: admin/views/settings.php:650
+msgid "AJAX search box, instant search dropdown"
+msgstr "جعبه جستجوی ایجکس، منوی کشویی جستجوی فوری"
+
+#: admin/views/settings.php:658
+msgid "Frontend Filters"
+msgstr "فیلترهای فرانت‌اند"
+
+#: admin/views/settings.php:660
+msgid "Product filtering, layered navigation, load more"
+msgstr "فیلتر کردن محصولات، ناوبری لایه‌ای، بارگذاری بیشتر"
+
+#: admin/views/settings.php:668 admin/views/settings.php:792
+msgid "Admin Search (Cmd/Ctrl+K)"
+msgstr "جستجو در پیشخوان (Cmd/Ctrl+K)"
+
+#: admin/views/settings.php:670
+msgid "Quick search in WordPress admin"
+msgstr "جستجوی سریع در پیشخوان وردپرس"
+
+#: admin/views/settings.php:676
+msgid ""
+"Select which MantiLoad actions should use Turbo Mode. Frontend Search is "
+"recommended for most sites."
+msgstr ""
+"انتخاب کنید کدام عملیات‌های منتی‌لود باید از حالت توربو استفاده کنند. جستجوی "
+"فرانت‌اند برای اکثر سایت‌ها توصیه می‌شود."
+
+#: admin/views/settings.php:682
+msgid "Additional Plugins to Keep"
+msgstr "افزونه‌های اضافی برای نگهداری"
+
+#: admin/views/settings.php:685
+msgid ""
+"MantiLoad and WooCommerce are always kept. Select any additional plugins "
+"needed for search:"
+msgstr ""
+"منتی‌لود و ووکامرس همیشه نگه داشته می‌شوند. هر افزونه اضافی مورد نیاز برای "
+"جستجو را انتخاب کنید:"
+
+#: admin/views/settings.php:719
+msgid "✓ Always Loaded:"
+msgstr "✓ همیشه بارگذاری می‌شوند:"
+
+#: admin/views/settings.php:729
+msgid "⚠ Recommended to Keep:"
+msgstr "⚠ برای نگهداری توصیه می‌شود:"
+
+#: admin/views/settings.php:745
+msgid "Other Plugins:"
+msgstr "افزونه‌های دیگر:"
+
+#: admin/views/settings.php:759
+msgid "Tip:"
+msgstr "نکته:"
+
+#: admin/views/settings.php:760
+msgid ""
+"Start with none selected. If search breaks, add plugins one by one to find "
+"which is needed."
+msgstr ""
+"ابتدا هیچ‌کدام را انتخاب نکنید. اگر جستجو دچار مشکل شد، افزونه‌ها را یکی یکی "
+"اضافه کنید تا بفهمید کدام مورد نیاز است."
+
+#: admin/views/settings.php:785
+msgid "Admin Superpowers"
+msgstr "قابلیت‌های فوق‌حرفه‌ای برای پیشخوان"
+
+#: admin/views/settings.php:786
+msgid "Revolutionary features that make WordPress admin blazing fast"
+msgstr "انقلابی در سرعت و عملکرد پیشخوان وردپرس"
+
+#: admin/views/settings.php:797
+msgid "Enable lightning-fast admin search"
+msgstr "فعال‌سازی جستجوی فوق‌سریع در پیشخوان"
+
+#: admin/views/settings.php:801
+msgid "The FIRST EVER WordPress Admin Search!"
+msgstr "اولین جستجوگر پیشخوان در تاریخ وردپرس!"
+
+#: admin/views/settings.php:802
+msgid ""
+"Press Cmd+K (Mac) or Ctrl+K (Windows) to instantly search products, orders, "
+"and posts. Sub-50ms response times!"
+msgstr ""
+"برای جستجوی فوری محصولات، سفارش‌ها و نوشته‌ها، کلیدهای Cmd+K (مک) یا Ctrl+K "
+"(ویندوز) را فشار دهید. زمان پاسخ کمتر از ۵۰ میلی‌ثانیه!"
+
+#: admin/views/settings.php:809
+msgid "Index Orders & Customers"
+msgstr "ایندکس سفارش‌ها و مشتریان"
+
+#: admin/views/settings.php:814
+msgid "Enable fast order & customer search in admin"
+msgstr "فعال‌سازی جستجوی سریع سفارش و مشتری در پیشخوان"
+
+#: admin/views/settings.php:818
+msgid "Game Changer!"
+msgstr "تحول آفرین!"
+
+#: admin/views/settings.php:819
+msgid ""
+"Index WooCommerce orders and customers for lightning-fast admin search. Find "
+"any order by number, customer name, email, or phone instantly (5-15ms vs "
+"500-2000ms with WordPress). Press Cmd+K/Ctrl+K and search for orders #12345 "
+"or customer email!"
+msgstr ""
+"سفارش‌ها و مشتریان ووکامرس را برای جستجوی فوق‌سریع در پیشخوان ایندکس کنید. هر "
+"سفارش را بر اساس شماره، نام مشتری، ایمیل یا تلفن فورا پیدا کنید (۵-۱۵ "
+"میلی‌ثانیه در مقابل ۵۰۰-۲۰۰۰ میلی‌ثانیه با وردپرس). کلیدهای Cmd+K/Ctrl+K را "
+"فشار دهید و سفارش #12345 یا ایمیل مشتری را جستجو کنید!"
+
+#: admin/views/settings.php:824
+msgid "⚠️ Important:"
+msgstr "⚠️ نکته مهم:"
+
+#: admin/views/settings.php:824
+msgid ""
+"After enabling this, you must rebuild the index to add orders and customers "
+"to Manticore."
+msgstr ""
+"پس از فعال‌سازی این گزینه، باید ایندکس را بازسازی کنید تا سفارش‌ها و مشتریان "
+"به منتی‌کور اضافه شوند."
+
+#: admin/views/settings.php:831
+msgid "Product List Optimization"
+msgstr "بهینه‌سازی فهرست محصولات"
+
+#: admin/views/settings.php:836
+msgid "Optimize product admin search"
+msgstr "بهینه‌سازی جستجوی محصولات در پیشخوان"
+
+#: admin/views/settings.php:840
+msgid ""
+"Replace slow LIKE queries (300-500ms) with instant Manticore search (5-30ms) "
+"in Products > All Products"
+msgstr ""
+"جایگزینی کوئری‌های نسبتا کند (۳۰۰-۵۰۰ میلی‌ثانیه) با جستجوی فوری منتی‌کور (۵-۳۰ "
+"میلی‌ثانیه) در بخش محصولات > همه محصولات"
+
+#: admin/views/settings.php:854
+msgid "Smart Related Products"
+msgstr "محصولات مرتبط هوشمند"
+
+#: admin/views/settings.php:855
+msgid ""
+"Lightning-fast, intelligent related products that understand attributes, "
+"categories, and price ranges"
+msgstr ""
+"محصولات مرتبط فوق‌سریع و هوشمند که ویژگی‌ها، دسته‌بندی‌ها و محدوده‌های قیمت را "
+"درک می‌کنند"
+
+#: admin/views/settings.php:861
+msgid "Enable Related Products"
+msgstr "فعال‌سازی محصولات مرتبط"
+
+#: admin/views/settings.php:866
+msgid "Replace WooCommerce related products with MantiLoad"
+msgstr "جایگزینی محصولات مرتبط ووکامرس با منتی‌لود"
+
+#: admin/views/settings.php:870
+msgid "Performance:"
+msgstr "عملکرد:"
+
+#: admin/views/settings.php:870
+msgid "20-30x faster than WooCommerce default (2-5ms vs 50-150ms)"
+msgstr ""
+"تا ۳۰ برابر سریع‌تر از حالت پیش‌فرض ووکامرس (۲-۵ میلی‌ثانیه در مقابل ۵۰-۱۵۰ "
+"میلی‌ثانیه)"
+
+#: admin/views/settings.php:871
+msgid "Intelligence:"
+msgstr "هوشمندی:"
+
+#: admin/views/settings.php:871
+msgid "Matches product attributes, categories, price range, and more"
+msgstr "ویژگی‌های محصول، دسته‌بندی‌ها، محدوده قیمت و موارد دیگر را مطابقت می‌دهد"
+
+#: admin/views/settings.php:872
+msgid "Compatibility:"
+msgstr "سازگاری:"
+
+#: admin/views/settings.php:872
+msgid "Works automatically with all themes, Elementor, Divi, and page builders"
+msgstr "به طور خودکار با تمام پوسته‌ها، المنتور، دیوی و صفحه‌سازها کار می‌کند"
+
+#: admin/views/settings.php:879
+msgid "Matching Algorithm"
+msgstr "الگوریتم تطبیق"
+
+#: admin/views/settings.php:883
+msgid "Combo (Attributes + Categories + Price) - Recommended"
+msgstr "ترکیبی (ویژگی‌ها + دسته‌بندی‌ها + قیمت) - پیشنهاد می‌شود"
+
+#: admin/views/settings.php:886
+msgid "Attributes & Categories (Ignores Price)"
+msgstr "ویژگی‌ها و دسته‌بندی‌ها (نادیده گرفتن قیمت)"
+
+#: admin/views/settings.php:889
+msgid "Price & Categories (Ignores Attributes)"
+msgstr "قیمت و دسته‌بندی‌ها (نادیده گرفتن ویژگی‌ها)"
+
+#: admin/views/settings.php:892
+msgid "Fabric + Category - Perfect for Fashion"
+msgstr "جنس + دسته‌بندی - عالی برای مد"
+
+#: admin/views/settings.php:896
+msgid "Combo:"
+msgstr "ترکیب:"
+
+#: admin/views/settings.php:896
+msgid ""
+"Finds products with similar attributes (color, brand, size), same category, "
+"and similar price (±30%). Most intelligent!"
+msgstr ""
+"محصولاتی با ویژگی‌های مشابه (رنگ، برند، سایز)، دسته‌بندی یکسان و قیمت مشابه "
+"(±۳۰٪) پیدا می‌کند. هوشمندترین حالت!"
+
+#: admin/views/settings.php:897
+msgid "Attributes & Categories:"
+msgstr "ویژگی‌ها و دسته‌بندی‌ها:"
+
+#: admin/views/settings.php:897
+msgid "Focuses on product characteristics. Great for fashion/apparel stores."
+msgstr "بر ویژگی‌های محصول تمرکز می‌کند. برای فروشگاه‌های مد و پوشاک عالی است."
+
+#: admin/views/settings.php:898
+msgid "Price & Categories:"
+msgstr "قیمت و دسته‌بندی‌ها:"
+
+#: admin/views/settings.php:898
+msgid ""
+"Finds alternatives at similar price point. Perfect for competitive products."
+msgstr ""
+"جایگزین‌هایی در محدوده قیمتی مشابه پیدا می‌کند. برای محصولات رقابتی ایده‌آل است."
+
+#: admin/views/settings.php:899
+msgid "Fabric + Category:"
+msgstr "جنس + دسته‌بندی:"
+
+#: admin/views/settings.php:899
+msgid ""
+"Prioritizes fabric attribute matching (satin, lace, chiffon, etc.) within "
+"same category. Custom algorithm for fashion stores like Jovani."
+msgstr ""
+"به تناسب ویژگی جنس (ساتن، توری، شیفون و غیره) در همان دسته‌بندی اولویت می‌دهد. "
+"الگوریتم سفارشی برای فروشگاه‌های مد مانند Jovani."
+
+#: admin/views/settings.php:905
+msgid "Number of Products"
+msgstr "تعداد محصولات"
+
+#: admin/views/settings.php:910
+msgid "Number of related products to show (if your theme supports it)"
+msgstr "تعداد محصولات مرتبط برای نمایش (اگر پوسته شما از آن پشتیبانی می‌کند)"
+
+#: admin/views/settings.php:918
+msgid ""
+"MantiLoad automatically hooks into WooCommerce's related products system. No "
+"code changes needed! Works with:"
+msgstr ""
+"منتی‌لود به طور خودکار به سیستم محصولات مرتبط ووکامرس متصل می‌شود. بدون نیاز "
+"به تغییر کد! با موارد زیر کار می‌کند:"
+
+#: admin/views/settings.php:920
+msgid "All WooCommerce themes (WoodMart, Flatsome, Storefront, Astra, etc.)"
+msgstr "تمام پوسته‌های ووکامرسی (وودمارت، فلت‌سام، استورفرانت، آسترا و غیره)"
+
+#: admin/views/settings.php:921
+msgid "Elementor Pro, Divi, WPBakery, Beaver Builder"
+msgstr "المنتور پرو، دیوی، WP Bakery، Beaver Builder"
+
+#: admin/views/settings.php:922
+msgid "WooCommerce blocks (Gutenberg)"
+msgstr "بلوک‌های ووکامرس (گوتنبرگ)"
+
+#: admin/views/settings.php:923
+msgid "Any plugin using woocommerce_related_products()"
+msgstr "هر افزونه‌ای که از تابع woocommerce_related_products() استفاده می‌کند"
+
+#: admin/views/settings.php:934
+msgid "Shortcodes for Header Builders"
+msgstr "شورتکد برای ابزارهای ساخت سربرگ"
+
+#: admin/views/settings.php:935
 msgid ""
 "Use these shortcodes in Elementor, WPBakery, WoodMart Header Builder, or any "
 "page builder"
 msgstr ""
+"از این شورتکدها در المنتور، WP Bakery، سازنده هدر وودمارت یا هر صفحه‌ساز "
+"دیگری استفاده کنید"
 
-#: includes/class-ajax-search.php:129 includes/class-ajax-search.php:1140
-#: mantiload.php:734
+#: admin/views/settings.php:942
+msgid "1. Search Icon (Mobile Modal Style)"
+msgstr "۱. آیکون جستجو (سبک مودال موبایل)"
+
+#: admin/views/settings.php:945
+msgid ""
+"Displays a search icon that opens a full-screen modal. Perfect for headers!"
+msgstr ""
+"یک آیکون جستجو نمایش می‌دهد که یک پنجره تمام‌صفحه باز می‌کند. برای سربرگ‌ها عالی "
+"است!"
+
+#: admin/views/settings.php:954 admin/views/settings.php:1023
+msgid "Available Parameters:"
+msgstr "پارامترهای موجود:"
+
+#: admin/views/settings.php:959
+msgid "Icon size: small, medium, large"
+msgstr "اندازه آیکون: کوچک، متوسط، بزرگ"
+
+#: admin/views/settings.php:964
+msgid "Icon style: default, circle, rounded"
+msgstr "سبک آیکون: پیش‌فرض، دایره‌ای، گرد"
+
+#: admin/views/settings.php:969
+msgid "Custom label text"
+msgstr "متن لیبل دلخواه"
+
+#: admin/views/settings.php:974
+msgid "Show label next to icon: true/false"
+msgstr "نمایش لیبل در کنار آیکون: true/false"
+
+#: admin/views/settings.php:979
+msgid "Show product prices in results: true/false"
+msgstr "نمایش قیمت محصولات در نتایج: true/false"
+
+#: admin/views/settings.php:984
+msgid "Show stock status in results: true/false"
+msgstr "نمایش وضعیت موجودی در نتایج: true/false"
+
+#: admin/views/settings.php:989 admin/views/settings.php:1078
+msgid "Custom CSS class"
+msgstr "کلاس CSS سفارشی"
+
+#: admin/views/settings.php:997 admin/views/settings.php:1086
+msgid "Examples:"
+msgstr "نمونه‌ها:"
+
+#: admin/views/settings.php:1011
+msgid "2. Full Search Box"
+msgstr "۲. باکس جستجوی کامل"
+
+#: admin/views/settings.php:1014
+msgid ""
+"Displays a complete search box with autocomplete dropdown. Great for search "
+"pages or sidebars!"
+msgstr ""
+"یک باکس جستجوی کامل با منوی کشویی و تکمیل خودکار نمایش می‌دهد. برای صفحات "
+"جستجو یا سایدبارها عالی است!"
+
+#: admin/views/settings.php:1028
+msgid "Placeholder text"
+msgstr "متن نگهدارنده"
+
+#: admin/views/settings.php:1033
+msgid "Post types to search (comma-separated)"
+msgstr "انواع نوشته‌ها برای جستجو (با کاما جدا شوند)"
+
+#: admin/views/settings.php:1038
+msgid "Show search button: true/false"
+msgstr "نمایش دکمه جستجو: true/false"
+
+#: admin/views/settings.php:1043
+msgid "Search button text"
+msgstr "متن دکمه جستجو"
+
+#: admin/views/settings.php:1048
+msgid "Show icon instead of text on button: true/false"
+msgstr "نمایش آیکون به جای متن روی دکمه: true/false"
+
+#: admin/views/settings.php:1053
+msgid "Hide clear (X) button: true/false"
+msgstr "Hide clear (X) button: true/false"
+
+#: admin/views/settings.php:1058
+msgid "\"View all\" link text"
+msgstr "متن لینک «مشاهده همه»"
+
+#: admin/views/settings.php:1063
+msgid "Search box width (px, %, em, rem, vw)"
+msgstr "عرض باکس جستجو (px, %, em, rem, vw)"
+
+#: admin/views/settings.php:1068
+msgid "Show product prices: true/false"
+msgstr "نمایش قیمت محصولات: true/false"
+
+#: admin/views/settings.php:1073
+msgid "Show stock status: true/false"
+msgstr "نمایش وضعیت موجودی: true/false"
+
+#: admin/views/settings.php:1103
+msgid "Usage Tips:"
+msgstr "نکات استفاده:"
+
+#: admin/views/settings.php:1105
+msgid ""
+"For WoodMart Header Builder: Use \"HTML Block\" element and paste shortcode"
+msgstr ""
+"برای سازنده سربرگ وودمارت: از المان «بلوک HTML» استفاده کنید و شورتکد را "
+"جای‌گذاری کنید"
+
+#: admin/views/settings.php:1106
+msgid "For Elementor: Use \"Shortcode\" widget"
+msgstr "برای المنتور: از ابزارک «کد کوتاه» استفاده کنید"
+
+#: admin/views/settings.php:1107
+msgid ""
+"For PHP templates: <?php echo do_shortcode('[mantiload_search_icon]'); ?>"
+msgstr ""
+"برای قالب‌های PHP: <?php echo do_shortcode('[mantiload_search_icon]'); ?>"
+
+#: admin/views/settings.php:1108
+msgid ""
+"Recommended for headers: [mantiload_search_icon] for mobile-friendly "
+"experience"
+msgstr ""
+"پیشنهاد شده برای سربرگ‌ها: [mantiload_search_icon] سازگاری بهتر با موبایل"
+
+#: admin/views/settings.php:1116
+msgid "Custom CSS"
+msgstr "CSS سفارشی"
+
+#: admin/views/settings.php:1121
+msgid "Custom Styles"
+msgstr "استایل‌های سفارشی"
+
+#: admin/views/settings.php:1128
+msgid ""
+"Add custom CSS to style the search box and results. These styles will be "
+"loaded on the frontend and survive plugin updates."
+msgstr ""
+"برای استایل دادن به باکس جستجو و نتایج، CSS سفارشی اضافه کنید. این استایل‌ها "
+"در بخش پیش‌نمایش بارگذاری می‌شوند و پس از به‌روزرسانی افزونه باقی می‌مانند."
+
+#: admin/views/settings.php:1132
+msgid "Tips:"
+msgstr "نکات:"
+
+#: admin/views/settings.php:1133
+msgid ""
+"Use high specificity selectors (e.g., body .mantiload-inline-form) to "
+"override default styles"
+msgstr ""
+"از انتخابگرهای خاص (مثلاً body .mantiload-inline-form) برای لغو استایل‌های "
+"پیش‌فرض استفاده کنید."
+
+#: admin/views/settings.php:1134
+msgid "Add !important to ensure your styles take priority"
+msgstr "برای اطمینان از اولویت‌بندی استایل‌هایتان، !important را اضافه کنید."
+
+#: admin/views/settings.php:1135
+msgid "Changes apply immediately after saving - no cache clearing needed"
+msgstr ""
+"تغییرات بلافاصله پس از ذخیره‌سازی اعمال می‌شوند - نیازی به خالی کردن کش نیست"
+
+#: admin/views/settings.php:1150
+msgid "Save All Settings"
+msgstr "ذخیره تمام تنظیمات"
+
+#: includes/class-admin-search.php:113 includes/class-ajax-search.php:132
+#: includes/class-ajax-search.php:168
+msgid "No results found"
+msgstr "نتیجه‌ای پیدا نشد"
+
+#: includes/class-admin-search.php:114 includes/class-ajax-search.php:131
+#: includes/class-ajax-search.php:169
+msgid "Searching..."
+msgstr "در حال جستجو..."
+
+#: includes/class-ajax-search.php:130 includes/class-ajax-search.php:1171
+#: includes/class-search-widget.php:47 includes/class-search-widget.php:68
+#: mantiload.php:891 mantiload.php:995 mantiload.php:1372
+#: templates/search-modal.php:37 widgets/class-search-icon-widget.php:82
+msgid "Search products..."
+msgstr "جستجوی محصولات..."
+
+#: includes/class-ajax-search.php:133 includes/class-ajax-search.php:1177
+#: mantiload.php:897
 msgid "View all results"
-msgstr ""
+msgstr "مشاهده همه نتایج"
 
-#: admin/views/settings.php:198
-msgid "When to rebuild:"
-msgstr ""
+#: includes/class-ajax-search.php:134
+msgid "Press Enter to search"
+msgstr "برای جستجو Enter را فشار دهید"
 
-#: admin/views/settings.php:743
-msgid "WooCommerce blocks (Gutenberg)"
-msgstr ""
+#: includes/class-ajax-search.php:135
+msgid "results"
+msgstr "نتیجه"
 
-#: admin/views/settings.php:585
-msgid "WooCommerce Filter Integration"
-msgstr ""
+#: includes/class-ajax-search.php:136
+msgid "in"
+msgstr "در"
 
-#: admin/views/settings.php:578
-msgid "Works alongside Redis cache for maximum performance"
-msgstr ""
+#: includes/class-ajax-search.php:137
+msgid "ms"
+msgstr "میلی‌ثانیه"
 
-#: admin/views/settings.php:693
-msgid "Works automatically with all themes, Elementor, Divi, and page builders"
-msgstr ""
+#: includes/class-ajax-search.php:139
+#: includes/filters/class-filter-renderer.php:159
+msgid "Categories"
+msgstr "دسته‌بندی‌ها"
 
-#: includes/class-admin.php:359
-msgid "Works with all plugins"
-msgstr ""
+#: includes/class-ajax-search.php:1174 includes/class-search-widget.php:50
+#: includes/class-search-widget.php:70 mantiload.php:894 mantiload.php:942
+#: templates/search-box.php:39 templates/search-modal.php:16
+#: templates/search-modal.php:42 templates/search-modal.php:94
+#: widgets/class-search-icon-widget.php:48
+#: widgets/class-search-icon-widget.php:105
+#: widgets/class-search-icon-widget.php:201 widgets/class-search-widget.php:32
+msgid "Search"
+msgstr "جستجو"
 
-#: includes/class-admin.php:381
-msgid "Wrong Settings Can Break Your Site"
-msgstr ""
+#. translators: %s: index name
+#: includes/class-database-indexes.php:244
+#: includes/class-database-indexes.php:348
+#, php-format
+msgid "Index %s not found in definitions"
+msgstr "ایندکس %s در تعاریف یافت نشد"
 
-#: includes/class-admin.php:419
-msgid "You have a custom plugin that only needs specific contexts"
-msgstr ""
+#. translators: %s: table name
+#: includes/class-database-indexes.php:260
+#: includes/class-database-indexes.php:364
+#, php-format
+msgid "Table %s does not exist"
+msgstr "جدول %s وجود ندارد"
 
-#: includes/class-admin.php:364
-msgid "⚙️ Manual Control"
-msgstr ""
+#. translators: %s: index name
+#: includes/class-database-indexes.php:272
+#, php-format
+msgid "Index %s already exists"
+msgstr "ایندکس %s از قبل وجود دارد"
 
-#: includes/class-admin.php:167
-msgid "⚠️ Disable in production - may impact performance"
-msgstr ""
+#. translators: %s: error message
+#: includes/class-database-indexes.php:294
+#, php-format
+msgid "Failed to create index: %s"
+msgstr "ایجاد ایندکس ناموفق بود: %s"
 
-#: includes/class-admin.php:376
-msgid "⚠️ Important Warnings"
-msgstr ""
+#. translators: %s: index name
+#: includes/class-database-indexes.php:304
+#, php-format
+msgid "Index %s created successfully"
+msgstr "ایندکس %s با موفقیت ایجاد شد"
 
-#: admin/views/settings.php:645
-msgid "⚠️ Important:"
-msgstr ""
+#: includes/class-database-indexes.php:325
+msgid "Index already exists or table not available"
+msgstr "ایندکس از قبل وجود دارد یا جدول در دسترس نیست"
 
-#: includes/class-admin.php:352
-msgid "🎯 Automatic vs Manual Control"
-msgstr ""
+#. translators: %s: index name
+#: includes/class-database-indexes.php:376
+#, php-format
+msgid "Index %s does not exist"
+msgstr "ایندکس %s وجود ندارد"
 
-#: includes/class-admin.php:414
-msgid "🎯 When to Use Manual Control"
-msgstr ""
+#. translators: %s: error message
+#: includes/class-database-indexes.php:397
+#, php-format
+msgid "Failed to remove index: %s"
+msgstr "حذف ایندکس ناموفق بود: %s"
 
-#: includes/class-admin.php:403
-msgid "💡 Best Practices"
-msgstr ""
+#. translators: %s: index name
+#: includes/class-database-indexes.php:407
+#, php-format
+msgid "Index %s removed successfully"
+msgstr "ایندکس %s با موفقیت حذف شد"
 
-#: includes/class-admin.php:347
-msgid "🚀 What Lean Does"
-msgstr ""
+#: includes/class-database-indexes.php:428
+msgid "Index does not exist"
+msgstr "ایندکس وجود ندارد"
 
-#: includes/class-admin.php:355
-msgid "🤖 Automatic (Recommended)"
+#: includes/class-search-widget.php:23 widgets/class-search-widget.php:9
+msgid "MantiLoad Search"
+msgstr "جستجوگر منتی‌لود"
+
+#: includes/class-search-widget.php:25
+msgid "Ultra-fast AJAX search powered by Manticore"
+msgstr "جستجوی ایجکس فوق‌سریع با قدرت منتی‌کور"
+
+#: includes/class-search-widget.php:81
+#: includes/filters/class-filter-widget.php:76
+#: widgets/class-popular-searches-widget.php:47
+#: widgets/class-search-widget.php:35
+msgid "Title:"
+msgstr "عنوان:"
+
+#: includes/class-search-widget.php:88
+msgid "Placeholder Text:"
+msgstr "متن نگهدارنده:"
+
+#: includes/class-search-widget.php:94
+msgid "Search Post Types:"
+msgstr "جستجوی انواع نوشته:"
+
+#: includes/class-search-widget.php:106
+msgid "Show search button"
+msgstr "نمایش دکمه جستجو"
+
+#: includes/class-search-widget.php:112
+msgid "Button Text:"
+msgstr "متن دکمه:"
+
+#: includes/filters/class-filter-ajax.php:98
+msgid "Failed to retrieve products"
+msgstr "دریافت محصولات ناموفق بود"
+
+#. translators: %d: star rating
+#: includes/filters/class-filter-ajax.php:354
+#, php-format
+msgid "%d stars & up"
+msgstr "%d ستاره و بالاتر"
+
+#: includes/filters/class-filter-ajax.php:372
+#: includes/filters/class-filter-renderer.php:417
+msgid "In Stock"
+msgstr "موجود"
+
+#: includes/filters/class-filter-ajax.php:373
+#: includes/filters/class-filter-renderer.php:418
+msgid "Out of Stock"
+msgstr "ناموجود"
+
+#: includes/filters/class-filter-ajax.php:374
+#: includes/filters/class-filter-renderer.php:419
+msgid "On Backorder"
+msgstr "پیش‌فروش"
+
+#: includes/filters/class-filter-manager.php:167
+msgid "No products found"
+msgstr "هیچ محصولی پیدا نشد"
+
+#: includes/filters/class-filter-manager.php:168
+msgid "Clear All Filters"
+msgstr "پاک کردن همه فیلترها"
+
+#: includes/filters/class-filter-manager.php:169
+msgid "Apply Filters"
+msgstr "اعمال فیلترها"
+
+#: includes/filters/class-filter-manager.php:170
+msgid "Showing"
+msgstr "نمایش"
+
+#: includes/filters/class-filter-manager.php:171
+msgid "of"
+msgstr "از"
+
+#: includes/filters/class-filter-manager.php:172
+msgid "products"
+msgstr "محصولات"
+
+#: includes/filters/class-filter-renderer.php:71
+#: includes/filters/class-filter-widget.php:71
+msgid "Filter Products"
+msgstr "فیلتر محصولات"
+
+#: includes/filters/class-filter-renderer.php:74
+msgid "Clear All"
+msgstr "پاک‌کردن همه"
+
+#: includes/filters/class-filter-renderer.php:88
+msgid "products found"
+msgstr "محصول پیدا شد"
+
+#: includes/filters/class-filter-renderer.php:210
+msgid "Price Range"
+msgstr "محدوده قیمت"
+
+#: includes/filters/class-filter-renderer.php:374
+msgid "Customer Rating"
+msgstr "امتیاز مشتری"
+
+#. translators: %d: star rating
+#: includes/filters/class-filter-renderer.php:397
+#, php-format
+msgid "%d & Up"
+msgstr "%d و بالاتر"
+
+#: includes/filters/class-filter-renderer.php:424
+msgid "Availability"
+msgstr "موجودی"
+
+#: includes/filters/class-filter-renderer.php:468
+msgid "On Sale"
+msgstr "فروش ویژه"
+
+#: includes/filters/class-filter-renderer.php:482
+msgid "No products found matching your selection."
+msgstr "هیچ محصولی مطابق با انتخاب شما یافت نشد."
+
+#: includes/filters/class-filter-widget.php:28
+msgid "MantiLoad Filters"
+msgstr "فیلترهای منتی‌لود"
+
+#: includes/filters/class-filter-widget.php:30
+msgid "Revolutionary product filters powered by Manticore Search"
+msgstr "فیلترهای محصول فوق سریع قدرت گرفته از جستجوی منتی‌کور"
+
+#: includes/filters/class-filter-widget.php:88
+msgid "Filter Types (comma-separated):"
+msgstr "انواع فیلتر (با کاما جدا شود):"
+
+#: includes/filters/class-filter-widget.php:97
+msgid "Examples: category, price, pa_brand, pa_color, rating, stock, on_sale"
+msgstr "برای مثال: category, price, pa_brand, pa_color, rating, stock, on_sale"
+
+#. translators: 1: Manticore host address, 2: Manticore port number
+#: mantiload.php:811
+#, php-format
+msgid ""
+"Cannot connect to Manticore Search at %1$s:%2$d. Please ensure Manticore is "
+"installed and running. You can configure connection settings in MantiLoad > "
+"Settings."
 msgstr ""
+"اتصال به جستجوی منتی‌کور در %1$s:%2$d امکان‌پذیر نیست. لطفاً مطمئن شوید که "
+"منتی‌کور نصب و در حال اجرا است. می‌توانید تنظیمات اتصال را در منتی‌لود > "
+"تنظیمات پیکربندی کنید."
+
+#. translators: %s: current PHP version
+#: mantiload.php:821
+#, php-format
+msgid "MantiLoad requires PHP 7.4 or higher. You are running PHP %s."
+msgstr ""
+"منتی‌لود به PHP 7.4 یا بالاتر نیاز دارد. شما در حال استفاده از PHP %s هستید."
+
+#: mantiload.php:828
+msgid "MantiLoad requires either mysqli or PDO MySQL extension."
+msgstr "منتی‌لود نیازمند افزونه mysqli یا PDO MySQL است."
+
+#: mantiload.php:978 templates/search-modal.php:88
+#: widgets/class-search-icon-widget.php:65
+msgid "Open search"
+msgstr "باز کردن جستجو"
+
+#: mantiload.php:979 widgets/class-search-icon-widget.php:66
+msgid "Search products"
+msgstr "جستجوی محصولات"
+
+#: templates/search-box.php:45 templates/search-modal.php:48
+msgid "Clear search"
+msgstr "پاک کردن جستجو"
+
+#: templates/search-modal.php:17
+msgid "Close search"
+msgstr "بستن جستجو"
+
+#: templates/search-modal.php:66
+msgid "Search results"
+msgstr "نتایج جستجو"
+
+#: templates/search-modal.php:72
+msgid "Navigate"
+msgstr "ناوبری"
+
+#: templates/search-modal.php:73
+msgid "Select"
+msgstr "انتخاب"
+
+#: templates/search-modal.php:74
+msgid "Close"
+msgstr "بستن"
+
+#: templates/search-modal.php:77
+msgid "Powered by"
+msgstr "قدرت گرفته از"
+
+#: widgets/class-popular-searches-widget.php:9
+msgid "MantiLoad Popular Searches"
+msgstr "جستجوهای محبوب منتی‌لود"
+
+#: widgets/class-popular-searches-widget.php:10
+msgid "Show popular search queries"
+msgstr "نمایش کوئری‌های پرطرفدار جستجو"
+
+#: widgets/class-popular-searches-widget.php:24
+msgid "No searches yet"
+msgstr "هنوز هیچ جستجویی انجام نشده است"
+
+#: widgets/class-popular-searches-widget.php:44
+msgid "Popular Searches"
+msgstr "جستجوهای محبوب"
+
+#: widgets/class-search-icon-widget.php:27
+msgid "MantiLoad Search Icon"
+msgstr "آیکون جستجوی منتی‌لود"
+
+#: widgets/class-search-icon-widget.php:29
+msgid ""
+"Mobile-friendly search icon that opens MantiLoad search box (perfect for "
+"mobile menus)"
+msgstr ""
+"آیکون جستجوی سازگار با موبایل که باکس جستجوی منتی‌لود را باز می‌کند (مناسب "
+"برای منوهای موبایل)"
+
+#: widgets/class-search-icon-widget.php:118
+msgid "Icon only (no label)"
+msgstr "فقط آیکون (بدون لیبل)"
+
+#: widgets/class-search-icon-widget.php:120
+msgid "Perfect for mobile menus and navigation bars"
+msgstr "مناسب برای منوهای موبایل و نوارهای ناوبری"
+
+#: widgets/class-search-icon-widget.php:133
+msgid "Show text label next to icon"
+msgstr "نمایش لیبل در کنار آیکون"
+
+#: widgets/class-search-icon-widget.php:139
+msgid "Label text:"
+msgstr "متن لیبل:"
+
+#: widgets/class-search-icon-widget.php:153
+msgid "Icon size:"
+msgstr "اندازه آیکون:"
+
+#: widgets/class-search-icon-widget.php:160
+msgid "Small (20px)"
+msgstr "کوچک (20px)"
+
+#: widgets/class-search-icon-widget.php:161
+msgid "Medium (24px)"
+msgstr "متوسط (24px)"
+
+#: widgets/class-search-icon-widget.php:162
+msgid "Large (32px)"
+msgstr "بزرگ (32px)"
+
+#: widgets/class-search-icon-widget.php:168
+msgid "Icon style:"
+msgstr "سبک آیکون:"
+
+#: widgets/class-search-icon-widget.php:175
+msgid "Default (no background)"
+msgstr "پیش‌فرض (بدون پس‌زمینه)"
+
+#: widgets/class-search-icon-widget.php:176
+msgid "Circle background"
+msgstr "پس‌زمینه دایره‌ای"
+
+#: widgets/class-search-icon-widget.php:177
+msgid "Rounded square"
+msgstr "مربع گرد"
+
+#: widgets/class-search-icon-widget.php:183
+msgid "Usage:"
+msgstr "استفاده:"
+
+#: widgets/class-search-icon-widget.php:184
+msgid ""
+"Add this widget to your mobile menu or header. When clicked, it opens the "
+"MantiLoad search modal."
+msgstr ""
+"این ابزارک را به منوی موبایل یا سربرگ خود اضافه کنید. با کلیک، پنجره جستجوی "
+"منتی‌لود باز می‌شود."
+
+#: widgets/class-search-widget.php:10
+msgid "Ultra-fast search powered by Manticore"
+msgstr "جستجوی فوق‌سریع قدرت گرفته از منتی‌کور"
+
+#: widgets/class-search-widget.php:23
+msgctxt "placeholder"
+msgid "Search..."
+msgstr "جستجو..."
