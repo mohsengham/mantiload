@@ -2,39 +2,34 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: MantiLoad - Ultra-Fast Search & Filter 1.5.1\n"
+"Project-Id-Version: MantiLoad 1.6.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/mantiload\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-29T18:54:32+00:00\n"
+"POT-Creation-Date: 2025-12-06T21:57:08+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: mantiload\n"
 
 #. Plugin Name of the plugin
+#. Author of the plugin
 #: mantiload.php
-msgid "MantiLoad - Ultra-Fast Search & Filter"
+#: admin/class-admin-controller.php:34
+#: admin/class-admin-controller.php:35
+msgid "MantiLoad"
 msgstr ""
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
 #: mantiload.php
 msgid "https://mantiload.com/"
 msgstr ""
 
 #. Description of the plugin
 #: mantiload.php
-msgid "Lightning-fast search and filtering powered by Manticore Search. Optimized for WooCommerce with beautiful UI, advanced filters, and sub-millisecond search responses."
-msgstr ""
-
-#. Author of the plugin
-#: mantiload.php
-#: admin/class-admin-controller.php:34
-#: admin/class-admin-controller.php:35
-msgid "MantiLoad"
+msgid "High-performance search engine for WordPress and WooCommerce powered by Manticore Search. Delivers fast, relevant search results with advanced filtering capabilities."
 msgstr ""
 
 #: admin/class-admin-ajax.php:39
@@ -219,6 +214,10 @@ msgstr ""
 #: admin/class-admin-controller.php:740
 #, php-format
 msgid "Successfully removed %d indexes"
+msgstr ""
+
+#: admin/views/dashboard.php:405
+msgid "💎 Hidden Gem Recommendation"
 msgstr ""
 
 #: admin/views/database-indexes.php:34
@@ -1435,13 +1434,13 @@ msgstr ""
 msgid "Save All Settings"
 msgstr ""
 
-#: includes/class-admin-search.php:112
+#: includes/class-admin-search.php:113
 #: includes/class-ajax-search.php:132
 #: includes/class-ajax-search.php:168
 msgid "No results found"
 msgstr ""
 
-#: includes/class-admin-search.php:113
+#: includes/class-admin-search.php:114
 #: includes/class-ajax-search.php:131
 #: includes/class-ajax-search.php:169
 msgid "Searching..."
@@ -1451,9 +1450,9 @@ msgstr ""
 #: includes/class-ajax-search.php:1171
 #: includes/class-search-widget.php:47
 #: includes/class-search-widget.php:68
-#: mantiload.php:892
-#: mantiload.php:996
-#: mantiload.php:1373
+#: mantiload.php:891
+#: mantiload.php:995
+#: mantiload.php:1372
 #: templates/search-modal.php:37
 #: widgets/class-search-icon-widget.php:82
 msgid "Search products..."
@@ -1461,7 +1460,7 @@ msgstr ""
 
 #: includes/class-ajax-search.php:133
 #: includes/class-ajax-search.php:1177
-#: mantiload.php:898
+#: mantiload.php:897
 msgid "View all results"
 msgstr ""
 
@@ -1489,8 +1488,8 @@ msgstr ""
 #: includes/class-ajax-search.php:1174
 #: includes/class-search-widget.php:50
 #: includes/class-search-widget.php:70
-#: mantiload.php:895
-#: mantiload.php:943
+#: mantiload.php:894
+#: mantiload.php:942
 #: templates/search-box.php:39
 #: templates/search-modal.php:16
 #: templates/search-modal.php:42
@@ -1697,28 +1696,28 @@ msgid "Examples: category, price, pa_brand, pa_color, rating, stock, on_sale"
 msgstr ""
 
 #. translators: 1: Manticore host address, 2: Manticore port number
-#: mantiload.php:812
+#: mantiload.php:811
 #, php-format
 msgid "Cannot connect to Manticore Search at %1$s:%2$d. Please ensure Manticore is installed and running. You can configure connection settings in MantiLoad > Settings."
 msgstr ""
 
 #. translators: %s: current PHP version
-#: mantiload.php:822
+#: mantiload.php:821
 #, php-format
 msgid "MantiLoad requires PHP 7.4 or higher. You are running PHP %s."
 msgstr ""
 
-#: mantiload.php:829
+#: mantiload.php:828
 msgid "MantiLoad requires either mysqli or PDO MySQL extension."
 msgstr ""
 
-#: mantiload.php:979
+#: mantiload.php:978
 #: templates/search-modal.php:88
 #: widgets/class-search-icon-widget.php:65
 msgid "Open search"
 msgstr ""
 
-#: mantiload.php:980
+#: mantiload.php:979
 #: widgets/class-search-icon-widget.php:66
 msgid "Search products"
 msgstr ""

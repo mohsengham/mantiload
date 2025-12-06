@@ -402,7 +402,7 @@ ob_start();
 			<div style="flex: 1;">
 				<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
 					<h2 style="color: white; margin: 0; font-size: 24px; font-weight: 700;">
-						💎 Hidden Gem Recommendation
+						<?php echo esc_html__( '💎 Hidden Gem Recommendation', 'mantiload' ); ?>
 					</h2>
 					<div style="background: rgba(255,255,255,0.25); padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600;">
 						⭐ 4.8 Rating

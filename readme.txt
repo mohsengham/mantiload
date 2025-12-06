@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.3
+Stable tag: 1.6.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,10 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.6.4 - 2025-12-06 =
+* FIX: Made "Hidden Gem Recommendation" string translatable
+* IMPROVE: Regenerated translation template (POT file)
 
 = 1.6.3 - 2025-12-06 =
 * FIX: Exact SKU matching now works for alphanumeric SKUs (e.g., ZM-33751013)

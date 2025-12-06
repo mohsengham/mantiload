@@ -96,3 +96,4 @@ coverage/
 
 # MantiLoad specific
 reset_mantiload.php
+mantiload-fa_IR.l10n.php
