@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,11 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.7.2 - 2025-12-07 =
+* FIX: Product search queries now ALWAYS integrated regardless of main/secondary query status
+* FIX: Shop search results page now works correctly with SKU searches
+* IMPROVE: Search query integration forced for all product searches to ensure SKU matching works
 
 = 1.7.1 - 2025-12-07 =
 * FIX: Query Integration (posts_pre_query) now checks SKU before Manticore search

@@ -241,6 +241,12 @@ class Query_Integration {
 			return false;
 		}
 
+		// ALWAYS integrate product search queries (main or secondary)
+		// This ensures SKU searches work on search results page
+		if ( $query->is_search() && $query->get( 's' ) ) {
+			return true;
+		}
+
 		// For AJAX requests (WoodMart Load More, AJAX Filters, etc.)
 		// Allow secondary queries if they are product queries with significant IN clause
 		if ( wp_doing_ajax() ) {
