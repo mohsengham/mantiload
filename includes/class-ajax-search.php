@@ -372,72 +372,110 @@ class AJAX_Search {
                         return $cached_result;
                 }
 
-                // TIME: MantiCore query start
-                $manticore_start = microtime( true );
+                // PRIORITY: Check for exact SKU match FIRST (before Manticore) - case-insensitive
+                // This handles both product and variation SKUs
+                // For frontend, we want to show the PARENT product when a variation SKU matches
+                $sku_results = $wpdb->get_results( $wpdb->prepare(
+                        "SELECT p.ID, p.post_type, p.post_parent FROM {$wpdb->posts} p
+                        INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+                        WHERE p.post_type IN ('product', 'product_variation')
+                        AND p.post_status = 'publish'
+                        AND pm.meta_key = '_sku'
+                        AND UPPER(pm.meta_value) = UPPER(%s)
+                        LIMIT %d",
+                        $query,
+                        $limit
+                ) );
 
-                // Direct MantiCore connection (bypass WordPress)
-                // Use cached connection settings (saves 2x get_option calls per search!)
-                // phpcs:ignore WordPress.DB.RestrictedClasses.mysql__mysqli -- Direct mysqli required for Manticore Search connection
-                $manticore = new \mysqli( $settings_cache['manticore_host'], '', '', '', $settings_cache['manticore_port'] );
-
-                if ( $manticore->connect_error ) {
-                        return array( 'items' => array(), 'total' => 0, 'manticore_time' => 0 );
-                }
-
-                // Use cached index name
-                $index_name = $settings_cache['index_name'];
-
-                // Escape expanded query for MantiCore
-                $safe_query = $manticore->real_escape_string( $expanded_query );
-
-                // Ultra-fast MantiCore query (pure speed + synonyms!)
-                // Apply proper filters: product type, published status, search visibility
-                $sql = "SELECT id, WEIGHT() as relevance
-                                FROM {$index_name}
-                                WHERE MATCH('$safe_query')
-                                  AND post_type='product'
-                                  AND post_status='publish'
-                                  AND visibility != 'catalog'
-                                  AND visibility != 'hidden'
-                                ORDER BY relevance DESC
-                                LIMIT $limit";
-
-                $manticore_result = $manticore->query( $sql );
-
-                if ( ! $manticore_result ) {
-                        $manticore->close();
-                        $manticore_time = ( microtime( true ) - $manticore_start ) * 1000;
-                        return array( 'items' => array(), 'total' => 0, 'manticore_time' => $manticore_time );
-                }
-
-                $product_ids = array();
-                while ( $row = $manticore_result->fetch_assoc() ) {
-                        $product_ids[] = (int) $row['id'];
-                }
-
-                // Get TOTAL count using SHOW META (FAST! No duplicate search)
-                // SHOW META returns stats from the last query, including total_found
-                // This eliminates a second COUNT query (saves 1-2ms per search)
-                $meta_result = $manticore->query( "SHOW META" );
-                $total_count = 0;
-
-                if ( $meta_result ) {
-                        // Parse meta variables to find total_found
-                        while ( $meta_row = $meta_result->fetch_assoc() ) {
-                                if ( $meta_row['Variable_name'] === 'total_found' ) {
-                                        $total_count = (int) $meta_row['Value'];
-                                        break;
+                $exact_sku_ids = array();
+                if ( ! empty( $sku_results ) ) {
+                        foreach ( $sku_results as $result ) {
+                                // If it's a variation, add the PARENT product ID for frontend display
+                                // (frontend shop shows parent products, not individual variations)
+                                if ( $result->post_type === 'product_variation' && $result->post_parent > 0 ) {
+                                        $exact_sku_ids[] = $result->post_parent;
+                                } else {
+                                        $exact_sku_ids[] = $result->ID;
                                 }
                         }
                 }
 
-                // Safety fallback: if we got results but total_count is 0, use result count
-                // This handles edge cases where SHOW META might not return expected data
-                if ( $total_count === 0 && ! empty( $product_ids ) ) {
+                // TIME: MantiCore query start
+                $manticore_start = microtime( true );
+
+                // Initialize product IDs
+                $product_ids = array();
+                $total_found = 0;
+
+                // Only query Manticore if we didn't find an exact SKU match
+                if ( empty( $exact_sku_ids ) ) {
+                        // Direct MantiCore connection (bypass WordPress)
+                        // Use cached connection settings (saves 2x get_option calls per search!)
+                        // phpcs:ignore WordPress.DB.RestrictedClasses.mysql__mysqli -- Direct mysqli required for Manticore Search connection
+                        $manticore = new \mysqli( $settings_cache['manticore_host'], '', '', '', $settings_cache['manticore_port'] );
+
+                        if ( $manticore->connect_error ) {
+                                return array( 'items' => array(), 'total' => 0, 'manticore_time' => 0 );
+                        }
+
+                        // Use cached index name
+                        $index_name = $settings_cache['index_name'];
+
+                        // Escape expanded query for MantiCore
+                        $safe_query = $manticore->real_escape_string( $expanded_query );
+
+                        // Ultra-fast MantiCore query (pure speed + synonyms!)
+                        // Apply proper filters: product type, published status, search visibility
+                        $sql = "SELECT id, WEIGHT() as relevance
+                                        FROM {$index_name}
+                                        WHERE MATCH('$safe_query')
+                                          AND post_type='product'
+                                          AND post_status='publish'
+                                          AND visibility != 'catalog'
+                                          AND visibility != 'hidden'
+                                        ORDER BY relevance DESC
+                                        LIMIT $limit";
+
+                        $manticore_result = $manticore->query( $sql );
+
+                        if ( ! $manticore_result ) {
+                                $manticore->close();
+                                $manticore_time = ( microtime( true ) - $manticore_start ) * 1000;
+                                return array( 'items' => array(), 'total' => 0, 'manticore_time' => $manticore_time );
+                        }
+
+                        while ( $row = $manticore_result->fetch_assoc() ) {
+                                $product_ids[] = (int) $row['id'];
+                        }
+
+                        // Get TOTAL count using SHOW META (FAST! No duplicate search)
+                        // SHOW META returns stats from the last query, including total_found
+                        // This eliminates a second COUNT query (saves 1-2ms per search)
+                        $meta_result = $manticore->query( "SHOW META" );
+                        $total_count = 0;
+
+                        if ( $meta_result ) {
+                                // Parse meta variables to find total_found
+                                while ( $meta_row = $meta_result->fetch_assoc() ) {
+                                        if ( $meta_row['Variable_name'] === 'total_found' ) {
+                                                $total_count = (int) $meta_row['Value'];
+                                                break;
+                                        }
+                                }
+                        }
+
+                        // Safety fallback: if we got results but total_count is 0, use result count
+                        // This handles edge cases where SHOW META might not return expected data
+                        if ( $total_count === 0 && ! empty( $product_ids ) ) {
+                                $total_count = count( $product_ids );
+                        }
+
+                        $manticore->close();
+                } else {
+                        // Use exact SKU match results
+                        $product_ids = array_map( 'intval', $exact_sku_ids );
                         $total_count = count( $product_ids );
                 }
-
-                $manticore->close();
                 $manticore_time = ( microtime( true ) - $manticore_start ) * 1000;
 
                 if ( empty( $product_ids ) ) {

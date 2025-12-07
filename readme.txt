@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.5
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,35 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.7.1 - 2025-12-07 =
+* FIX: Query Integration (posts_pre_query) now checks SKU before Manticore search
+* FIX: Frontend shop search now correctly finds products by variation SKU
+* IMPROVE: SKU search priority added to all query paths including auto-interception
+
+= 1.7.0 - 2025-12-07 =
+* FIX: SKU search now case-insensitive (zm-2961 and ZM-2961 both work)
+* FIX: Frontend shop page search now finds products by variation SKU regardless of case
+* IMPROVE: Added pre_get_posts hook for better query interception
+* IMPROVE: All search contexts now handle SKU searches case-insensitively
+
+= 1.6.9 - 2025-12-07 =
+* FIX: Frontend shop page search (?s=zm-2961&post_type=product) now works correctly
+* FIX: $_GET parameter fallback now works on both admin and frontend for consistent search behavior
+* IMPROVE: All WP_Query-based searches now detect search parameters reliably
+
+= 1.6.8 - 2025-12-07 =
+* FIX: Frontend AJAX search box now finds products by variation SKU
+* FIX: Searching for variation SKU (e.g., ZM-2961) now shows the parent product in frontend search results
+* IMPROVE: All search contexts (admin, modal, frontend shop, AJAX) now handle variation SKUs correctly
+
+= 1.6.7 - 2025-12-07 =
+* FIX: Frontend shop search (?s=ZM-2961&post_type=product) now finds products by variation SKU
+* IMPROVE: SKU search now works on both frontend and backend for all search contexts
+
+= 1.6.6 - 2025-12-07 =
+* FIX: Modal search (Ctrl+K) now finds product variations by SKU
+* IMPROVE: Frontend and backend modal search now includes variations in SKU search results
 
 = 1.6.5 - 2025-12-06 =
 * FIX: Admin product search now finds parent products when searching by variation SKU

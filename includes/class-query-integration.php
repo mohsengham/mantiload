@@ -682,8 +682,39 @@ class Query_Integration {
 		}
 
 		// Build MATCH clause for full-text search
-		$match_clause = '';
+		// PRIORITY: Check for exact SKU match FIRST (case-insensitive)
+		// If we find a SKU match, use post__in filter instead of MATCH clause
+		$sku_product_ids = array();
 		if ( ! empty( $manticore_query['s'] ) ) {
+			global $wpdb;
+			$search_term = Manticore_Client::normalize_numerals( $manticore_query['s'] );
+
+			$sku_results = $wpdb->get_results( $wpdb->prepare(
+				"SELECT p.ID, p.post_type, p.post_parent FROM {$wpdb->posts} p
+				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+				WHERE p.post_type IN ('product', 'product_variation')
+				AND p.post_status = 'publish'
+				AND pm.meta_key = '_sku'
+				AND UPPER(pm.meta_value) = UPPER(%s)
+				LIMIT 10",
+				$search_term
+			) );
+
+			if ( ! empty( $sku_results ) ) {
+				foreach ( $sku_results as $result ) {
+					// If it's a variation, add the PARENT product ID for frontend display
+					if ( $result->post_type === 'product_variation' && $result->post_parent > 0 ) {
+						$sku_product_ids[] = $result->post_parent;
+					} else {
+						$sku_product_ids[] = $result->ID;
+					}
+				}
+			}
+		}
+
+		// Build MATCH clause (or skip if we found SKU matches)
+		$match_clause = '';
+		if ( ! empty( $manticore_query['s'] ) && empty( $sku_product_ids ) ) {
 			// Normalize Persian/Arabic numerals to Latin for consistent search
 			$search_term = Manticore_Client::normalize_numerals( $manticore_query['s'] );
 
@@ -697,6 +728,11 @@ class Query_Integration {
 				$match_clause = " WHERE MATCH('$safe_query')";
 				$manticore->close();
 			}
+		} elseif ( ! empty( $sku_product_ids ) ) {
+			// SKU match found - filter by these specific product IDs
+			$ids_str = implode( ',', array_map( 'absint', $sku_product_ids ) );
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- $ids_str contains only integers from absint()
+			$where_clauses[] = "id IN ({$ids_str})";
 		}
 
 		// Build WHERE clause for filters

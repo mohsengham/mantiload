@@ -59,6 +59,7 @@ class Admin_Search {
 			// INTERCEPT SLOW PRODUCT LIST SEARCH! Multiple approaches for different contexts
 			\add_filter( 'posts_search', array( $this, 'bypass_slow_search' ), 999, 2 );
 			\add_filter( 'posts_where', array( $this, 'add_manticore_ids' ), 999, 2 );
+			\add_action( 'pre_get_posts', array( $this, 'intercept_product_search' ), 999 );
 
 			// Intercept WooCommerce product search at the source (MOST EFFECTIVE!)
 			\add_filter( 'woocommerce_product_pre_search_products', array( $this, 'pre_search_products' ), 10, 7 );
@@ -259,7 +260,7 @@ class Admin_Search {
 		$exact_sku_products = $wpdb->get_col( $wpdb->prepare(
 			"SELECT p.ID FROM {$wpdb->posts} p
 			INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-			WHERE p.post_type = 'product'
+			WHERE p.post_type IN ('product', 'product_variation')
 			AND p.post_status = 'publish'
 			AND pm.meta_key = '_sku'
 			AND pm.meta_value = %s
@@ -861,17 +862,14 @@ class Admin_Search {
 	public function bypass_slow_search( $search, $query ) {
 		global $wpdb;
 
-	
-		// Only in admin
-		if ( ! is_admin() ) {
-			return $search;
-		}
+		// Get search term
+		$search_term = ! empty( $query->query_vars['s'] ) ? $query->query_vars['s'] : '';
 
-		// Get search term from either query_vars or $_GET (admin list uses $_GET)
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter
-		$from_query_vars = ! empty( $query->query_vars['s'] ) ? $query->query_vars['s'] : '';
-		$from_get = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
-		$search_term = $from_query_vars ? $from_query_vars : $from_get;
+		// Fallback to $_GET if query_vars is empty (needed for both admin and frontend)
+		if ( empty( $search_term ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter
+			$search_term = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		}
 
 		// If search term is empty but $search parameter has content, we're being called after WordPress built the search
 		// In this case, we still want to bypass the slow search
@@ -884,17 +882,26 @@ class Admin_Search {
 		}
 
 		// Check if this is a product query
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only post_type parameter
 		$query_post_type = isset( $query->query_vars['post_type'] ) ? $query->query_vars['post_type'] : '';
-		$get_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
 
-		// Prefer query_vars post_type, but fallback to $_GET if query_vars is empty or wrong
-		// This handles cases where WordPress hasn't populated query_vars yet
-		$post_type = ! empty( $query_post_type ) && $query_post_type !== 'page' ? $query_post_type : $get_post_type;
+		// Fallback to $_GET if query_vars is empty (needed for both admin and frontend)
+		if ( empty( $query_post_type ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only post_type parameter
+			$query_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
+		}
 
-		if ( $post_type !== 'product' ) {
+		// Check if it's a product query (handle both string and array)
+		$is_product_query = false;
+		if ( is_array( $query_post_type ) ) {
+			$is_product_query = in_array( 'product', $query_post_type, true );
+		} elseif ( $query_post_type === 'product' ) {
+			$is_product_query = true;
+		}
+
+		if ( ! $is_product_query ) {
 			return $search;
 		}
+
 		// KILL the slow LIKE search! We'll use MantiCore IDs instead
 		return '';
 	}
@@ -909,36 +916,44 @@ class Admin_Search {
 	public function add_manticore_ids( $where, $query ) {
 		global $wpdb;
 
-		// Only in admin
-		if ( ! is_admin() ) {
-			return $where;
-		}
+		// Get search term
+		$search_query = ! empty( $query->query_vars['s'] ) ? $query->query_vars['s'] : '';
 
-		// Get search term from either query_vars or $_GET (admin list uses $_GET)
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter
-		$search_query = ! empty( $query->query_vars['s'] ) ? $query->query_vars['s'] : ( isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '' );
+		// Fallback to $_GET if query_vars is empty (needed for both admin and frontend)
+		if ( empty( $search_query ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter
+			$search_query = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+		}
 
 		if ( empty( $search_query ) ) {
 			return $where;
 		}
 
 		// Check if this is a product query
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only post_type parameter
 		$query_post_type = isset( $query->query_vars['post_type'] ) ? $query->query_vars['post_type'] : '';
-		$get_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
 
-		// Prefer query_vars post_type, but fallback to $_GET if query_vars is empty or wrong
-		// This handles cases where WordPress hasn't populated query_vars yet
-		$post_type = ! empty( $query_post_type ) && $query_post_type !== 'page' ? $query_post_type : $get_post_type;
+		// Fallback to $_GET if query_vars is empty (needed for both admin and frontend)
+		if ( empty( $query_post_type ) ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only post_type parameter
+			$query_post_type = isset( $_GET['post_type'] ) ? sanitize_text_field( wp_unslash( $_GET['post_type'] ) ) : '';
+		}
 
-		if ( $post_type !== 'product' ) {
+		// Check if it's a product query (handle both string and array)
+		$is_product_query = false;
+		if ( is_array( $query_post_type ) ) {
+			$is_product_query = in_array( 'product', $query_post_type, true );
+		} elseif ( $query_post_type === 'product' ) {
+			$is_product_query = true;
+		}
+
+		if ( ! $is_product_query ) {
 			return $where;
 		}
 
 		$search_query = \sanitize_text_field( $search_query );
 		$product_ids = array();
 
-		// PRIORITY 0: ALWAYS check for exact SKU match first
+		// PRIORITY 0: ALWAYS check for exact SKU match first (case-insensitive)
 		// This is the most common admin search pattern - users search by SKU
 		// Works for both numeric (11010) and alphanumeric (ZM-33751013) SKUs
 		$sku_results = $wpdb->get_results( $wpdb->prepare(
@@ -947,7 +962,7 @@ class Admin_Search {
 			WHERE p.post_type IN ('product', 'product_variation')
 			AND p.post_status = 'publish'
 			AND pm.meta_key = '_sku'
-			AND pm.meta_value = %s
+			AND UPPER(pm.meta_value) = UPPER(%s)
 			LIMIT 10",
 			$search_query
 		) );
@@ -1331,6 +1346,29 @@ class Admin_Search {
 	/**
 	 * Intercept order search and use Manticore instead of slow MySQL queries
 	 */
+	/**
+	 * Intercept product search via pre_get_posts
+	 * This runs EARLY before SQL is built, ensuring our filters work properly
+	 *
+	 * @param WP_Query $query Query object
+	 */
+	public function intercept_product_search( $query ) {
+		// Only intercept main product search queries
+		if ( ! $query->is_main_query() || ! $query->is_search() ) {
+			return;
+		}
+
+		// Check if this is a product search
+		$post_type = $query->get( 'post_type' );
+		if ( $post_type !== 'product' && ! ( is_array( $post_type ) && in_array( 'product', $post_type, true ) ) ) {
+			return;
+		}
+
+		// The search term should already be in query_vars at this point
+		// Our posts_search and posts_where filters will handle the actual search
+		// This hook just ensures the query is recognized as a product search
+	}
+
 	public function intercept_order_search( $query ) {
 		// Only intercept on order list page with search
 		if ( ! is_admin() || ! $query->is_main_query() ) {
