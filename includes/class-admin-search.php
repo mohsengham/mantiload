@@ -941,8 +941,8 @@ class Admin_Search {
 		// PRIORITY 0: ALWAYS check for exact SKU match first
 		// This is the most common admin search pattern - users search by SKU
 		// Works for both numeric (11010) and alphanumeric (ZM-33751013) SKUs
-		$sku_products = $wpdb->get_col( $wpdb->prepare(
-			"SELECT p.ID FROM {$wpdb->posts} p
+		$sku_results = $wpdb->get_results( $wpdb->prepare(
+			"SELECT p.ID, p.post_type, p.post_parent FROM {$wpdb->posts} p
 			INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
 			WHERE p.post_type IN ('product', 'product_variation')
 			AND p.post_status = 'publish'
@@ -952,8 +952,16 @@ class Admin_Search {
 			$search_query
 		) );
 
-		if ( ! empty( $sku_products ) ) {
-			$product_ids = array_merge( $product_ids, $sku_products );
+		if ( ! empty( $sku_results ) ) {
+			foreach ( $sku_results as $result ) {
+				// If it's a variation, add the PARENT product ID so it shows in the admin list
+				// (admin product list only shows products, not variations)
+				if ( $result->post_type === 'product_variation' && $result->post_parent > 0 ) {
+					$product_ids[] = $result->post_parent;
+				} else {
+					$product_ids[] = $result->ID;
+				}
+			}
 		}
 
 		// PRIORITY 1: Try MantiCore for INSTANT search (with synonyms!)

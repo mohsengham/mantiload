@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.6.4
+Stable tag: 1.6.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,6 +277,10 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.6.5 - 2025-12-06 =
+* FIX: Admin product search now finds parent products when searching by variation SKU
+* IMPROVE: Searching for variation SKU (e.g., ZM-2961) now shows the parent product in admin list
 
 = 1.6.4 - 2025-12-06 =
 * FIX: Made "Hidden Gem Recommendation" string translatable
