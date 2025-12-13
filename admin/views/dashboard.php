@@ -485,8 +485,8 @@ ob_start();
 			</div>
 			<div class="feature-card">
 				<span class="feature-icon"><i data-lucide="filter"></i></span>
-				<h3>Advanced Filters</h3>
-				<p>Filter by categories, tags, price, attributes, and custom fields</p>
+				<h3>Filter Compatibility</h3>
+				<p>Works seamlessly with WooCommerce, WoodMart, BeRocket and other filter plugins</p>
 			</div>
 			<div class="feature-card">
 				<span class="feature-icon"><i data-lucide="bar-chart"></i></span>

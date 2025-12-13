@@ -4,7 +4,7 @@ Tags: search, woocommerce, fast search, ajax search, product search
 Requires at least: 5.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.7.2
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,10 +43,11 @@ Standard WordPress search on the same dataset: 200-1000ms
 
 **WooCommerce Integration**
 
-* Product filtering by price, category, attributes, stock status
+* Compatible with native WooCommerce filters
+* Works with WoodMart, BeRocket, and other filter plugins
 * Related products algorithm
 * Cart integration for quick add-to-order
-* Variable product support
+* Variable product support with SKU search
 * Admin order search optimization
 
 **Interface Options**
@@ -277,6 +278,11 @@ Yes! MantiLoad is open source. Contributions welcome on GitHub!
 8. Mobile-responsive search interface
 
 == Changelog ==
+
+= 1.7.3 - 2025-12-07 =
+* UPDATE: Dashboard features list updated to reflect filter compatibility instead of custom filters
+* UPDATE: Plugin description clarifies compatibility with WooCommerce, WoodMart, BeRocket filters
+* IMPROVE: Documentation updated to reflect current functionality
 
 = 1.7.2 - 2025-12-07 =
 * FIX: Product search queries now ALWAYS integrated regardless of main/secondary query status
